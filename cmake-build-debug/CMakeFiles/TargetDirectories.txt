@@ -1,0 +1,3 @@
+/Users/joaocarlosteixeiracosta/CLionProjects/DA_PROJECT_1/cmake-build-debug/CMakeFiles/DA_DEMO.dir
+/Users/joaocarlosteixeiracosta/CLionProjects/DA_PROJECT_1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/joaocarlosteixeiracosta/CLionProjects/DA_PROJECT_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
