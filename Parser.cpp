@@ -27,7 +27,8 @@ AssignmentData parseCSV(string filename) {
             getline(ss, token, ','); email = token;
             getline(ss, token, ','); primary = stoi(token);
             getline(ss, token, ',');
-            if (!token.empty()) secondary = stoi(token);
+            if (token.empty()) secondary = -1;
+            else secondary = stoi(token);
             data.submissions.push_back({id, title, authors, email, primary, secondary});
         }
         else if (section == "reviewers") {
@@ -38,7 +39,8 @@ AssignmentData parseCSV(string filename) {
             getline(ss, token, ','); email = token;
             getline(ss, token, ','); primary = stoi(token);
             getline(ss, token, ',');
-            if (!token.empty()) secondary = stoi(token);
+            if (token.empty()) secondary = -1;
+            else secondary = stoi(token);
             data.reviewers.push_back({id, name, email, primary, secondary});
         }
         else if (section == "parameters") {
