@@ -6,4 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(Project_DA_1 main.cpp
         Data.h
         Parser.cpp
-        Parser.h)
+        Parser.h
+        data_structures/EdmondsKarp.h
+        menu.cpp
+        menu.h)
