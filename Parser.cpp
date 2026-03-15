@@ -80,13 +80,13 @@ AssignmentData parseCSV(string filename) {
             getline(ss, value, ',');
             if (key == "GenerateAssignments") {
                 int v = stoi(value);
-                if (v < 0 || v > 2)
+                if (v < 0 || v > 3)
                     errors.push_back("Invalid GenerateAssignments value");
                 data.control.generateAssignments = v;
             }
             else if (key == "RiskAnalysis") {
                 int v = stoi(value);
-                if (v < 0 || v > 1)
+                if (v < 0)
                     errors.push_back("Invalid RiskAnalysis value");
                 data.control.riskAnalysis = v;
             }
