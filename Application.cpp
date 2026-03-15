@@ -1,14 +1,25 @@
 #include "Application.h"
 #include "Parser.h"
 #include <iostream>
+#include <algorithm>
 #include <stdexcept>
 
 using namespace std;
+
+// Removes quotes, spaces and carriage returns from a filename
+static string cleanFilename(const string& name) {
+    string result;
+    for (char c : name)
+        if (c != '"' && c != '\'' && c != '\r' && c != ' ')
+            result += c;
+    return result.empty() ? "output.csv" : result;
+}
 
 // ─── File loading ─────────────────────────────────────────────────────────────
 
 void Application::loadFile(const string& path) {
     instance_ = parseInputFile(path);
+    instance_->control.outputFileName = cleanFilename(instance_->control.outputFileName);
     loadedFile_ = path;
 }
 
@@ -57,8 +68,7 @@ int Application::runBatch(const string& inputFile) {
              << inst.reviewers.size() << " reviewer(s)\n";
 
         if (inst.control.generateAssignments != 0) {
-            int mode = inst.control.generateAssignments;
-            FlowResult result = app.runAssignment(mode);
+            FlowResult result = app.runAssignment(inst.control.generateAssignments);
             app.writeAssignment(result);
         }
 
