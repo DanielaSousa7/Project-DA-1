@@ -7,14 +7,16 @@
 #include <set>
 #include <stdexcept>
 
+using namespace std;
+
 // ─── Internal helpers ────────────────────────────────────────────────────────
 
 /**
  * @brief Strips leading and trailing whitespace from a string.
  */
-static std::string trim(const std::string& s) {
+static string trim(const string& s) {
     size_t start = s.find_first_not_of(" \t\r\n");
-    if (start == std::string::npos) return "";
+    if (start == string::npos) return "";
     size_t end = s.find_last_not_of(" \t\r\n");
     return s.substr(start, end - start + 1);
 }
@@ -22,7 +24,7 @@ static std::string trim(const std::string& s) {
 /**
  * @brief Removes surrounding double-quotes from a string if present.
  */
-static std::string unquote(const std::string& s) {
+static string unquote(const string& s) {
     if (s.size() >= 2 && s.front() == '"' && s.back() == '"')
         return s.substr(1, s.size() - 2);
     return s;
@@ -32,7 +34,7 @@ static std::string unquote(const std::string& s) {
  * @brief Strips everything from the first '#' onward in a line (inline comments).
  *        Returns the cleaned line.
  */
-static std::string stripComment(const std::string& line) {
+static string stripComment(const string& line) {
     // We need to be careful: '#' inside quoted strings should NOT be stripped.
     bool inQuote = false;
     for (size_t i = 0; i < line.size(); ++i) {
@@ -46,9 +48,9 @@ static std::string stripComment(const std::string& line) {
  * @brief Splits a CSV line into tokens, respecting quoted fields.
  *        Handles fields like: 31, "Title, with comma", author, ...
  */
-static std::vector<std::string> splitCSV(const std::string& line) {
-    std::vector<std::string> tokens;
-    std::string current;
+static vector<string> splitCSV(const string& line) {
+    vector<string> tokens;
+    string current;
     bool inQuote = false;
 
     for (size_t i = 0; i < line.size(); ++i) {
@@ -69,18 +71,18 @@ static std::vector<std::string> splitCSV(const std::string& line) {
 
 /**
  * @brief Safely converts a string to int. Returns 0 if the string is empty.
- * @throws std::runtime_error if the string is non-empty but not a valid integer.
+ * @throws runtime_error if the string is non-empty but not a valid integer.
  */
-static int safeStoi(const std::string& s, const std::string& context) {
-    std::string t = trim(s);
+static int safeStoi(const string& s, const string& context) {
+    string t = trim(s);
     if (t.empty()) return 0;
     try {
         size_t pos;
-        int val = std::stoi(t, &pos);
-        if (pos != t.size()) throw std::invalid_argument("trailing chars");
+        int val = stoi(t, &pos);
+        if (pos != t.size()) throw invalid_argument("trailing chars");
         return val;
     } catch (...) {
-        throw std::runtime_error("Invalid integer value '" + t + "' in " + context);
+        throw runtime_error("Invalid integer value '" + t + "' in " + context);
     }
 }
 
@@ -90,24 +92,24 @@ static int safeStoi(const std::string& s, const std::string& context) {
  * @brief Parses one submission line.
  * Expected fields: Id, Title, Authors, E-mail, Primary[, Secondary]
  */
-static Submission parseSubmissionLine(const std::string& line, int lineNo) {
+static Submission parseSubmissionLine(const string& line, int lineNo) {
     auto fields = splitCSV(line);
     if (fields.size() < 5)
-        throw std::runtime_error("Line " + std::to_string(lineNo) +
+        throw runtime_error("Line " + to_string(lineNo) +
                                  ": Submission needs at least 5 fields (Id,Title,Authors,Email,Primary)");
 
     Submission s;
-    s.id              = safeStoi(fields[0], "submission ID at line " + std::to_string(lineNo));
+    s.id              = safeStoi(fields[0], "submission ID at line " + to_string(lineNo));
     s.title           = fields[1];
     s.authors         = fields[2];
     s.email           = fields[3];
-    s.primaryTopic    = safeStoi(fields[4], "primary topic at line " + std::to_string(lineNo));
-    s.secondaryTopic  = (fields.size() > 5) ? safeStoi(fields[5], "secondary topic at line " + std::to_string(lineNo)) : 0;
+    s.primaryTopic    = safeStoi(fields[4], "primary topic at line " + to_string(lineNo));
+    s.secondaryTopic  = (fields.size() > 5) ? safeStoi(fields[5], "secondary topic at line " + to_string(lineNo)) : 0;
 
     if (s.id <= 0)
-        throw std::runtime_error("Line " + std::to_string(lineNo) + ": Submission ID must be positive");
+        throw runtime_error("Line " + to_string(lineNo) + ": Submission ID must be positive");
     if (s.primaryTopic <= 0)
-        throw std::runtime_error("Line " + std::to_string(lineNo) + ": Primary topic must be a positive integer");
+        throw runtime_error("Line " + to_string(lineNo) + ": Primary topic must be a positive integer");
 
     return s;
 }
@@ -116,23 +118,23 @@ static Submission parseSubmissionLine(const std::string& line, int lineNo) {
  * @brief Parses one reviewer line.
  * Expected fields: Id, Name, E-mail, Primary[, Secondary]
  */
-static Reviewer parseReviewerLine(const std::string& line, int lineNo) {
+static Reviewer parseReviewerLine(const string& line, int lineNo) {
     auto fields = splitCSV(line);
     if (fields.size() < 4)
-        throw std::runtime_error("Line " + std::to_string(lineNo) +
+        throw runtime_error("Line " + to_string(lineNo) +
                                  ": Reviewer needs at least 4 fields (Id,Name,Email,Primary)");
 
     Reviewer r;
-    r.id                  = safeStoi(fields[0], "reviewer ID at line " + std::to_string(lineNo));
+    r.id                  = safeStoi(fields[0], "reviewer ID at line " + to_string(lineNo));
     r.name                = fields[1];
     r.email               = fields[2];
-    r.primaryExpertise    = safeStoi(fields[3], "primary expertise at line " + std::to_string(lineNo));
-    r.secondaryExpertise  = (fields.size() > 4) ? safeStoi(fields[4], "secondary expertise at line " + std::to_string(lineNo)) : 0;
+    r.primaryExpertise    = safeStoi(fields[3], "primary expertise at line " + to_string(lineNo));
+    r.secondaryExpertise  = (fields.size() > 4) ? safeStoi(fields[4], "secondary expertise at line " + to_string(lineNo)) : 0;
 
     if (r.id <= 0)
-        throw std::runtime_error("Line " + std::to_string(lineNo) + ": Reviewer ID must be positive");
+        throw runtime_error("Line " + to_string(lineNo) + ": Reviewer ID must be positive");
     if (r.primaryExpertise <= 0)
-        throw std::runtime_error("Line " + std::to_string(lineNo) + ": Primary expertise must be a positive integer");
+        throw runtime_error("Line " + to_string(lineNo) + ": Primary expertise must be a positive integer");
 
     return r;
 }
@@ -141,59 +143,59 @@ static Reviewer parseReviewerLine(const std::string& line, int lineNo) {
  * @brief Parses a key-value line (used in #Parameters and #Control sections).
  * Returns {key, value} after trimming.
  */
-static std::pair<std::string, std::string> parseKeyValue(const std::string& line, int lineNo) {
+static pair<string, string> parseKeyValue(const string& line, int lineNo) {
     size_t comma = line.find(',');
-    if (comma == std::string::npos)
-        throw std::runtime_error("Line " + std::to_string(lineNo) + ": Expected 'Key, Value' format");
+    if (comma == string::npos)
+        throw runtime_error("Line " + to_string(lineNo) + ": Expected 'Key, Value' format");
     return { trim(line.substr(0, comma)), trim(unquote(trim(line.substr(comma + 1)))) };
 }
 
 // ─── Main parser ─────────────────────────────────────────────────────────────
 
-ProblemInstance parseInputFile(const std::string& filename) {
+ProblemInstance parseInputFile(const string& filename) {
     // Validate extension
     if (filename.size() < 4 || filename.substr(filename.size() - 4) != ".csv")
-        throw std::runtime_error("Input file must have a .csv extension: " + filename);
+        throw runtime_error("Input file must have a .csv extension: " + filename);
 
-    std::ifstream file(filename);
+    ifstream file(filename);
     if (!file.is_open())
-        throw std::runtime_error("Cannot open file: " + filename);
+        throw runtime_error("Cannot open file: " + filename);
 
     ProblemInstance instance;
-    std::vector<std::string> errors;  // Collect all errors before throwing
+    vector<string> errors;  // Collect all errors before throwing
 
     // Possible parser states
     enum class Section { NONE, SUBMISSIONS, REVIEWERS, PARAMETERS, CONTROL };
     Section currentSection = Section::NONE;
 
-    std::string rawLine;
+    string rawLine;
     int lineNo = 0;
 
-    while (std::getline(file, rawLine)) {
+    while (getline(file, rawLine)) {
         ++lineNo;
 
         // ── Section header detection ──────────────────────────────────────────
         // MUST use the raw line here — stripComment would erase '#Submissions' etc.
-        std::string rawTrimmed = trim(rawLine);
+        string rawTrimmed = trim(rawLine);
         if (!rawTrimmed.empty() && rawTrimmed[0] == '#') {
             // Convert to uppercase for case-insensitive matching
-            std::string upper = rawTrimmed;
-            std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
+            string upper = rawTrimmed;
+            transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
 
-            if (upper.find("#SUBMISSIONS") != std::string::npos)
+            if (upper.find("#SUBMISSIONS") != string::npos)
                 currentSection = Section::SUBMISSIONS;
-            else if (upper.find("#REVIEWERS") != std::string::npos)
+            else if (upper.find("#REVIEWERS") != string::npos)
                 currentSection = Section::REVIEWERS;
-            else if (upper.find("#PARAMETERS") != std::string::npos)
+            else if (upper.find("#PARAMETERS") != string::npos)
                 currentSection = Section::PARAMETERS;
-            else if (upper.find("#CONTROL") != std::string::npos)
+            else if (upper.find("#CONTROL") != string::npos)
                 currentSection = Section::CONTROL;
             // else: lone '#' or column-header comment line — just skip
             continue;
         }
 
         // Strip inline comments and skip blank data lines
-        std::string line = trim(stripComment(rawLine));
+        string line = trim(stripComment(rawLine));
         if (line.empty()) continue;
 
         // ── Data lines ────────────────────────────────────────────────────────
@@ -211,8 +213,8 @@ ProblemInstance parseInputFile(const std::string& filename) {
                 }
                 case Section::PARAMETERS: {
                     auto [key, value] = parseKeyValue(line, lineNo);
-                    std::string keyUpper = key;
-                    std::transform(keyUpper.begin(), keyUpper.end(), keyUpper.begin(), ::toupper);
+                    string keyUpper = key;
+                    transform(keyUpper.begin(), keyUpper.end(), keyUpper.begin(), ::toupper);
 
                     if      (keyUpper == "MINREVIEWSPERSUBMISSION")    instance.params.minReviewsPerSubmission    = safeStoi(value, key);
                     else if (keyUpper == "MAXREVIEWSPERREVIEWER")       instance.params.maxReviewsPerReviewer       = safeStoi(value, key);
@@ -221,26 +223,26 @@ ProblemInstance parseInputFile(const std::string& filename) {
                     else if (keyUpper == "PRIMARYSUBMISSIONDOMAIN")     instance.params.primarySubmissionDomain    = safeStoi(value, key);
                     else if (keyUpper == "SECONDARYSUBMISSIONDOMAIN")   instance.params.secondarySubmissionDomain  = safeStoi(value, key);
                     else
-                        errors.push_back("Line " + std::to_string(lineNo) + ": Unknown parameter '" + key + "'");
+                        errors.push_back("Line " + to_string(lineNo) + ": Unknown parameter '" + key + "'");
                     break;
                 }
                 case Section::CONTROL: {
                     auto [key, value] = parseKeyValue(line, lineNo);
-                    std::string keyUpper = key;
-                    std::transform(keyUpper.begin(), keyUpper.end(), keyUpper.begin(), ::toupper);
+                    string keyUpper = key;
+                    transform(keyUpper.begin(), keyUpper.end(), keyUpper.begin(), ::toupper);
 
                     if      (keyUpper == "GENERATEASSIGNMENTS") instance.control.generateAssignments = safeStoi(value, key);
                     else if (keyUpper == "RISKANALYSIS")        instance.control.riskAnalysis        = safeStoi(value, key);
                     else if (keyUpper == "OUTPUTFILENAME")      instance.control.outputFileName      = value.empty() ? "output.csv" : value;
                     else
-                        errors.push_back("Line " + std::to_string(lineNo) + ": Unknown control key '" + key + "'");
+                        errors.push_back("Line " + to_string(lineNo) + ": Unknown control key '" + key + "'");
                     break;
                 }
                 case Section::NONE:
-                    errors.push_back("Line " + std::to_string(lineNo) + ": Data found before any section header");
+                    errors.push_back("Line " + to_string(lineNo) + ": Data found before any section header");
                     break;
             }
-        } catch (const std::runtime_error& e) {
+        } catch (const runtime_error& e) {
             errors.push_back(e.what());
         }
     }
@@ -248,17 +250,17 @@ ProblemInstance parseInputFile(const std::string& filename) {
     // ── Post-parse validation ─────────────────────────────────────────────────
 
     // Check for duplicate submission IDs
-    std::set<int> subIds;
+    set<int> subIds;
     for (const auto& s : instance.submissions) {
         if (!subIds.insert(s.id).second)
-            errors.push_back("Duplicate submission ID: " + std::to_string(s.id));
+            errors.push_back("Duplicate submission ID: " + to_string(s.id));
     }
 
     // Check for duplicate reviewer IDs
-    std::set<int> revIds;
+    set<int> revIds;
     for (const auto& r : instance.reviewers) {
         if (!revIds.insert(r.id).second)
-            errors.push_back("Duplicate reviewer ID: " + std::to_string(r.id));
+            errors.push_back("Duplicate reviewer ID: " + to_string(r.id));
     }
 
     // Check mandatory parameters
@@ -275,9 +277,9 @@ ProblemInstance parseInputFile(const std::string& filename) {
 
     // If any errors, report them all at once
     if (!errors.empty()) {
-        std::string msg = "Input file errors:\n";
+        string msg = "Input file errors:\n";
         for (const auto& e : errors) msg += "  - " + e + "\n";
-        throw std::runtime_error(msg);
+        throw runtime_error(msg);
     }
 
     return instance;
@@ -286,33 +288,33 @@ ProblemInstance parseInputFile(const std::string& filename) {
 // ─── Display helper ───────────────────────────────────────────────────────────
 
 void printProblemInstance(const ProblemInstance& instance) {
-    std::cout << "=== Submissions (" << instance.submissions.size() << ") ===\n";
+    cout << "=== Submissions (" << instance.submissions.size() << ") ===\n";
     for (const auto& s : instance.submissions) {
-        std::cout << "  [" << s.id << "] \"" << s.title << "\""
+        cout << "  [" << s.id << "] \"" << s.title << "\""
                   << " | " << s.authors
                   << " | Primary: " << s.primaryTopic;
-        if (s.secondaryTopic) std::cout << " | Secondary: " << s.secondaryTopic;
-        std::cout << "\n";
+        if (s.secondaryTopic) cout << " | Secondary: " << s.secondaryTopic;
+        cout << "\n";
     }
 
-    std::cout << "\n=== Reviewers (" << instance.reviewers.size() << ") ===\n";
+    cout << "\n=== Reviewers (" << instance.reviewers.size() << ") ===\n";
     for (const auto& r : instance.reviewers) {
-        std::cout << "  [" << r.id << "] " << r.name
+        cout << "  [" << r.id << "] " << r.name
                   << " | Primary: " << r.primaryExpertise;
-        if (r.secondaryExpertise) std::cout << " | Secondary: " << r.secondaryExpertise;
-        std::cout << "\n";
+        if (r.secondaryExpertise) cout << " | Secondary: " << r.secondaryExpertise;
+        cout << "\n";
     }
 
-    std::cout << "\n=== Parameters ===\n";
-    std::cout << "  MinReviewsPerSubmission:    " << instance.params.minReviewsPerSubmission   << "\n";
-    std::cout << "  MaxReviewsPerReviewer:      " << instance.params.maxReviewsPerReviewer      << "\n";
-    std::cout << "  PrimaryReviewerExpertise:   " << instance.params.primaryReviewerExpertise   << "\n";
-    std::cout << "  SecondaryReviewerExpertise: " << instance.params.secondaryReviewerExpertise << "\n";
-    std::cout << "  PrimarySubmissionDomain:    " << instance.params.primarySubmissionDomain    << "\n";
-    std::cout << "  SecondarySubmissionDomain:  " << instance.params.secondarySubmissionDomain  << "\n";
+    cout << "\n=== Parameters ===\n";
+    cout << "  MinReviewsPerSubmission:    " << instance.params.minReviewsPerSubmission   << "\n";
+    cout << "  MaxReviewsPerReviewer:      " << instance.params.maxReviewsPerReviewer      << "\n";
+    cout << "  PrimaryReviewerExpertise:   " << instance.params.primaryReviewerExpertise   << "\n";
+    cout << "  SecondaryReviewerExpertise: " << instance.params.secondaryReviewerExpertise << "\n";
+    cout << "  PrimarySubmissionDomain:    " << instance.params.primarySubmissionDomain    << "\n";
+    cout << "  SecondarySubmissionDomain:  " << instance.params.secondarySubmissionDomain  << "\n";
 
-    std::cout << "\n=== Control ===\n";
-    std::cout << "  GenerateAssignments: " << instance.control.generateAssignments << "\n";
-    std::cout << "  RiskAnalysis:        " << instance.control.riskAnalysis        << "\n";
-    std::cout << "  OutputFileName:      " << instance.control.outputFileName      << "\n";
+    cout << "\n=== Control ===\n";
+    cout << "  GenerateAssignments: " << instance.control.generateAssignments << "\n";
+    cout << "  RiskAnalysis:        " << instance.control.riskAnalysis        << "\n";
+    cout << "  OutputFileName:      " << instance.control.outputFileName      << "\n";
 }

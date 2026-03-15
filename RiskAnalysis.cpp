@@ -7,6 +7,8 @@
 #include <numeric>
 #include <stdexcept>
 
+using namespace std;
+
 // ─── Feasibility check ────────────────────────────────────────────────────────
 
 /**
@@ -47,7 +49,7 @@ RiskResult riskAnalysisK1(const ProblemInstance& instance, int mode) {
     }
 
     // Sort risky sets by reviewer ID for deterministic output
-    std::sort(result.riskySets.begin(), result.riskySets.end(),
+    sort(result.riskySets.begin(), result.riskySets.end(),
               [](const auto& a, const auto& b){ return a[0] < b[0]; });
 
     return result;
@@ -61,21 +63,21 @@ RiskResult riskAnalysisK1(const ProblemInstance& instance, int mode) {
  *
  * Time complexity: O(C(n,k) * k)
  */
-static std::vector<std::vector<int>> combinations(int n, int k) {
-    std::vector<std::vector<int>> result;
+static vector<vector<int>> combinations(int n, int k) {
+    vector<vector<int>> result;
     if (k > n || k <= 0) return result;
 
     // Use bitmask / selector vector approach
-    std::vector<int> selector(n, 0);
-    std::fill(selector.begin(), selector.begin() + k, 1);
-    std::sort(selector.begin(), selector.end(), std::greater<int>());
+    vector<int> selector(n, 0);
+    fill(selector.begin(), selector.begin() + k, 1);
+    sort(selector.begin(), selector.end(), greater<int>());
 
     do {
-        std::vector<int> combo;
+        vector<int> combo;
         for (int i = 0; i < n; ++i)
             if (selector[i]) combo.push_back(i);
         result.push_back(combo);
-    } while (std::prev_permutation(selector.begin(), selector.end()));
+    } while (prev_permutation(selector.begin(), selector.end()));
 
     return result;
 }
@@ -102,7 +104,7 @@ RiskResult riskAnalysisKN(const ProblemInstance& instance, int mode, int K) {
 
     if (K >= R) {
         // Removing all reviewers always fails (trivially)
-        std::vector<int> allIds;
+        vector<int> allIds;
         for (const auto& r : instance.reviewers) allIds.push_back(r.id);
         result.riskySets.push_back(allIds);
         result.anyRisky = true;
@@ -112,31 +114,31 @@ RiskResult riskAnalysisKN(const ProblemInstance& instance, int mode, int K) {
     // Warn for large search spaces
     auto combos = combinations(R, K);
     if (combos.size() > 10000)
-        std::cerr << "[Warning] C(" << R << "," << K << ") = " << combos.size()
+        cerr << "[Warning] C(" << R << "," << K << ") = " << combos.size()
                   << " subsets to evaluate — this may take a while.\n";
 
     for (const auto& indices : combos) {
         // Build instance without the reviewers at these indices
         ProblemInstance reduced = instance;
         // Erase in reverse order to preserve indices
-        std::vector<int> sortedIdx = indices;
-        std::sort(sortedIdx.rbegin(), sortedIdx.rend());
+        vector<int> sortedIdx = indices;
+        sort(sortedIdx.rbegin(), sortedIdx.rend());
         for (int idx : sortedIdx)
             reduced.reviewers.erase(reduced.reviewers.begin() + idx);
 
         if (!assignmentFeasible(reduced, mode)) {
             // Record the actual reviewer IDs (sorted)
-            std::vector<int> riskyIds;
+            vector<int> riskyIds;
             for (int idx : indices)
                 riskyIds.push_back(instance.reviewers[idx].id);
-            std::sort(riskyIds.begin(), riskyIds.end());
+            sort(riskyIds.begin(), riskyIds.end());
             result.riskySets.push_back(riskyIds);
             result.anyRisky = true;
         }
     }
 
     // Sort the list of risky sets lexicographically
-    std::sort(result.riskySets.begin(), result.riskySets.end());
+    sort(result.riskySets.begin(), result.riskySets.end());
 
     return result;
 }
@@ -151,10 +153,10 @@ RiskResult riskAnalysisKN(const ProblemInstance& instance, int mode, int K) {
  *
  * If no risky sets found, writes a comment indicating that.
  */
-void writeRiskOutput(const RiskResult& result, const std::string& filename) {
-    std::ofstream out(filename);
+void writeRiskOutput(const RiskResult& result, const string& filename) {
+    ofstream out(filename);
     if (!out.is_open())
-        throw std::runtime_error("Cannot open risk output file: " + filename);
+        throw runtime_error("Cannot open risk output file: " + filename);
 
     out << "#Risk Analysis: " << result.K << "\n";
 
@@ -171,5 +173,5 @@ void writeRiskOutput(const RiskResult& result, const std::string& filename) {
     }
 
     out.close();
-    std::cout << "[Risk output written to: " << filename << "]\n";
+    cout << "[Risk output written to: " << filename << "]\n";
 }

@@ -7,6 +7,8 @@
 #include <map>
 #include <stdexcept>
 
+using namespace std;
+
 // ─── Construction ─────────────────────────────────────────────────────────────
 
 FlowNetwork::FlowNetwork(const ProblemInstance& instance, int mode) {
@@ -55,7 +57,6 @@ FlowNetwork::FlowNetwork(const ProblemInstance& instance, int mode) {
     } else {
         // Report how many reviews each submission is still missing
         for (int i = 0; i < numSubs_; ++i) {
-            auto* subVertex = graph_.findVertex(submissionNode(i));
             // Flow on source→sub edge = reviews assigned so far
             int assigned = 0;
             // Find the source→sub edge via source's adjacency list
@@ -95,7 +96,7 @@ void FlowNetwork::addFlowEdge(int u, int v, double cap) {
     auto* vu = graph_.findVertex(u);
     auto* vv = graph_.findVertex(v);
     if (!vu || !vv)
-        throw std::runtime_error("addFlowEdge: vertex not found");
+        throw runtime_error("addFlowEdge: vertex not found");
 
     // Forward edge: capacity = cap, flow = 0
     Edge<int>* fwd = vu->addEdge(vv, cap);
@@ -165,7 +166,7 @@ bool FlowNetwork::bfsAugmentingPath() {
     auto* src = graph_.findVertex(source_);
     src->setVisited(true);
 
-    std::queue<Vertex<int>*> q;
+    queue<Vertex<int>*> q;
     q.push(src);
 
     while (!q.empty()) {
@@ -201,12 +202,12 @@ int FlowNetwork::edmondsKarp() {
 
     while (bfsAugmentingPath()) {
         // ── Find bottleneck ──────────────────────────────────────────────────
-        double bottleneck = std::numeric_limits<double>::max();
+        double bottleneck = numeric_limits<double>::max();
         auto* v = graph_.findVertex(sink_);
         while (v->getInfo() != source_) {
             Edge<int>* e = v->getPath();
             double res = e->getWeight() - e->getFlow();
-            bottleneck = std::min(bottleneck, res);
+            bottleneck = min(bottleneck, res);
             v = e->getOrig();
         }
 
@@ -251,7 +252,7 @@ void FlowNetwork::extractAssignments(const ProblemInstance& instance, int mode) 
     }
 
     // Sort by submission ID, then reviewer ID
-    std::sort(result_.assignments.begin(), result_.assignments.end(),
+    sort(result_.assignments.begin(), result_.assignments.end(),
               [](const Assignment& a, const Assignment& b) {
                   if (a.submissionId != b.submissionId) return a.submissionId < b.submissionId;
                   return a.reviewerId < b.reviewerId;
@@ -264,11 +265,10 @@ void FlowNetwork::extractAssignments(const ProblemInstance& instance, int mode) 
  * Writes the output in the format specified in the project (Figures 2 and 3).
  */
 void writeAssignmentOutput(const FlowResult& result,
-                           const ProblemInstance& instance,
-                           const std::string& filename) {
-    std::ofstream out(filename);
+                           const string& filename) {
+    ofstream out(filename);
     if (!out.is_open())
-        throw std::runtime_error("Cannot open output file: " + filename);
+        throw runtime_error("Cannot open output file: " + filename);
 
     if (result.success) {
         // ── Section 1: submission → reviewer ────────────────────────────────
@@ -278,13 +278,13 @@ void writeAssignmentOutput(const FlowResult& result,
 
         // ── Section 2: reviewer → submissions (dual view) ───────────────────
         // Build map: reviewerId → list of {submissionId, domain}
-        std::map<int, std::vector<std::pair<int,int>>> revMap;
+        map<int, vector<pair<int,int>>> revMap;
         for (const auto& a : result.assignments)
             revMap[a.reviewerId].emplace_back(a.submissionId, a.matchDomain);
 
         out << "#ReviewerId,SubmissionId,Match\n";
         for (auto& [revId, subs] : revMap) {
-            std::sort(subs.begin(), subs.end());
+            sort(subs.begin(), subs.end());
             for (auto& [subId, dom] : subs)
                 out << revId << ", " << subId << ", " << dom << "\n";
         }
@@ -295,11 +295,11 @@ void writeAssignmentOutput(const FlowResult& result,
         // ── Unsuccessful: report missing reviews ─────────────────────────────
         out << "#SubmissionId,Domain,MissingReviews\n";
         auto missing = result.missing;
-        std::sort(missing.begin(), missing.end());
+        sort(missing.begin(), missing.end());
         for (auto& [subId, dom, cnt] : missing)
             out << subId << ", " << dom << ", " << cnt << "\n";
     }
 
     out.close();
-    std::cout << "[Output written to: " << filename << "]\n";
+    cout << "[Output written to: " << filename << "]\n";
 }

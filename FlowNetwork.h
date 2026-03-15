@@ -7,6 +7,8 @@
 #include <tuple>
 #include <string>
 
+using namespace std;
+
 /**
  * @brief Represents one review assignment: paper → reviewer with matched domain.
  */
@@ -22,9 +24,9 @@ struct Assignment {
 struct FlowResult {
     bool success;                        ///< True if all submissions got MinReviews
     int  totalFlow;                      ///< Total number of review assignments made
-    std::vector<Assignment> assignments; ///< The actual assignments (success case)
+    vector<Assignment> assignments; ///< The actual assignments (success case)
     /// For the failure case: {submissionId, domain, missingCount}
-    std::vector<std::tuple<int,int,int>> missing;
+    vector<tuple<int,int,int>> missing;
 };
 
 /**
@@ -148,7 +150,6 @@ private:
  * Time complexity: O(A log A) where A = number of assignments (due to sorting).
  */
 void writeAssignmentOutput(const FlowResult& result,
-                           const ProblemInstance& instance,
-                           const std::string& filename);
+                           const string& filename);
 
 #endif // FLOW_NETWORK_H

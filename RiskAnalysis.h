@@ -5,13 +5,15 @@
 #include <vector>
 #include <string>
 
+using namespace std;
+
 /**
  * @brief Result of a risk analysis run.
  */
 struct RiskResult {
     int K;                                        ///< Risk parameter used
     bool anyRisky;                                ///< True if at least one risky set found
-    std::vector<std::vector<int>> riskySets;      ///< Each entry = set of reviewer IDs whose
+    vector<vector<int>> riskySets;      ///< Each entry = set of reviewer IDs whose
                                                   ///  simultaneous absence breaks assignment
 };
 
@@ -71,6 +73,6 @@ RiskResult riskAnalysisKN(const ProblemInstance& instance, int mode, int K);
  *
  * Time complexity: O(S log S) where S = total reviewer IDs across all risky sets.
  */
-void writeRiskOutput(const RiskResult& result, const std::string& filename);
+void writeRiskOutput(const RiskResult& result, const string& filename);
 
 #endif // RISK_ANALYSIS_H
