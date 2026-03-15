@@ -1,6 +1,9 @@
 #include "Parser.h"
 #include <sstream>
 #include <fstream>
+#include <iostream>
+#include <set>
+#include <vector>
 using namespace std;
 
 AssignmentData parseCSV(string filename) {
@@ -8,7 +11,11 @@ AssignmentData parseCSV(string filename) {
     string line;
     string section;
     ifstream file(filename);
+    set<int> submissionIds;
+    set<int> reviewerIds;
+    vector<string> errors;
     while (getline(file,line)) {
+        if (line.empty()) continue;
         if (line[0] == '#') {
             if (line.find("Submissions") != string::npos) section = "submissions";
             else if (line.find("Reviewers") != string::npos) section = "reviewers";
@@ -22,6 +29,11 @@ AssignmentData parseCSV(string filename) {
             int id, primary, secondary;
             string title, authors, email;
             getline(ss, token, ','); id = stoi(token);
+            if (id <= 0)
+                errors.push_back("Invalid submission id: " + to_string(id));
+            if (submissionIds.count(id))
+                errors.push_back("Duplicate submission id: " + to_string(id));
+            submissionIds.insert(id);
             getline(ss, token, ','); title = token;
             getline(ss, token, ','); authors = token;
             getline(ss, token, ','); email = token;
@@ -35,6 +47,11 @@ AssignmentData parseCSV(string filename) {
             int id, primary, secondary;
             string name, email;
             getline(ss, token, ','); id = stoi(token);
+            if (id <= 0)
+                errors.push_back("Invalid reviewer id: " + to_string(id));
+            if (reviewerIds.count(id))
+                errors.push_back("Duplicate reviewer id: " + to_string(id));
+            reviewerIds.insert(id);
             getline(ss, token, ','); name = token;
             getline(ss, token, ','); email = token;
             getline(ss, token, ','); primary = stoi(token);
@@ -47,21 +64,43 @@ AssignmentData parseCSV(string filename) {
             string key, value;
             getline(ss, key, ',');
             getline(ss, value, ',');
-            if (key == "MinReviewsPerSubmission") data.parameters.minReviewsPerSubmission = stoi(value);
-            else if (key == "MaxReviewsPerReviewer") data.parameters.maxReviewsPerReviewer = stoi(value);
-            else if (key == "PrimaryReviewerExpertise") data.parameters.primaryReviewerExpertise = stoi(value);
-            else if (key == "SecondaryReviewerExpertise") data.parameters.secondaryReviewerExpertise = stoi(value);
-            else if (key == "PrimarySubmissionDomain") data.parameters.primarySubmissionDomain = stoi(value);
-            else if (key == "SecondarySubmissionDomain") data.parameters.secondarySubmissionDomain = stoi(value);
+            int v = stoi(value);
+            if (v < 0)
+                errors.push_back("Negative parameter value: " + key);
+            if (key == "MinReviewsPerSubmission") data.parameters.minReviewsPerSubmission = v;
+            else if (key == "MaxReviewsPerReviewer") data.parameters.maxReviewsPerReviewer = v;
+            else if (key == "PrimaryReviewerExpertise") data.parameters.primaryReviewerExpertise = v;
+            else if (key == "SecondaryReviewerExpertise") data.parameters.secondaryReviewerExpertise = v;
+            else if (key == "PrimarySubmissionDomain") data.parameters.primarySubmissionDomain = v;
+            else if (key == "SecondarySubmissionDomain") data.parameters.secondarySubmissionDomain = v;
         }
         else if (section == "control") {
             string key, value;
             getline(ss, key, ',');
             getline(ss, value, ',');
-            if (key == "GenerateAssignments") data.control.generateAssignments = stoi(value);
-            else if (key == "RiskAnalysis") data.control.riskAnalysis = stoi(value);
+            if (key == "GenerateAssignments") {
+                int v = stoi(value);
+                if (v < 0 || v > 2)
+                    errors.push_back("Invalid GenerateAssignments value");
+                data.control.generateAssignments = v;
+            }
+            else if (key == "RiskAnalysis") {
+                int v = stoi(value);
+                if (v < 0 || v > 1)
+                    errors.push_back("Invalid RiskAnalysis value");
+                data.control.riskAnalysis = v;
+            }
             else if (key == "OutputFileName") data.control.outputFileName = value;
         }
+    }
+    file.close();
+    if (data.control.generateAssignments != 0 && data.control.outputFileName.empty()) {
+        data.control.outputFileName = "output.csv";
+    }
+    if (!errors.empty()) {
+        cerr << "Input file contains errors:\n";
+        for (string e : errors)
+            cerr << "- " << e << endl;
     }
     return data;
 }
