@@ -1,10 +1,20 @@
+#include "menu.h"
 #include "parser.h"
 #include <iostream>
 #include <string>
 using namespace std;
 
-// Menu simples
-void showMenu() {
+void showMainMenu() {
+    cout << "=== Conference Assignment Tool ===\n";
+    cout << "1. Read new file\n";
+    cout << "2. BrowseData\n";
+    cout << "3. Run assignment\n";
+    cout << "4. Run Risk Analysis\n";
+    cout << "0. Exit\n";
+    cout << "Select an option: ";
+}
+
+void showDataMenu() {
     cout << "=== Conference Assignment Tool ===\n";
     cout << "1. List Submissions\n";
     cout << "2. List Reviewers\n";
@@ -12,6 +22,39 @@ void showMenu() {
     cout << "4. Show Control\n";
     cout << "0. Exit\n";
     cout << "Select an option: ";
+}
+
+void showAssignmentMenu() {
+    cout << "=== Conference Assignment Tool ===\n";
+    cout << "0. Exit\n";
+    cout << "Select an option: ";
+}
+
+void showRiskAnalysisMenu() {
+    cout << "=== Conference Assignment Tool ===\n";
+    cout << "0. Exit\n";
+    cout << "Select an option: ";
+}
+
+int dataMenu(AssignmentData data) {
+    int option;
+    do {
+        showDataMenu();
+        cin >> option;
+        cin.ignore(); // limpar \n
+        switch(option) {
+            case 1: printSubmissions(data); break;
+            case 2: printReviewers(data); break;
+            case 3: printParameters(data); break;
+            default: cout << "Invalid option!\n"; break;
+        }
+        cout << "\n";
+    } while(option != 0);
+    return 0;
+}
+
+int assignmentMenu(AssignmentData data) {
+    return 0;
 }
 
 void printSubmissions(const AssignmentData &data) {
@@ -64,13 +107,17 @@ int mainMenu() {
 
     int option;
     do {
-        showMenu();
+        showMainMenu();
         cin >> option;
         cin.ignore(); // limpar \n
         switch(option) {
-            case 1: printSubmissions(data); break;
-            case 2: printReviewers(data); break;
-            case 3: printParameters(data); break;
+            case 1:
+                cout << "Enter input CSV filename: ";
+                cin >> filename;
+                data = parseCSV(filename);
+                break;
+            case 2: dataMenu(data); break;
+            case 3: assignmentMenu(data); break;
             case 4: printControl(data); break;
             case 0: cout << "Exiting...\n"; break;
             default: cout << "Invalid option!\n"; break;

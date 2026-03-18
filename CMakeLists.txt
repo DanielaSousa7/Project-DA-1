@@ -7,6 +7,5 @@ add_executable(Project_DA_1 main.cpp
         Data.h
         Parser.cpp
         Parser.h
-        data_structures/EdmondsKarp.h
         menu.cpp
         menu.h)

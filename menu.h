@@ -3,7 +3,12 @@
 
 #include "data.h"
 
-void showMenu();
+void showMainMenu();
+void showDataMenu();
+void showAssignmentMenu();
+void showRiskAnalysisMenu();
+int dataMenu(AssignmentData data);
+int assignmentMenu(AssignmentData data);
 void printSubmissions(const AssignmentData &data);
 void printReviewers(const AssignmentData &data);
 void printParameters(const AssignmentData &data);
