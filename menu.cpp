@@ -47,6 +47,7 @@ int dataMenu(AssignmentData data) {
             case 2: printReviewers(data); break;
             case 3: printParameters(data); break;
             case 4: printControl(data); break;
+            case 0: break;
             default: cout << "Invalid option!\n"; break;
         }
         cout << "\n";
@@ -55,6 +56,32 @@ int dataMenu(AssignmentData data) {
 }
 
 int assignmentMenu(AssignmentData data) {
+    int option;
+    do {
+        showAssignmentMenu();
+        cin >> option;
+        cin.ignore(); // limpar \n
+        switch(option) {
+            case 0: break;
+            default: cout << "Invalid option!\n"; break;
+        }
+        cout << "\n";
+    } while(option != 0);
+    return 0;
+}
+
+int riskAnalysisMenu(AssignmentData data) {
+    int option;
+    do {
+        showRiskAnalysisMenu();
+        cin >> option;
+        cin.ignore(); // limpar \n
+        switch(option) {
+            case 0: break;
+            default: cout << "Invalid option!\n"; break;
+        }
+        cout << "\n";
+    } while(option != 0);
     return 0;
 }
 
@@ -106,7 +133,7 @@ int mainMenu() {
 
     AssignmentData data = parseCSV(filename);
 
-    int option;
+    int option = -1;
     do {
         showMainMenu();
         cin >> option;
@@ -117,13 +144,13 @@ int mainMenu() {
                 cin >> filename;
                 data = parseCSV(filename);
                 break;
-            case 2: dataMenu(data); break;
-            case 3: assignmentMenu(data); break;
-            case 4: printControl(data); break;
+            case 2: cout << '\n' ; dataMenu(data); break;
+            case 3: cout << '\n' ; assignmentMenu(data); break;
+            case 4: cout << '\n' ; riskAnalysisMenu(data); break;
             case 0: cout << "Exiting...\n"; break;
             default: cout << "Invalid option!\n"; break;
         }
         cout << "\n";
-    } while(option != 0);
+    } while(option > 0);
     return 0;
 }
