@@ -5,12 +5,20 @@
 
 using namespace std;
 
-// Removes leading/trailing whitespace and quotes from a string
+// Removes leading/trailing whitespace and quotes
 static string clean(const string& s) {
     size_t start = s.find_first_not_of(" \t\r\n\"");
     if (start == string::npos) return "";
     size_t end = s.find_last_not_of(" \t\r\n\"");
     return s.substr(start, end - start + 1);
+}
+
+// Safe stoi — returns 0 if the string is empty or not a number
+static int safeInt(const string& s) {
+    string t = clean(s);
+    if (t.empty()) return 0;
+    try { return stoi(t); }
+    catch (...) { return 0; }
 }
 
 ProblemInstance parseInputFile(const string& filename) {
@@ -19,6 +27,8 @@ ProblemInstance parseInputFile(const string& filename) {
     string line, section;
 
     while (getline(file, line)) {
+        // Remove \r in case of Windows line endings
+        if (!line.empty() && line.back() == '\r') line.pop_back();
         if (line.empty()) continue;
 
         // Section headers
@@ -35,28 +45,28 @@ ProblemInstance parseInputFile(const string& filename) {
 
         if (section == "submissions") {
             Submission s;
-            getline(ss, token, ','); s.id            = stoi(token);
-            getline(ss, token, ','); s.title          = clean(token);
-            getline(ss, token, ','); s.authors        = clean(token);
-            getline(ss, token, ','); s.email          = clean(token);
-            getline(ss, token, ','); s.primaryTopic   = stoi(token);
-            getline(ss, token, ','); s.secondaryTopic = token.empty() ? 0 : stoi(token);
+            getline(ss, token, ','); s.id             = safeInt(token);
+            getline(ss, token, ','); s.title           = clean(token);
+            getline(ss, token, ','); s.authors         = clean(token);
+            getline(ss, token, ','); s.email           = clean(token);
+            getline(ss, token, ','); s.primaryTopic    = safeInt(token);
+            getline(ss, token, ','); s.secondaryTopic  = safeInt(token);
             data.submissions.push_back(s);
         }
         else if (section == "reviewers") {
             Reviewer r;
-            getline(ss, token, ','); r.id                  = stoi(token);
-            getline(ss, token, ','); r.name                = clean(token);
-            getline(ss, token, ','); r.email               = clean(token);
-            getline(ss, token, ','); r.primaryExpertise    = stoi(token);
-            getline(ss, token, ','); r.secondaryExpertise  = token.empty() ? 0 : stoi(token);
+            getline(ss, token, ','); r.id                 = safeInt(token);
+            getline(ss, token, ','); r.name               = clean(token);
+            getline(ss, token, ','); r.email              = clean(token);
+            getline(ss, token, ','); r.primaryExpertise   = safeInt(token);
+            getline(ss, token, ','); r.secondaryExpertise = safeInt(token);
             data.reviewers.push_back(r);
         }
         else if (section == "parameters") {
             string key, value;
             getline(ss, key,   ','); key   = clean(key);
             getline(ss, value, ','); value = clean(value);
-            int v = stoi(value);
+            int v = safeInt(value);
             if      (key == "MinReviewsPerSubmission")    data.params.minReviewsPerSubmission    = v;
             else if (key == "MaxReviewsPerReviewer")       data.params.maxReviewsPerReviewer       = v;
             else if (key == "PrimaryReviewerExpertise")    data.params.primaryReviewerExpertise   = v;
@@ -68,8 +78,8 @@ ProblemInstance parseInputFile(const string& filename) {
             string key, value;
             getline(ss, key,   ','); key   = clean(key);
             getline(ss, value, ','); value = clean(value);
-            if      (key == "GenerateAssignments") data.control.generateAssignments = stoi(value);
-            else if (key == "RiskAnalysis")         data.control.riskAnalysis        = stoi(value);
+            if      (key == "GenerateAssignments") data.control.generateAssignments = safeInt(value);
+            else if (key == "RiskAnalysis")         data.control.riskAnalysis        = safeInt(value);
             else if (key == "OutputFileName")       data.control.outputFileName      = value;
         }
     }

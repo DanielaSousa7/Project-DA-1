@@ -38,8 +38,8 @@ FlowResult Application::runAssignment(int mode) const {
     return FlowNetwork(getInstance(), mode).getResult();
 }
 
-void Application::writeAssignment(const FlowResult& result) const {
-    writeAssignmentOutput(result, getInstance().control.outputFileName);
+void Application::writeAssignment(const FlowResult& result, const vector<string>& riskLines) const {
+    writeAssignmentOutput(result, getInstance().control.outputFileName, riskLines);
 }
 
 // ─── Risk Analysis ────────────────────────────────────────────────────────────
@@ -50,10 +50,6 @@ RiskResult Application::runRiskAnalysis(int K) const {
                                                        : inst.control.generateAssignments;
     return (K == 1) ? riskAnalysisK1(inst, mode)
                     : riskAnalysisKN(inst, mode, K);
-}
-
-void Application::writeRisk(const RiskResult& result) const {
-    writeRiskOutput(result, "risk_" + getInstance().control.outputFileName);
 }
 
 // ─── Batch mode ───────────────────────────────────────────────────────────────
@@ -69,12 +65,15 @@ int Application::runBatch(const string& inputFile) {
 
         if (inst.control.generateAssignments != 0) {
             FlowResult result = app.runAssignment(inst.control.generateAssignments);
-            app.writeAssignment(result);
-        }
 
-        if (inst.control.riskAnalysis != 0) {
-            RiskResult result = app.runRiskAnalysis(inst.control.riskAnalysis);
-            app.writeRisk(result);
+            // Run risk analysis regardless of success
+            vector<string> riskLines;
+            if (inst.control.riskAnalysis != 0) {
+                RiskResult risk = app.runRiskAnalysis(inst.control.riskAnalysis);
+                riskLines = riskResultToLines(risk);
+            }
+
+            app.writeAssignment(result, riskLines);
         }
 
         return 0;

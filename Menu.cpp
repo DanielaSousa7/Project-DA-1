@@ -244,7 +244,7 @@ static void riskMenu(Application& app) {
             case 1: {
                 RiskResult r = app.runRiskAnalysis(1);
                 displayRiskResult(r, R, 1);
-                try { app.writeRisk(r); } catch (const exception& e) { cerr << "  [Warning] " << e.what() << "\n"; }
+                // risk shown on screen only in interactive mode
                 pause(); break;
             }
             case 2: {
@@ -253,7 +253,7 @@ static void riskMenu(Application& app) {
                 if (K < 2) { cout << "  Invalid.\n"; break; }
                 RiskResult r = app.runRiskAnalysis(K);
                 displayRiskResult(r, R, K);
-                try { app.writeRisk(r); } catch (const exception& e) { cerr << "  [Warning] " << e.what() << "\n"; }
+                // risk shown on screen only in interactive mode
                 pause(); break;
             }
             case 3:
@@ -261,7 +261,7 @@ static void riskMenu(Application& app) {
                 else {
                     RiskResult r = app.runRiskAnalysis(fileK);
                     displayRiskResult(r, R, fileK);
-                    try { app.writeRisk(r); } catch (const exception& e) { cerr << "  [Warning] " << e.what() << "\n"; }
+                    // risk shown on screen only in interactive mode
                     pause();
                 }
                 break;
