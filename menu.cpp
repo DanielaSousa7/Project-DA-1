@@ -7,7 +7,7 @@ using namespace std;
 void showMainMenu() {
     cout << "=== Conference Assignment Tool ===\n";
     cout << "1. Read new file\n";
-    cout << "2. BrowseData\n";
+    cout << "2. Browse Data\n";
     cout << "3. Run assignment\n";
     cout << "4. Run Risk Analysis\n";
     cout << "0. Exit\n";
@@ -20,19 +20,19 @@ void showDataMenu() {
     cout << "2. List Reviewers\n";
     cout << "3. Show Parameters\n";
     cout << "4. Show Control\n";
-    cout << "0. Exit\n";
+    cout << "0. Back\n";
     cout << "Select an option: ";
 }
 
 void showAssignmentMenu() {
     cout << "=== Conference Assignment Tool ===\n";
-    cout << "0. Exit\n";
+    cout << "0. Back\n";
     cout << "Select an option: ";
 }
 
 void showRiskAnalysisMenu() {
     cout << "=== Conference Assignment Tool ===\n";
-    cout << "0. Exit\n";
+    cout << "0. Back\n";
     cout << "Select an option: ";
 }
 
@@ -46,6 +46,7 @@ int dataMenu(AssignmentData data) {
             case 1: printSubmissions(data); break;
             case 2: printReviewers(data); break;
             case 3: printParameters(data); break;
+            case 4: printControl(data); break;
             default: cout << "Invalid option!\n"; break;
         }
         cout << "\n";
