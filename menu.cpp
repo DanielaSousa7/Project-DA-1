@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "parser.h"
 #include <iostream>
+#include <limits>
 #include <string>
 using namespace std;
 
@@ -34,55 +35,6 @@ void showRiskAnalysisMenu() {
     cout << "=== Conference Assignment Tool ===\n";
     cout << "0. Back\n";
     cout << "Select an option: ";
-}
-
-int dataMenu(AssignmentData data) {
-    int option;
-    do {
-        showDataMenu();
-        cin >> option;
-        cin.ignore(); // limpar \n
-        switch(option) {
-            case 1: printSubmissions(data); break;
-            case 2: printReviewers(data); break;
-            case 3: printParameters(data); break;
-            case 4: printControl(data); break;
-            case 0: break;
-            default: cout << "Invalid option!\n"; break;
-        }
-        cout << "\n";
-    } while(option != 0);
-    return 0;
-}
-
-int assignmentMenu(AssignmentData data) {
-    int option;
-    do {
-        showAssignmentMenu();
-        cin >> option;
-        cin.ignore(); // limpar \n
-        switch(option) {
-            case 0: break;
-            default: cout << "Invalid option!\n"; break;
-        }
-        cout << "\n";
-    } while(option != 0);
-    return 0;
-}
-
-int riskAnalysisMenu(AssignmentData data) {
-    int option;
-    do {
-        showRiskAnalysisMenu();
-        cin >> option;
-        cin.ignore(); // limpar \n
-        switch(option) {
-            case 0: break;
-            default: cout << "Invalid option!\n"; break;
-        }
-        cout << "\n";
-    } while(option != 0);
-    return 0;
 }
 
 void printSubmissions(const AssignmentData &data) {
@@ -125,6 +77,75 @@ void printControl(const AssignmentData &data) {
     cout << "OutputFileName: " << data.control.outputFileName << "\n";
 }
 
+int dataMenu(AssignmentData data) {
+    int option;
+    do {
+        showDataMenu();
+        if (cin >> option) {
+            cin.ignore(); // clean '\n'
+            switch(option) {
+                case 1: cout << "\n"; printSubmissions(data); cout << "\n"; break;
+                case 2: cout << "\n"; printReviewers(data); cout << "\n"; break;
+                case 3: cout << "\n"; printParameters(data); cout << "\n"; break;
+                case 4: cout << "\n"; printControl(data); cout << "\n"; break;
+                case 0: break;
+                default: cout << "Invalid option!\n" << '\n'; break;
+            }
+        } else {
+            // Clear the error state and ignore the invalid input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid option!\n" << '\n';
+            option = -1;
+        }
+    } while(option != 0);
+    return 0;
+}
+
+int assignmentMenu(AssignmentData data) {
+    int option;
+    do {
+        showAssignmentMenu();
+        if (cin >> option) {
+            cin.ignore(); // clean '\n'
+            switch(option) {
+                case 0: break;
+                default: cout << "Invalid option!\n" << '\n'; break;
+            }
+        }
+        else {
+            // Clear the error state and ignore the invalid input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid option!\n" << '\n';
+            option = -1;
+        }
+    } while(option != 0);
+    return 0;
+}
+
+int riskAnalysisMenu(AssignmentData data) {
+    int option;
+    do {
+        showRiskAnalysisMenu();
+        if (cin >> option) {
+            cin.ignore(); // clean '\n'
+            switch(option) {
+                case 0: break;
+                default: cout << "Invalid option!\n" << '\n'; break;
+            }
+        }
+        else {
+            // Clear the error state and ignore the invalid input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid option!\n" << '\n';
+            option = -1;
+        }
+    } while(option != 0);
+    return 0;
+}
+
 int mainMenu() {
     // TODO: aqui vem todo o código que estava dentro do main do menu
     string filename;
@@ -136,21 +157,29 @@ int mainMenu() {
     int option = -1;
     do {
         showMainMenu();
-        cin >> option;
-        cin.ignore(); // limpar \n
-        switch(option) {
-            case 1:
-                cout << "Enter input CSV filename: ";
-                cin >> filename;
-                data = parseCSV(filename);
-                break;
-            case 2: cout << '\n' ; dataMenu(data); break;
-            case 3: cout << '\n' ; assignmentMenu(data); break;
-            case 4: cout << '\n' ; riskAnalysisMenu(data); break;
-            case 0: cout << "Exiting...\n"; break;
-            default: cout << "Invalid option!\n"; break;
+        if (cin >> option) {
+            cin.ignore(); // clean '\n'
+            switch(option) {
+                case 1:
+                    cout << "Enter input CSV filename: ";
+                    cin >> filename;
+                    data = parseCSV(filename);
+                    break;
+                case 2: cout << '\n' ; dataMenu(data); break;
+                case 3: cout << '\n' ; assignmentMenu(data); break;
+                case 4: cout << '\n' ; riskAnalysisMenu(data); break;
+                case 0: cout << "Exiting...\n"; break;
+                default: cout << "Invalid option!\n"; break;
+            }
+        }
+        else {
+            // Clear the error state and ignore the invalid input
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid option!\n";
+            option = -1;
         }
         cout << "\n";
-    } while(option > 0);
+    } while(option != 0);
     return 0;
 }
