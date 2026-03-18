@@ -1,0 +1,26 @@
+\doxysection{Assignment\+Data Struct Reference}
+\hypertarget{structAssignmentData}{}\label{structAssignmentData}\index{AssignmentData@{AssignmentData}}
+
+
+Collaboration diagram for Assignment\+Data\+:
+% FIG 0
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structAssignmentData_a2d2b3628ea3f8e9a061c318d6335ebf8}\label{structAssignmentData_a2d2b3628ea3f8e9a061c318d6335ebf8} 
+vector$<$ \mbox{\hyperlink{structSubmission}{Submission}} $>$ {\bfseries submissions}
+\item 
+\Hypertarget{structAssignmentData_a1c280a09f7428d53453348eefbd63008}\label{structAssignmentData_a1c280a09f7428d53453348eefbd63008} 
+vector$<$ \mbox{\hyperlink{structReviewer}{Reviewer}} $>$ {\bfseries reviewers}
+\item 
+\Hypertarget{structAssignmentData_a3607aea45b0ae82928c635d52bff2ff7}\label{structAssignmentData_a3607aea45b0ae82928c635d52bff2ff7} 
+\mbox{\hyperlink{structParameters}{Parameters}} {\bfseries parameters}
+\item 
+\Hypertarget{structAssignmentData_a688ded16abf28048abd28a158df96268}\label{structAssignmentData_a688ded16abf28048abd28a158df96268} 
+\mbox{\hyperlink{structControl}{Control}} {\bfseries control}
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Data.\+h\end{DoxyCompactItemize}
