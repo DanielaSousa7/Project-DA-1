@@ -1,5 +1,6 @@
 #include "menu.h"
 #include "parser.h"
+#include "Output.h"
 #include <iostream>
 #include <limits>
 #include <string>
@@ -38,6 +39,7 @@ void showDataMenu() {
 
 void showAssignmentMenu() {
     cout << "=== Conference Assignment Tool ===\n";
+    cout << "1. Run assignment\n";
     cout << "0. Back\n";
     cout << "Select an option: ";
 }
@@ -51,11 +53,11 @@ void showRiskAnalysisMenu() {
 void printSubmissions(const AssignmentData &data) {
     cout << "--- Submissions ---\n";
     for (const auto &s : data.submissions) {
-        cout << "ID: " << s.id 
-             << ", Title: " << s.title 
+        cout << "ID: " << s.id
+             << ", Title: " << s.title
              << ", Authors: " << s.authors
-             << ", Email: " << s.email 
-             << ", Primary: " << s.primaryDomain 
+             << ", Email: " << s.email
+             << ", Primary: " << s.primaryDomain
              << ", Secondary: " << s.secondaryDomain << "\n";
     }
 }
@@ -63,10 +65,10 @@ void printSubmissions(const AssignmentData &data) {
 void printReviewers(const AssignmentData &data) {
     cout << "--- Reviewers ---\n";
     for (const auto &r : data.reviewers) {
-        cout << "ID: " << r.id 
-             << ", Name: " << r.name 
+        cout << "ID: " << r.id
+             << ", Name: " << r.name
              << ", Email: " << r.email
-             << ", Primary: " << r.primaryExpertise 
+             << ", Primary: " << r.primaryExpertise
              << ", Secondary: " << r.secondaryExpertise << "\n";
     }
 }
@@ -118,20 +120,44 @@ int assignmentMenu(AssignmentData data) {
     do {
         showAssignmentMenu();
         if (cin >> option) {
-            cin.ignore(); // clean '\n'
+            cin.ignore();
+
             switch(option) {
+                case 1: {
+                    cout << "Running assignment...\n";
+
+                    ReviewAssignment result = runReviewAssignment(data);
+
+                    // PRINT NO TERMINAL
+                    cout << "\n--- Assignments ---\n";
+                    for (auto &a : result.submissionAssignments) {
+                        cout << "Submission " << a.submissionId
+                             << " -> Reviewer " << a.reviewerId
+                             << " (Domain " << a.matchDomain << ")\n";
+                    }
+
+                    cout << "\nTotal: " << result.totalAssignments << "\n";
+
+                    // ESCREVER FICHEIRO
+                    ReviewOutput::printAssignment(result, data.control.outputFileName);
+
+                    cout << "Output written to " << data.control.outputFileName << "\n\n";
+                    break;
+                }
+
                 case 0: break;
-                default: cout << "Invalid option!\n" << '\n'; break;
+                default: cout << "Invalid option!\n"; break;
             }
         }
         else {
-            // Clear the error state and ignore the invalid input
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid option!\n" << '\n';
+            cout << "Invalid option!\n";
             option = -1;
         }
+
     } while(option != 0);
+
     return 0;
 }
 
