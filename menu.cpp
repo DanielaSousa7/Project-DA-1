@@ -139,7 +139,7 @@ int assignmentMenu(AssignmentData data) {
                     cout << "\nTotal: " << result.totalAssignments << "\n";
 
                     // ESCREVER FICHEIRO
-                    ReviewOutput::printAssignment(result, data.control.outputFileName);
+                    ReviewOutput::printAssignment(result, data, data.control.outputFileName);
 
                     cout << "Output written to " << data.control.outputFileName << "\n\n";
                     break;

@@ -8,7 +8,7 @@
 
 class ReviewOutput {
 public:
-    static void printAssignment(const ReviewAssignment &assignment, const std::string &filename);
+    static void printAssignment(const ReviewAssignment &assignment, const AssignmentData &data, const std::string &filename);
     static void printUnassignedSubmissions(const AssignmentData &data, const ReviewAssignment &assignment);
 };
 
