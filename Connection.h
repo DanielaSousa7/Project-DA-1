@@ -3,8 +3,16 @@
 
 #include "Data.h"
 #include "ReviewAssignment.h"
+#include <vector>
+using namespace std;
 
-ReviewAssignment runReviewAssignment(AssignmentData data);
+// Runs the review assignment. excludeReviewerId = -1 means include all reviewers.
+ReviewAssignment runReviewAssignment(AssignmentData data, int excludeReviewerId = -1);
 
+// Returns true if a full valid assignment is possible (with optional excluded reviewer).
+bool assignmentFeasible(AssignmentData data, int excludeReviewerId = -1);
 
-#endif //PROJECT_DA_1_CONNECTION_H
+// Risk Analysis K=1: returns IDs of reviewers whose absence breaks the assignment.
+vector<int> riskAnalysisK1(AssignmentData data);
+
+#endif

@@ -1,69 +1,63 @@
 #include "Output.h"
+#include "Connection.h"
 #include <fstream>
 #include <algorithm>
 using namespace std;
 
-void printAssignment(ReviewAssignment assignment,AssignmentData data, string filename) {
+void printAssignment(ReviewAssignment assignment, AssignmentData data, string filename) {
     ofstream out(filename);
+
     auto sub = assignment.submissionAssignments;
     auto rev = assignment.reviewerAssignments;
-    sort(sub.begin(), sub.end(), [](auto &a, auto &b) {
-        if (a.submissionId != b.submissionId)
-            return a.submissionId < b.submissionId;
-        return a.reviewerId < b.reviewerId;
+
+    sort(sub.begin(), sub.end(), [](const auto& a, const auto& b) {
+        return a.submissionId != b.submissionId
+            ? a.submissionId < b.submissionId
+            : a.reviewerId   < b.reviewerId;
     });
-    sort(rev.begin(), rev.end(), [](auto &a, auto &b) {
-        if (a.reviewerId != b.reviewerId)
-            return a.reviewerId < b.reviewerId;
-        return a.submissionId < b.submissionId;
+    sort(rev.begin(), rev.end(), [](const auto& a, const auto& b) {
+        return a.reviewerId != b.reviewerId
+            ? a.reviewerId   < b.reviewerId
+            : a.submissionId < b.submissionId;
     });
 
-    out << "#SubmissionId,ReviewerId,Match\n";
-    for (auto item : sub)
-        out << item.submissionId << ", " << item.reviewerId << ", " << item.matchDomain << "\n";
+    // Always show what was assigned (even if partial)
+    if (!sub.empty()) {
+        out << "#SubmissionId,ReviewerId,Match\n";
+        for (const auto& item : sub)
+            out << item.submissionId << ", " << item.reviewerId << ", " << item.matchDomain << "\n";
 
-    out << "#ReviewerId,SubmissionId,Match\n";
-    for (auto item : rev)
-        out << item.reviewerId << ", " << item.submissionId << ", " << item.matchDomain << "\n";
+        out << "#ReviewerId,SubmissionId,Match\n";
+        for (const auto& item : rev)
+            out << item.reviewerId << ", " << item.submissionId << ", " << item.matchDomain << "\n";
 
-    out << "#Total: " << assignment.totalAssignments << "\n";
+        out << "#Total: " << assignment.totalAssignments << "\n";
+    }
 
+    // Report missing reviews
     bool hasMissing = false;
-    for (Submission s : data.submissions) {
+    for (const Submission& s : data.submissions) {
         int count = 0;
-        for (ReviewAssignmentItem a : sub) {
-            if (a.submissionId == s.id)
-                count++;
-        }
+        for (const auto& a : sub)
+            if (a.submissionId == s.id) count++;
         int missing = data.parameters.minReviewsPerSubmission - count;
         if (missing > 0) {
-            if (!hasMissing) {
-                out << "#SubmissionId,Domain,MissingReviews\n";
-                hasMissing = true;
-            }
+            if (!hasMissing) { out << "#SubmissionId,Domain,MissingReviews\n"; hasMissing = true; }
             out << s.id << ", " << s.primaryDomain << ", " << missing << "\n";
         }
     }
 
+    // Risk Analysis
     if (data.control.riskAnalysis == 1) {
-        out << "#Risk Analysis: " << data.control.riskAnalysis << "\n";
-        vector<int> risky;
-        for ( Reviewer r: data.reviewers) {
-            int count = 0;
-            for (ReviewAssignmentItem a : rev) {
-                if (a.reviewerId == r.id)
-                    count++;
-            }
-            if (count > data.parameters.maxReviewsPerReviewer) {
-                risky.push_back(r.id);
-            }
-        }
-        sort(risky.begin(), risky.end());
-        for (size_t i = 0; i < risky.size(); i++) {
-            if (i > 0) out << ", ";
+        out << "#Risk Analysis: 1\n";
+        vector<int> risky = riskAnalysisK1(data);
+        for (int i = 0; i < (int)risky.size(); ++i) {
+            if (i) out << ", ";
             out << risky[i];
         }
-        out << "\n";
+        if (risky.empty()) out << "\n";
+        else out << "\n";
     }
+
     out.close();
 }
