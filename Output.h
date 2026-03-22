@@ -2,15 +2,10 @@
 #define PROJECT_DA_1_OUTPUT_H
 
 #include "Data.h"
-#include "Connection.h"
 #include "ReviewAssignment.h"
 #include <string>
+using namespace std;
 
-class ReviewOutput {
-public:
-    static void printAssignment(const ReviewAssignment &assignment, const AssignmentData &data, const std::string &filename);
-    static void printUnassignedSubmissions(const AssignmentData &data, const ReviewAssignment &assignment);
-};
-
+void printAssignment(ReviewAssignment assignment, AssignmentData data, string filename);
 
 #endif //PROJECT_DA_1_OUTPUT_H

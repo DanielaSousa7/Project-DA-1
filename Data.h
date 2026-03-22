@@ -44,23 +44,4 @@ struct AssignmentData {
     Control control;
 };
 
-struct AssignmentOutput {
-    int submissionId;
-    int reviewerId;
-    int match;
-};
-
-struct UnsuccessfulAssignment {
-    int submissionId;
-    int domain;
-    int missingReviews;
-};
-
-struct RiskAnalysis {
-    int k;
-    vector<int> riskyReviewers;
-};
-
-
-
 #endif

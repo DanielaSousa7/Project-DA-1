@@ -6,13 +6,12 @@
 void showMainMenu();
 void showDataMenu();
 void showAssignmentMenu();
-void showRiskAnalysisMenu();
-int dataMenu(AssignmentData data);
-int assignmentMenu(AssignmentData data);
-void printSubmissions(const AssignmentData &data);
-void printReviewers(const AssignmentData &data);
-void printParameters(const AssignmentData &data);
-void printControl(const AssignmentData &data);
+void dataMenu(AssignmentData data);
+void assignmentMenu(AssignmentData data);
+void printSubmissions(AssignmentData data);
+void printReviewers(AssignmentData data);
+void printParameters(AssignmentData data);
+void printControl(AssignmentData data);
 int mainMenu();
 
 #endif //PROJECT_DA_1_MENU_H
