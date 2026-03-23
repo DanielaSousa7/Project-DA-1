@@ -14,8 +14,8 @@ void printAssignment(ReviewAssignment assignment,AssignmentData data, string fil
     });
     sort(rev.begin(), rev.end(), [](auto &a, auto &b) {
         if (a.reviewerId != b.reviewerId)
-            return a.reviewerId < b.reviewerId;
-        return a.submissionId < b.submissionId;
+            return a.submissionId < b.submissionId;
+        return a.reviewerId < b.reviewerId;
     });
 
     out << "#SubmissionId,ReviewerId,Match\n";
@@ -24,7 +24,7 @@ void printAssignment(ReviewAssignment assignment,AssignmentData data, string fil
 
     out << "#ReviewerId,SubmissionId,Match\n";
     for (auto item : rev)
-        out << item.reviewerId << ", " << item.submissionId << ", " << item.matchDomain << "\n";
+        out << item.submissionId << ", " << item.reviewerId << ", " << item.matchDomain << "\n";
 
     out << "#Total: " << assignment.totalAssignments << "\n";
 
