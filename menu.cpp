@@ -8,16 +8,16 @@
 using namespace std;
 
 void showMainMenu() {
-    cout << "=== Conference Assignment Tool ===\n";
+    cout << "=== Assignment Tool ===\n";
     cout << "1. Read new file\n";
-    cout << "2. Browse Data\n";
+    cout << "2. Browse File Data\n";
     cout << "3. Run assignment\n";
     cout << "0. Exit\n";
     cout << "Select an option: ";
 }
 
 void showDataMenu() {
-    cout << "=== Conference Assignment Tool ===\n";
+    cout << "=== File Data ===\n";
     cout << "1. List Submissions\n";
     cout << "2. List Reviewers\n";
     cout << "3. Show Parameters\n";
@@ -27,7 +27,7 @@ void showDataMenu() {
 }
 
 void showAssignmentMenu() {
-    cout << "=== Conference Assignment Tool ===\n";
+    cout << "=== Run Assignment ===\n";
     cout << "1. Run assignment\n";
     cout << "0. Back\n";
     cout << "Select an option: ";
@@ -133,13 +133,15 @@ void assignmentMenu(AssignmentData data) {
             cout << "Invalid option!\n";
             option = -1;
         }
+        cout << '\n';
     }
 }
 
 int mainMenu() {
     string filename;
-    cout << "Enter input CSV filename: ";
+    cout << "Enter path of your .csv file: ";
     cin >> filename;
+    cout << endl;
     AssignmentData data = parseCSV(filename);
     int option = -1;
     while (option != 0) {
