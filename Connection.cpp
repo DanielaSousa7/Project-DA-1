@@ -13,10 +13,10 @@ ReviewAssignment runReviewAssignment(AssignmentData data) {
     int reviewerOffset = 2000;
     g.addVertex(source);
     g.addVertex(sink);
-    map<int,int> submissionDomain;
+    map<int, pair<pair<int, int>, int>> submissionDomain;
     for (Submission s : data.submissions) {
         g.addVertex(submissionOffset + s.id);
-        submissionDomain[s.id] = s.primaryDomain;
+        submissionDomain[s.id] = {{s.primaryDomain, s.secondaryDomain}, -1};
     }
     for (Reviewer r : data.reviewers) {
         g.addVertex(reviewerOffset + r.id);
@@ -30,35 +30,30 @@ ReviewAssignment runReviewAssignment(AssignmentData data) {
     for (auto &s : data.submissions) {
         for (auto &r : data.reviewers) {
             bool match = false;
+
             bool useSubPrimary   = data.parameters.primarySubmissionDomain;
             bool useSubSecondary = data.parameters.secondarySubmissionDomain;
             bool useRevPrimary   = data.parameters.primaryReviewerExpertise;
-            bool useRevSecondary = data.parameters.secondaryReviewerExpertise;
+
             int mode = data.control.generateAssignments;
             if (mode == 1) {
                 if (useSubPrimary && useRevPrimary) {
                     match = (s.primaryDomain == r.primaryExpertise);
+                    submissionDomain[s.id].second = 0;
                 }
             }
             else if (mode == 2) {
                 if (useRevPrimary) {
-                    if (useSubPrimary && s.primaryDomain == r.primaryExpertise)
+                    if (useSubPrimary && s.primaryDomain == r.primaryExpertise) {
                         match = true;
-                    if (useSubSecondary && s.secondaryDomain != -1 &&s.secondaryDomain == r.primaryExpertise)
+                        submissionDomain[s.id].second = 0;
+                    }
+                    if (useSubSecondary && s.secondaryDomain != -1 &&s.secondaryDomain == r.primaryExpertise) {
                         match = true;
+                        submissionDomain[s.id].second = 1;
+                    }
                 }
             }
-            else if (mode == 3) {
-                if (useSubPrimary && useRevPrimary &&s.primaryDomain == r.primaryExpertise)
-                    match = true;
-                if (useSubSecondary && useRevPrimary && s.secondaryDomain != -1 && s.secondaryDomain == r.primaryExpertise)
-                    match = true;
-                if (useSubPrimary && useRevSecondary && r.secondaryExpertise != -1 && s.primaryDomain == r.secondaryExpertise)
-                    match = true;
-                if (useSubSecondary && useRevSecondary && s.secondaryDomain != -1 && r.secondaryExpertise != -1 && s.secondaryDomain == r.secondaryExpertise)
-                    match = true;
-            }
-
             if (match) {
                 g.addEdge(submissionOffset + s.id, reviewerOffset + r.id, 1);
             }
@@ -76,7 +71,13 @@ ReviewAssignment runReviewAssignment(AssignmentData data) {
             if (u >= submissionOffset && u < reviewerOffset && w >= reviewerOffset && e->getFlow() > 0) {
                 int subId = u - submissionOffset;
                 int revId = w - reviewerOffset;
-                int matchDomain = submissionDomain[subId];
+
+                int matchDomainLevel = submissionDomain[subId].second;
+                int matchDomain;
+                switch (matchDomainLevel) {
+                    case 0 : matchDomain = submissionDomain[subId].first.first; break;
+                    case 1 : matchDomain = submissionDomain[subId].first.second; break;
+                }
                 assignment.submissionAssignments.push_back({subId, revId, matchDomain});
                 assignment.reviewerAssignments.push_back({revId, subId, matchDomain});
                 assignment.totalAssignments++;
