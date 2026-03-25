@@ -106,7 +106,7 @@ AssignmentData parseCSV(string filename) {
                     errors.push_back("Invalid RiskAnalysis value");
                 data.control.riskAnalysis = v;
             }
-            else if (key == "OutputFileName") removeQuotes(value);
+            else if (key == "OutputFileName") data.control.outputFileName = removeQuotes(value);
         }
     }
     file.close();
