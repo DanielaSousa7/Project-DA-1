@@ -6,6 +6,20 @@
 #include <vector>
 using namespace std;
 
+string trim(string s) {
+    size_t start = s.find_first_not_of(" \t\r\n");
+    if (start == string::npos) return "";
+    size_t end = s.find_last_not_of(" \t\r\n");
+    return s.substr(start, end - start + 1);
+}
+
+string removeQuotes(string s) {
+    if (s.size() >= 2 && s.front() == '"' && s.back() == '"') {
+        return s.substr(1, s.size() - 2);
+    }
+    return s;
+}
+
 AssignmentData parseCSV(string filename) {
     AssignmentData data;
     string line;
@@ -78,6 +92,8 @@ AssignmentData parseCSV(string filename) {
             string key, value;
             getline(ss, key, ',');
             getline(ss, value, ',');
+            key = trim(key);
+            value = trim(value);
             if (key == "GenerateAssignments") {
                 int v = stoi(value);
                 if (v < 0 || v > 3)
@@ -90,7 +106,7 @@ AssignmentData parseCSV(string filename) {
                     errors.push_back("Invalid RiskAnalysis value");
                 data.control.riskAnalysis = v;
             }
-            else if (key == "OutputFileName") data.control.outputFileName = value;
+            else if (key == "OutputFileName") removeQuotes(value);
         }
     }
     file.close();
