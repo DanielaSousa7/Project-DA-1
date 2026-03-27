@@ -46,10 +46,9 @@ void printAssignment(ReviewAssignment assignment,AssignmentData data, string fil
         }
     }
 
-    // Risk Analysis
     if (data.control.riskAnalysis == 1) {
         out << "#Risk Analysis: 1\n";
-        vector<int> risky = riskAnalysisK1(data);
+        vector<int> risky = riskAnalysis(data);
         for (int i = 0; i < (int)risky.size(); ++i) {
             if (i) out << ", ";
             out << risky[i];
