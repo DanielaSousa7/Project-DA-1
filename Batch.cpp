@@ -8,6 +8,10 @@ using namespace std;
 
 void batchMode(string inputFile, string outputFile) {
     AssignmentData data = parseCSV(inputFile);
+    if (data.hasErrors) {
+        cerr << "Errors found in input file. Aborting batch.\n";
+        return;
+    }
     cout << "Loaded: " << data.submissions.size() << " submission(s), " << data.reviewers.size() << " reviewer(s)\n";
     if (data.control.generateAssignments != 0) {
         ReviewAssignment result = runReviewAssignment(data);

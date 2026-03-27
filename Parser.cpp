@@ -114,6 +114,7 @@ AssignmentData parseCSV(string filename) {
         data.control.outputFileName = "output.csv";
     }
     if (!errors.empty()) {
+        data.hasErrors = true;
         cerr << "Input file contains errors:\n";
         for (string e : errors)
             cerr << "- " << e << endl;

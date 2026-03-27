@@ -92,10 +92,15 @@ void dataMenu(AssignmentData data) {
 
 int mainMenu() {
     string filename;
-    cout << "Enter path of your .csv file: ";
-    cin >> filename;
-    cout << endl;
-    AssignmentData data = parseCSV(filename);
+    AssignmentData data;
+    while (true) {
+        cout << "Enter path of your .csv file: ";
+        cin >> filename;
+        cout << endl;
+        data = parseCSV(filename);
+        if (!data.hasErrors) break;
+        cout << "Invalid file. Please load another file.\n\n";
+    }
     int option = -1;
     while (option != 0) {
         showMainMenu();

@@ -42,6 +42,7 @@ struct AssignmentData {
     vector<Reviewer> reviewers;
     Parameters parameters;
     Control control;
+    bool hasErrors = false;
 };
 
 #endif
