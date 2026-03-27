@@ -1,6 +1,7 @@
 #include "menu.h"
 #include "parser.h"
 #include "Output.h"
+#include "Connection.h"
 #include <iostream>
 #include <limits>
 #include <string>

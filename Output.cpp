@@ -1,4 +1,5 @@
 #include "Output.h"
+#include "Connection.h"
 #include <fstream>
 #include <algorithm>
 using namespace std;
@@ -45,25 +46,17 @@ void printAssignment(ReviewAssignment assignment,AssignmentData data, string fil
         }
     }
 
+    // Risk Analysis
     if (data.control.riskAnalysis == 1) {
-        out << "#Risk Analysis: " << data.control.riskAnalysis << "\n";
-        vector<int> risky;
-        for ( Reviewer r: data.reviewers) {
-            int count = 0;
-            for (ReviewAssignmentItem a : rev) {
-                if (a.reviewerId == r.id)
-                    count++;
-            }
-            if (count > data.parameters.maxReviewsPerReviewer) {
-                risky.push_back(r.id);
-            }
-        }
-        sort(risky.begin(), risky.end());
-        for (size_t i = 0; i < risky.size(); i++) {
-            if (i > 0) out << ", ";
+        out << "#Risk Analysis: 1\n";
+        vector<int> risky = riskAnalysisK1(data);
+        for (int i = 0; i < (int)risky.size(); ++i) {
+            if (i) out << ", ";
             out << risky[i];
         }
-        out << "\n";
+        if (risky.empty()) out << "\n";
+        else out << "\n";
     }
+
     out.close();
 }
