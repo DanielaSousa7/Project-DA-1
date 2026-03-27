@@ -1,7 +1,6 @@
 CXX      = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -I. -w
 
-# Ficheiros fonte (apenas os que constam na imagem)
 SRCS = Connection.cpp main.cpp menu.cpp Output.cpp Parser.cpp
 OBJS = $(SRCS:.cpp=.o)
 
