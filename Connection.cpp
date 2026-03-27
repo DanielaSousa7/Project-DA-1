@@ -31,9 +31,9 @@ ReviewAssignment runReviewAssignment(AssignmentData data) {
         for (auto &r : data.reviewers) {
             bool match = false;
 
-            bool useSubPrimary   = data.parameters.primarySubmissionDomain;
-            bool useSubSecondary = data.parameters.secondarySubmissionDomain;
-            bool useRevPrimary   = data.parameters.primaryReviewerExpertise;
+            bool useSubPrimary   = data.parameters.primarySubmissionDomain   != 0;
+            bool useSubSecondary = data.parameters.secondarySubmissionDomain != 0;
+            bool useRevPrimary   = data.parameters.primaryReviewerExpertise  != 0;
 
             int mode = data.control.generateAssignments;
             if (mode == 1) {
@@ -59,6 +59,12 @@ ReviewAssignment runReviewAssignment(AssignmentData data) {
             }
         }
     }
+
+    for (auto &s : data.submissions) {
+        cout << s.id << ": (" << submissionDomain[s.id].first.first << ", " <<
+            submissionDomain[s.id].first.second << "), " << submissionDomain[s.id].second << endl;
+    }
+
     edmondsKarp(&g, source, sink);
     int totalFlow = 0;
     for (Edge<int>* e : g.findVertex(source)->getAdj()) {
@@ -74,9 +80,12 @@ ReviewAssignment runReviewAssignment(AssignmentData data) {
 
                 int matchDomainLevel = submissionDomain[subId].second;
                 int matchDomain;
-                switch (matchDomainLevel) {
-                    case 0 : matchDomain = submissionDomain[subId].first.first; break;
-                    case 1 : matchDomain = submissionDomain[subId].first.second; break;
+
+                if (matchDomainLevel == 0) {
+                    matchDomain = submissionDomain[subId].first.first;
+                }
+                else {
+                    matchDomain = submissionDomain[subId].first.second;
                 }
                 assignment.submissionAssignments.push_back({subId, revId, matchDomain});
                 assignment.reviewerAssignments.push_back({revId, subId, matchDomain});
