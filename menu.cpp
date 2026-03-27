@@ -27,13 +27,6 @@ void showDataMenu() {
     cout << "Select an option: ";
 }
 
-void showAssignmentMenu() {
-    cout << "=== Run Assignment ===\n";
-    cout << "1. Run assignment\n";
-    cout << "0. Back\n";
-    cout << "Select an option: ";
-}
-
 void printSubmissions(AssignmentData data) {
     cout << "--- Submissions ---\n";
     for (Submission s : data.submissions) {
@@ -98,46 +91,6 @@ void dataMenu(AssignmentData data) {
     }
 }
 
-void assignmentMenu(AssignmentData data) {
-    int option = -1;
-    while (option != 0) {
-        showAssignmentMenu();
-        if (cin >> option) {
-            cin.ignore();
-            switch (option) {
-                case 1: {
-                    cout << "Running assignment...\n";
-                    ReviewAssignment result = runReviewAssignment(data);
-                    cout << "\n--- Assignments ---\n";
-                    for (ReviewAssignmentItem a : result.submissionAssignments) {
-                        cout << "Submission " << a.submissionId;
-                        cout << " -> Reviewer " << a.reviewerId;
-                        cout << " (Domain " << a.matchDomain << ")\n";
-                    }
-                    cout << "\nTotal: " << result.totalAssignments << "\n";
-                    if (data.control.generateAssignments != 0) {
-                        printAssignment(result, data, data.control.outputFileName);
-                        cout << "Output written to " << data.control.outputFileName << "\n";
-                    }
-                    break;
-                }
-                case 0:
-                    break;
-                default:
-                    cout << "Invalid option!\n";
-                    break;
-            }
-        }
-        else {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid option!\n";
-            option = -1;
-        }
-        cout << '\n';
-    }
-}
-
 int mainMenu() {
     string filename;
     cout << "Enter path of your .csv file: ";
@@ -159,10 +112,22 @@ int mainMenu() {
                     cout << '\n';
                     dataMenu(data);
                     break;
-                case 3:
-                    cout << '\n';
-                    assignmentMenu(data);
+                case 3: {
+                    cout << "Running assignment...\n";
+                    ReviewAssignment result = runReviewAssignment(data);
+                    cout << "\n--- Assignments ---\n";
+                    for (ReviewAssignmentItem a : result.submissionAssignments) {
+                        cout << "Submission " << a.submissionId;
+                        cout << " -> Reviewer " << a.reviewerId;
+                        cout << " (Domain " << a.matchDomain << ")\n";
+                    }
+                    cout << "\nTotal: " << result.totalAssignments << "\n";
+                    if (data.control.generateAssignments != 0) {
+                        printAssignment(result, data, data.control.outputFileName);
+                        cout << "Output written to " << data.control.outputFileName << "\n";
+                    }
                     break;
+                }
                 case 0:
                     cout << "Exiting...\n";
                     break;
