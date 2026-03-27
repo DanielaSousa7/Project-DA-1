@@ -1,0 +1,37 @@
+\doxysection{Review\+Assignment Struct Reference}
+\hypertarget{struct_review_assignment}{}\label{struct_review_assignment}\index{ReviewAssignment@{ReviewAssignment}}
+
+
+Holds the full result of running the assignment algorithm.  
+
+
+
+
+{\ttfamily \+\#include $<$Review\+Assignment.\+h$>$}
+
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{struct_review_assignment_a4f3c8cda25e7cb21335c3989efc20798}\label{struct_review_assignment_a4f3c8cda25e7cb21335c3989efc20798} 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_review_assignment_item}{Review\+Assignment\+Item}} $>$ {\bfseries submission\+Assignments}
+\begin{DoxyCompactList}\small\item\em Assignments sorted by paper ID. \end{DoxyCompactList}\item 
+\Hypertarget{struct_review_assignment_af6116120fb75922a4966a0cd002da761}\label{struct_review_assignment_af6116120fb75922a4966a0cd002da761} 
+std::\+vector$<$ \doxymbox{\hyperlink{struct_review_assignment_item}{Review\+Assignment\+Item}} $>$ {\bfseries reviewer\+Assignments}
+\begin{DoxyCompactList}\small\item\em Assignments sorted by reviewer ID. \end{DoxyCompactList}\item 
+\Hypertarget{struct_review_assignment_ab6cbe4a88b7be8e3c35e805a3e1ef43e}\label{struct_review_assignment_ab6cbe4a88b7be8e3c35e805a3e1ef43e} 
+int {\bfseries total\+Assignments} = 0
+\begin{DoxyCompactList}\small\item\em Total number of review assignments made. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Holds the full result of running the assignment algorithm. 
+
+Contains two views of the same assignments:\+
+\begin{DoxyItemize}
+\item submission\+Assignments:\+ sorted by paper ID
+\item reviewer\+Assignments:\+ sorted by reviewer ID 
+\end{DoxyItemize}
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{_review_assignment_8h}{Review\+Assignment.\+h}}\end{DoxyCompactItemize}

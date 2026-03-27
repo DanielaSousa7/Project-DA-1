@@ -1,0 +1,51 @@
+\doxysection{Batch.\+cpp File Reference}
+\hypertarget{_batch_8cpp}{}\label{_batch_8cpp}\index{Batch.cpp@{Batch.cpp}}
+
+
+Implementation of the batch mode.  
+
+
+{\ttfamily \+\#include "{}Parser.\+h"{}}\newline
+{\ttfamily \+\#include "{}Output.\+h"{}}\newline
+{\ttfamily \+\#include "{}Connection.\+h"{}}\newline
+{\ttfamily \+\#include $<$iostream$>$}\newline
+{\ttfamily \+\#include $<$string$>$}\newline
+{\ttfamily \+\#include "{}Batch.\+h"{}}\newline
+Include dependency graph for Batch.\+cpp:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{_batch_8cpp_a0bd62db4f7cba1ba3aab1517daf75fde}{batch\+Mode}} (string input\+File, string output\+File)
+\begin{DoxyCompactList}\small\item\em Runs the tool in batch mode, reading from a CSV file and writing output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the batch mode. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{_batch_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_batch_8cpp_a0bd62db4f7cba1ba3aab1517daf75fde}\index{Batch.cpp@{Batch.cpp}!batchMode@{batchMode}}
+\index{batchMode@{batchMode}!Batch.cpp@{Batch.cpp}}
+\doxysubsubsection{\texorpdfstring{batchMode()}{batchMode()}}
+{\footnotesize\ttfamily \label{_batch_8cpp_a0bd62db4f7cba1ba3aab1517daf75fde} 
+void batch\+Mode (\begin{DoxyParamCaption}\item[{string}]{input\+File}{, }\item[{string}]{output\+File}{}\end{DoxyParamCaption})}
+
+
+
+Runs the tool in batch mode, reading from a CSV file and writing output. 
+
+Executes batch processing mode.
+
+If an explicit output filename is provided as a third argument, it overrides the filename specified in the CSV control section.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+File} & Path to the input CSV file. \\
+\hline
+{\em output\+File} & Optional output filename override (empty = use CSV setting). \\
+\hline
+\end{DoxyParams}

@@ -1,5 +1,10 @@
+/**
+* @file menu.cpp
+ * @brief Implementation of the interactive menu.
+ */
+
 #include "menu.h"
-#include "parser.h"
+#include "Parser.h"
 #include "Output.h"
 #include "Connection.h"
 #include <iostream>
@@ -7,6 +12,7 @@
 #include <string>
 using namespace std;
 
+/// @brief Displays the main menu options.
 void showMainMenu() {
     cout << "=== Assignment Tool ===\n";
     cout << "1. Read new file\n";
@@ -16,6 +22,7 @@ void showMainMenu() {
     cout << "Select an option: ";
 }
 
+/// @brief Displays the data browser submenu options.
 void showDataMenu() {
     cout << "=== File Data ===\n";
     cout << "1. List Submissions\n";
@@ -26,6 +33,10 @@ void showDataMenu() {
     cout << "Select an option: ";
 }
 
+/**
+ * @brief Prints all submissions to the console.
+ * @param data The currently loaded problem instance.
+ */
 void printSubmissions(AssignmentData data) {
     cout << "--- Submissions ---\n";
     for (Submission s : data.submissions) {
@@ -38,6 +49,10 @@ void printSubmissions(AssignmentData data) {
     }
 }
 
+/**
+ * @brief Prints all reviewers to the console.
+ * @param data The currently loaded problem instance.
+ */
 void printReviewers(AssignmentData data) {
     cout << "--- Reviewers ---\n";
     for (Reviewer r : data.reviewers) {
@@ -49,6 +64,10 @@ void printReviewers(AssignmentData data) {
     }
 }
 
+/**
+ * @brief Prints the problem parameters to the console.
+ * @param data The currently loaded problem instance.
+ */
 void printParameters(AssignmentData data) {
     cout << "--- Parameters ---\n";
     cout << "MinReviewsPerSubmission: " << data.parameters.minReviewsPerSubmission << "\n";
@@ -59,6 +78,10 @@ void printParameters(AssignmentData data) {
     cout << "SecondarySubmissionDomain: " << data.parameters.secondarySubmissionDomain << "\n";
 }
 
+/**
+ * @brief Prints the control settings to the console.
+ * @param data The currently loaded problem instance.
+ */
 void printControl(AssignmentData data) {
     cout << "--- Control ---\n";
     cout << "GenerateAssignments: " << data.control.generateAssignments << "\n";
@@ -66,6 +89,10 @@ void printControl(AssignmentData data) {
     cout << "OutputFileName: " << data.control.outputFileName << "\n";
 }
 
+/**
+ * @brief Runs the data browser submenu.
+ * @param data The currently loaded problem instance.
+ */
 void dataMenu(AssignmentData data) {
     int option = -1;
     while(option != 0) {
@@ -90,6 +117,10 @@ void dataMenu(AssignmentData data) {
     }
 }
 
+/**
+ * @brief Runs the assignment submenu.
+ * @param data The currently loaded problem instance.
+ */
 int mainMenu() {
     string filename;
     cout << "Enter path of your .csv file: ";

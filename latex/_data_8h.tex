@@ -1,0 +1,32 @@
+\doxysection{Data.\+h File Reference}
+\hypertarget{_data_8h}{}\label{_data_8h}\index{Data.h@{Data.h}}
+
+
+Core data structures used throughout the application.  
+
+
+{\ttfamily \+\#include $<$string$>$}\newline
+{\ttfamily \+\#include $<$vector$>$}\newline
+Include dependency graph for Data.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_submission}{Submission}}
+\begin{DoxyCompactList}\small\item\em Represents a paper submitted to the conference. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_reviewer}{Reviewer}}
+\begin{DoxyCompactList}\small\item\em Represents a reviewer in the conference. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_parameters}{Parameters}}
+\begin{DoxyCompactList}\small\item\em Problem parameters read from the \doxylink{struct_parameters}{Parameters} section of the CSV. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_control}{Control}}
+\begin{DoxyCompactList}\small\item\em \doxylink{struct_control}{Control} settings read from the \doxylink{struct_control}{Control} section of the CSV. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}
+\begin{DoxyCompactList}\small\item\em Container for all data parsed from a .csv input file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Core data structures used throughout the application. 
+
+Defines the structs that represent submissions, reviewers, parameters, control settings, and the full problem instance loaded from a CSV file. 

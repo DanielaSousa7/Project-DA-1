@@ -1,0 +1,68 @@
+\doxysection{Output.\+h File Reference}
+\hypertarget{_output_8h}{}\label{_output_8h}\index{Output.h@{Output.h}}
+
+
+Function for writing the assignment result to a CSV file.  
+
+
+{\ttfamily \+\#include "{}Data.\+h"{}}\newline
+{\ttfamily \+\#include "{}Review\+Assignment.\+h"{}}\newline
+{\ttfamily \+\#include $<$string$>$}\newline
+Include dependency graph for Output.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{_output_8h_a39530cf7d6e95cc2e133607b1500e642}{print\+Assignment}} (\doxymbox{\hyperlink{struct_review_assignment}{Review\+Assignment}} assignment, \doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data, string filename)
+\begin{DoxyCompactList}\small\item\em Writes the review assignment result to a CSV output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Function for writing the assignment result to a CSV file. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{_output_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_output_8h_a39530cf7d6e95cc2e133607b1500e642}\index{Output.h@{Output.h}!printAssignment@{printAssignment}}
+\index{printAssignment@{printAssignment}!Output.h@{Output.h}}
+\doxysubsubsection{\texorpdfstring{printAssignment()}{printAssignment()}}
+{\footnotesize\ttfamily \label{_output_8h_a39530cf7d6e95cc2e133607b1500e642} 
+void print\+Assignment (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_review_assignment}{Review\+Assignment}}}]{assignment}{, }\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{, }\item[{string}]{filename}{}\end{DoxyParamCaption})}
+
+
+
+Writes the review assignment result to a CSV output file. 
+
+The output file contains:\+
+\begin{DoxyItemize}
+\item {\ttfamily \#Submission\+Id,Reviewer\+Id,Match} — one line per assignment, sorted by paper ID
+\item {\ttfamily \#Reviewer\+Id,Submission\+Id,Match} — same assignments, sorted by reviewer ID
+\item {\ttfamily \#Total:\+ N} — total number of assignments
+\item {\ttfamily \#Submission\+Id,Domain,Missing\+Reviews} — papers that did not get enough reviews (if any)
+\item {\ttfamily \#Risk Analysis:\+ 1} followed by critical reviewer IDs (if Risk\+Analysis = 1)
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em assignment} & The result of running the assignment algorithm. \\
+\hline
+{\em data} & The full problem instance (used for missing review checks). \\
+\hline
+{\em filename} & Path to the output CSV file.\\
+\hline
+\end{DoxyParams}
+Sorts submissions by paper ID then reviewer ID, and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.
+
+
+\begin{DoxyParams}{Parameters}
+{\em assignment} & The result of running the assignment algorithm. \\
+\hline
+{\em data} & The full problem instance. \\
+\hline
+{\em filename} & Path to the output CSV file. \\
+\hline
+\end{DoxyParams}

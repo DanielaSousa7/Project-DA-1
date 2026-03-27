@@ -1,0 +1,98 @@
+\doxysection{Parser.\+cpp File Reference}
+\hypertarget{_parser_8cpp}{}\label{_parser_8cpp}\index{Parser.cpp@{Parser.cpp}}
+
+
+Implementation of the CSV parser.  
+
+
+{\ttfamily \+\#include "{}Parser.\+h"{}}\newline
+{\ttfamily \+\#include $<$sstream$>$}\newline
+{\ttfamily \+\#include $<$fstream$>$}\newline
+{\ttfamily \+\#include $<$iostream$>$}\newline
+{\ttfamily \+\#include $<$set$>$}\newline
+{\ttfamily \+\#include $<$vector$>$}\newline
+Include dependency graph for Parser.\+cpp:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \doxymbox{\hyperlink{_parser_8cpp_af54deaac3f50b79226535f61f5822e56}{trim}} (string s)
+\begin{DoxyCompactList}\small\item\em Removes leading and trailing whitespace from a string. \end{DoxyCompactList}\item 
+string \doxymbox{\hyperlink{_parser_8cpp_af678a74de1d6fb50933244136811127f}{remove\+Quotes}} (string s)
+\begin{DoxyCompactList}\small\item\em Removes surrounding double-\/quotes from a string if present. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} \doxymbox{\hyperlink{_parser_8cpp_a724be4895e53323b971968a2436e0b80}{parse\+CSV}} (string filename)
+\begin{DoxyCompactList}\small\item\em Parses a conference assignment CSV file into an \doxylink{struct_assignment_data}{Assignment\+Data} struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the CSV parser. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{_parser_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_parser_8cpp_a724be4895e53323b971968a2436e0b80}\index{Parser.cpp@{Parser.cpp}!parseCSV@{parseCSV}}
+\index{parseCSV@{parseCSV}!Parser.cpp@{Parser.cpp}}
+\doxysubsubsection{\texorpdfstring{parseCSV()}{parseCSV()}}
+{\footnotesize\ttfamily \label{_parser_8cpp_a724be4895e53323b971968a2436e0b80} 
+\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} parse\+CSV (\begin{DoxyParamCaption}\item[{string}]{filename}{}\end{DoxyParamCaption})}
+
+
+
+Parses a conference assignment CSV file into an \doxylink{struct_assignment_data}{Assignment\+Data} struct. 
+
+The file must contain four sections delimited by lines starting with \textquotesingle{}\#\textquotesingle{}:\+
+\begin{DoxyItemize}
+\item {\ttfamily \#Submissions} — paper entries
+\item {\ttfamily \#Reviewers} — reviewer entries
+\item {\ttfamily \#\doxylink{struct_parameters}{Parameters}} — numeric problem parameters
+\item {\ttfamily \#\doxylink{struct_control}{Control}} — output control settings
+\end{DoxyItemize}
+
+Errors (invalid IDs, duplicates) are collected and printed to stderr at the end. Parsing continues even when errors are found.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to the .csv input file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A fully populated \doxylink{struct_assignment_data}{Assignment\+Data} struct. 
+\end{DoxyReturn}
+\Hypertarget{_parser_8cpp_af678a74de1d6fb50933244136811127f}\index{Parser.cpp@{Parser.cpp}!removeQuotes@{removeQuotes}}
+\index{removeQuotes@{removeQuotes}!Parser.cpp@{Parser.cpp}}
+\doxysubsubsection{\texorpdfstring{removeQuotes()}{removeQuotes()}}
+{\footnotesize\ttfamily \label{_parser_8cpp_af678a74de1d6fb50933244136811127f} 
+string remove\+Quotes (\begin{DoxyParamCaption}\item[{string}]{s}{}\end{DoxyParamCaption})}
+
+
+
+Removes surrounding double-\/quotes from a string if present. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The input string, e.\+g. {\ttfamily "{}assign.\+csv"{}}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string without surrounding quotes, e.\+g. {\ttfamily assign.\+csv}. 
+\end{DoxyReturn}
+\Hypertarget{_parser_8cpp_af54deaac3f50b79226535f61f5822e56}\index{Parser.cpp@{Parser.cpp}!trim@{trim}}
+\index{trim@{trim}!Parser.cpp@{Parser.cpp}}
+\doxysubsubsection{\texorpdfstring{trim()}{trim()}}
+{\footnotesize\ttfamily \label{_parser_8cpp_af54deaac3f50b79226535f61f5822e56} 
+string trim (\begin{DoxyParamCaption}\item[{string}]{s}{}\end{DoxyParamCaption})}
+
+
+
+Removes leading and trailing whitespace from a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The input string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The trimmed string. 
+\end{DoxyReturn}
