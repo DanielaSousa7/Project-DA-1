@@ -10,7 +10,6 @@ static int getMatchDomain(const Submission& s, const Reviewer& r, const Assignme
     bool useSubPrimary   = data.parameters.primarySubmissionDomain;
     bool useSubSecondary = data.parameters.secondarySubmissionDomain;
     bool useRevPrimary   = data.parameters.primaryReviewerExpertise;
-    bool useRevSecondary = data.parameters.secondaryReviewerExpertise;
 
     if (mode == 1) {
         if (useSubPrimary && useRevPrimary && s.primaryDomain == r.primaryExpertise)
@@ -23,12 +22,6 @@ static int getMatchDomain(const Submission& s, const Reviewer& r, const Assignme
             if (useSubSecondary && s.secondaryDomain != -1 && s.secondaryDomain == r.primaryExpertise)
                 return s.secondaryDomain;
         }
-    }
-    else if (mode == 3) {
-        if (useSubPrimary   && useRevPrimary   && s.primaryDomain   == r.primaryExpertise)   return s.primaryDomain;
-        if (useSubSecondary && useRevPrimary   && s.secondaryDomain != -1 && s.secondaryDomain == r.primaryExpertise)  return s.secondaryDomain;
-        if (useSubPrimary   && useRevSecondary && r.secondaryExpertise != -1 && s.primaryDomain   == r.secondaryExpertise) return s.primaryDomain;
-        if (useSubSecondary && useRevSecondary && s.secondaryDomain != -1 && r.secondaryExpertise != -1 && s.secondaryDomain == r.secondaryExpertise) return s.secondaryDomain;
     }
     return -1;
 }
