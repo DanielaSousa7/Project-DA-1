@@ -2,7 +2,7 @@ CXX      = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -Wno-reorder -I.
 DS_FLAGS = -std=c++17 -I. -w
 
-TARGET = proj
+TARGET = myProg
 SRCS   = main.cpp menu.cpp Parser.cpp Connection.cpp Output.cpp Batch.cpp
 OBJS   = $(SRCS:.cpp=.o)
 
