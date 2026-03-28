@@ -108,8 +108,7 @@ void printControl(AssignmentData data) {
 /**
  * @brief Runs the data menu.
  *
- * Time complexity: O(k * M), where k is the number of selected options
- * and M is the cost of the executed print operation.
+ * Time complexity: depends on the selected option.
  *
  * @param data Input problem data.
  */
