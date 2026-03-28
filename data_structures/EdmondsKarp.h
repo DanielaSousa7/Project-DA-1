@@ -1,24 +1,43 @@
+/**
+ * @file EdmondsKarp.h
+ * @brief Implementation of the Edmonds-Karp maximum flow algorithm.
+ */
+
 #ifndef PROJECT_DA_1_EDMONDSKARP_H
 #define PROJECT_DA_1_EDMONDSKARP_H
 
 #include "../data_structures/Graph.h"
 
-// Function to test the given vertex 'w' and visit it if conditions are met
+/**
+ * @brief Visits a vertex if it has not been visited and there is residual capacity.
+ *
+ * @param q BFS queue.
+ * @param e Edge used to reach the vertex.
+ * @param w Vertex to visit.
+ * @param residual Residual capacity.
+ */
 template <class T>
 void testAndVisit(std::queue< Vertex<T>*> &q, Edge<T> *e, Vertex<T> *w, double residual) {
-    // Check if the vertex 'w' is not visited and there is residual capacity
     if (! w->isVisited() && residual > 0) {
-        // Mark 'w' as visited, set the path through which it was reached, and enqueue it
         w->setVisited(true);
         w->setPath(e);
         q.push(w);
     }
 }
 
-// Function to find an augmenting path using Breadth-First Search
+/**
+ * @brief Finds an augmenting path using BFS.
+ *
+ * Time complexity: O(V + E), where V is the number of vertices
+ * and E is the number of edges.
+ *
+ * @param g Graph.
+ * @param s Source vertex.
+ * @param t Target vertex.
+ * @return True if an augmenting path exists, false otherwise.
+ */
 template <class T>
 bool findAugmentingPath(Graph<T> *g, Vertex<T> *s, Vertex<T> *t) {
-    // Mark all vertices as not visited
     for(auto v : g->getVertexSet()) {
         v->setVisited(false);
     }
@@ -35,11 +54,18 @@ bool findAugmentingPath(Graph<T> *g, Vertex<T> *s, Vertex<T> *t) {
             testAndVisit(q, e, e->getOrig(), e->getFlow());
         }
     }
-    // Return true if a path to the target is found, false otherwise
     return t->isVisited();
 }
 
-// Function to find the minimum residual capacity along the augmenting path
+/**
+ * @brief Finds the minimum residual capacity along an augmenting path.
+ *
+ * Time complexity: O(V), where V is the number of vertices.
+ *
+ * @param s Source vertex.
+ * @param t Target vertex.
+ * @return Minimum residual capacity.
+ */
 template <class T>
 double findMinResidualAlongPath(Vertex<T> *s, Vertex<T> *t) {
     double f = INF;
@@ -54,14 +80,20 @@ double findMinResidualAlongPath(Vertex<T> *s, Vertex<T> *t) {
             v = e->getDest();
         }
     }
-    // Return the minimum residual capacity
     return f;
 }
 
-// Function to augment flow along the augmenting path with the given flow value
+/**
+ * @brief Augments the flow along an augmenting path.
+ *
+ * Time complexity: O(V), where V is the number of vertices.
+ *
+ * @param s Source vertex.
+ * @param t Target vertex.
+ * @param f Flow to add.
+ */
 template <class T>
 void augmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f) {
-    // Traverse the augmenting path and update the flow values accordingly
     for (auto v = t; v!=s; ) {
         auto e = v->getPath();
         double flow = e->getFlow();
@@ -77,10 +109,18 @@ void augmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f) {
 
 }
 
-// Main function implementing the Edmonds-Karp algorithm
+/**
+ * @brief Runs the Edmonds-Karp maximum flow algorithm.
+ *
+ * Time complexity: O(V * E^2), where V is the number of vertices
+ * and E is the number of edges.
+ *
+ * @param g Graph.
+ * @param source Source vertex id.
+ * @param target Target vertex id.
+ */
 template <class T>
 void edmondsKarp(Graph<T> *g, int source, int target) {
-    // Find source and target vertices in the graph
     Vertex<T>* s = g->findVertex(source);
     Vertex<T>* t = g->findVertex(target);
     for (auto v: g->getVertexSet()) {

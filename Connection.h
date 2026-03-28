@@ -1,5 +1,5 @@
 /**
-* @file Connection.h
+ * @file Connection.h
  * @brief Flow network construction and risk analysis functions.
  *
  * Builds a Max-Flow network from a problem instance and runs Edmonds-Karp to determine review assignments.
