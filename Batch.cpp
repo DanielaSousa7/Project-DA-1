@@ -1,7 +1,6 @@
 /**
-* @file Batch.cpp
+ * @file Batch.cpp
  * @brief Implementation of the batch mode.
- *
  */
 
 #include "Parser.h"
@@ -13,13 +12,13 @@
 using namespace std;
 
 /**
- * @brief Runs the tool in batch mode, reading from a CSV file and writing output.
+ * @brief Runs the program in batch mode.
  *
- * If an explicit output filename is provided as a third argument, it overrides
- * the filename specified in the CSV control section.
+ * Time complexity: depends mainly on parseCSV, runReviewAssignment
+ * and printAssignment.
  *
- * @param inputFile  Path to the input CSV file.
- * @param outputFile Optional output filename override (empty = use CSV setting).
+ * @param inputFile Input file name.
+ * @param outputFile Output file name.
  */
 
 void batchMode(string inputFile, string outputFile) {
