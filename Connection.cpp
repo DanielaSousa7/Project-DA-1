@@ -19,6 +19,8 @@ using namespace std;
  * @param r    The reviewer.
  * @param data The full problem instance (used for mode and parameter flags).
  * @return The matched domain number, or -1 if there is no valid match.
+ *
+ * Complexity: O(1) - constant time, performs only a few comparison operations.
  */
 
 int getMatchDomain(Submission s, Reviewer r, AssignmentData data) {
@@ -54,6 +56,10 @@ int getMatchDomain(Submission s, Reviewer r, AssignmentData data) {
  * @param data The full problem instance.
  * @param excludeReviewerId Reviewer to exclude from the network (-1 = include all).
  * @return A ReviewAssignment containing all assigned paper-reviewer pairs.
+ *
+ * Complexity: O(V * E^2) This is the complexity of Edmonds-Karp algorithm.
+ * V = number of vertices (2 + |submissions| + |reviewers|)
+ * E = number of edges (source->submission + reviewer->sink + submission->reviewer edges).
  */
 
 ReviewAssignment runReviewAssignment(AssignmentData data, int excludeReviewerId) {
@@ -120,10 +126,12 @@ ReviewAssignment runReviewAssignment(AssignmentData data, int excludeReviewerId)
 }
 
 /**
- * @brief Checks whether a full valid assignment is possible.
+ * @brief Checks whether a full valid assignment is possible when reviewer is removed.
  * @param data The full problem instance.
  * @param excludeReviewerId Reviewer to exclude (-1 = include all).
- * @return true if totalAssignments equals submissions × minReviewsPerSubmission.
+ * @return true if totalAssignments is bigger or equal to submissions × minReviewsPerSubmission.
+ *
+ * Complexity: O(V * E^2). This function inherits the complexity of the Edmonds-Karp algorithm, since that runReviewAssignment() is called.
  */
 
 bool assignmentFeasible(AssignmentData data, int excludeReviewerId) {
@@ -134,14 +142,16 @@ bool assignmentFeasible(AssignmentData data, int excludeReviewerId) {
 
 /**
  * @brief Risk Analysis: finds reviewers whose individual absence breaks the assignment.
- *
+ * Start by checking if the base assignment is already infeasible, if so return an empty list
  * For each reviewer, removes them from the problem and checks whether a full
  * assignment is still possible. If not, they are considered critical.
- *
- * Returns an empty list if the base assignment is already infeasible.
- *
  * @param data The full problem instance.
  * @return Sorted list of critical reviewer IDs.
+ *
+ * Complexity: O(R * V * E^2)
+ * R = number of reviewers, V = number of vertices, E = number of edges.
+ * For each reviewer, we run a full max-flow computation.
+ * The final sort is O(R log R).
  */
 
 vector<int> riskAnalysis(AssignmentData data) {
