@@ -1,5 +1,5 @@
 /**
-* @file menu.h
+ * @file menu.h
  * @brief Interactive menu functions for the conference assignment tool.
  */
 
@@ -8,36 +8,34 @@
 
 #include "Data.h"
 
-/// @brief Displays the main menu options.
+/**
+ * @brief Displays the main menu.
+ */
 void showMainMenu();
 
-/// @brief Displays the data browser submenu options.
+/**
+ * @brief Displays the data menu.
+ */
 void showDataMenu();
 
-/// @brief Displays the assignment submenu options.
-void showAssignmentMenu();
-
 /**
- * @brief Runs the data browser submenu, allowing the user to inspect the loaded data.
- * @param data The currently loaded problem instance.
+ * @brief Runs the data menu.
+ *
+ * @param data Input problem data.
  */
 void dataMenu(AssignmentData data);
 
 /**
- * @brief Runs the assignment submenu, allowing the user to run and view assignments.
- * @param data The currently loaded problem instance.
- */
-void assignmentMenu(AssignmentData data);
-
-/**
- * @brief Prints all submissions to the console.
- * @param data The currently loaded problem instance.
+ * @brief Prints all submissions.
+ *
+ * @param data Input problem data.
  */
 void printSubmissions(AssignmentData data);
 
 /**
- * @brief Prints all reviewers to the console.
- * @param data The currently loaded problem instance.
+ * @brief Prints all reviewers.
+ *
+ * @param data Input problem data.
  */
 void printReviewers(AssignmentData data);
 
@@ -48,13 +46,14 @@ void printReviewers(AssignmentData data);
 void printParameters(AssignmentData data);
 
 /**
- * @brief Prints the control settings to the console.
- * @param data The currently loaded problem instance.
+ * @brief Prints the control settings.
+ *
+ * @param data Input problem data.
  */
 void printControl(AssignmentData data);
 
 /**
- * @brief Entry point for the interactive menu loop.
+ * @brief Runs the main interactive menu.
  *
  * Prompts the user for a CSV file, then shows the main menu.
  * Loops until the user chooses to exit.

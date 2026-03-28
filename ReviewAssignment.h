@@ -1,6 +1,6 @@
 /**
-* @file ReviewAssignment.h
- * @brief Data structures for representing the result of a review assignment.
+ * @file ReviewAssignment.h
+ * @brief Defines the structures used to store review assignments.
  */
 
 #ifndef PROJECT_DA_1_REVIEWASSIGNMENT_H
@@ -9,25 +9,21 @@
 #include <vector>
 
 /**
- * @brief Represents a single review assignment between a paper and a reviewer.
+ * @brief Represents one assignment between a submission and a reviewer.
  */
 struct ReviewAssignmentItem {
-    int submissionId; ///< ID of the paper being reviewed
-    int reviewerId;   ///< ID of the reviewer assigned to it
-    int matchDomain;  ///< The domain that made the match possible
+    int submissionId; ///< Submission ID
+    int reviewerId;   ///< Reviewer ID
+    int matchDomain;  ///< Matching domain
 };
 
 /**
- * @brief Holds the full result of running the assignment algorithm.
- *
- * Contains two views of the same assignments:
- * - submissionAssignments: sorted by paper ID
- * - reviewerAssignments: sorted by reviewer ID
+ * @brief Stores the final result of the review assignment process.
  */
 struct ReviewAssignment {
-    std::vector<ReviewAssignmentItem> submissionAssignments; ///< Assignments sorted by paper ID
-    std::vector<ReviewAssignmentItem> reviewerAssignments;   ///< Assignments sorted by reviewer ID
-    int totalAssignments = 0; ///< Total number of review assignments made
+    std::vector<ReviewAssignmentItem> submissionAssignments; ///< Assignments by submission
+    std::vector<ReviewAssignmentItem> reviewerAssignments;   ///< Assignments by reviewer
+    int totalAssignments = 0; ///< Total number of assignments
 };
 
 #endif

@@ -1,6 +1,6 @@
 /**
  * @file Output.cpp
- * @brief Implementation of the assignment output writer.
+ * @brief Implementation of the function that writes the assignment result to a CSV file.
  */
 
 #include "Output.h"
@@ -10,11 +10,14 @@
 using namespace std;
 
 /**
- * @brief Writes the review assignment result to a CSV output file.
+ * @brief Writes the assignment result to a CSV file
  *
  * Sorts submissions by paper ID then reviewer ID, and reviewers by reviewer ID
  * then paper ID. Also reports any papers that did not receive enough reviews,
  * and runs the risk analysis if requested in the control settings.
+ *
+ * Time complexity: O(A log A + R * A + K), where A is the number of assignments,
+ * R is the number of submissions and K is the cost of the risk analysis.
  *
  * @param assignment The result of running the assignment algorithm.
  * @param data       The full problem instance.
@@ -45,7 +48,6 @@ void printAssignment(ReviewAssignment assignment,AssignmentData data, string fil
 
     out << "#Total: " << assignment.totalAssignments << "\n";
 
-    // Report papers that did not receive enough reviews
     bool hasMissing = false;
     for (Submission s : data.submissions) {
         int count = 0;
@@ -63,17 +65,14 @@ void printAssignment(ReviewAssignment assignment,AssignmentData data, string fil
         }
     }
 
-    // Risk Analysis: list reviewer IDs whose absence would break the assignment
     if (data.control.riskAnalysis == 1) {
         out << "#Risk Analysis: 1\n";
         vector<int> risky = riskAnalysis(data);
-        for (int i = 0; i < (int)risky.size(); ++i) {
+        for (size_t i = 0; i < risky.size(); ++i) {
             if (i) out << ", ";
             out << risky[i];
         }
-        if (risky.empty()) out << "\n";
-        else out << "\n";
+        out << "\n";
     }
-
     out.close();
 }
