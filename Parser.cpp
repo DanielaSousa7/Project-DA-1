@@ -1,3 +1,8 @@
+/**
+ * @file Parser.cpp
+ * @brief Implementation of the CSV parser.
+ */
+
 #include "Parser.h"
 #include <sstream>
 #include <fstream>
@@ -6,6 +11,11 @@
 #include <vector>
 using namespace std;
 
+/**
+ * @brief Removes leading and trailing whitespace from a string.
+ * @param s The input string.
+ * @return The trimmed string.
+ */
 string trim(string s) {
     size_t start = s.find_first_not_of(" \t\r\n");
     if (start == string::npos) return "";
@@ -13,6 +23,11 @@ string trim(string s) {
     return s.substr(start, end - start + 1);
 }
 
+/**
+ * @brief Removes surrounding double-quotes from a string if present.
+ * @param s The input string, e.g. `"assign.csv"`.
+ * @return The string without surrounding quotes, e.g. `assign.csv`.
+ */
 string removeQuotes(string s) {
     if (s.size() >= 2 && s.front() == '"' && s.back() == '"') {
         return s.substr(1, s.size() - 2);
@@ -20,6 +35,21 @@ string removeQuotes(string s) {
     return s;
 }
 
+/**
+ * @brief Parses a conference assignment CSV file into an AssignmentData struct.
+ *
+ * The file must contain four sections delimited by lines starting with '#':
+ * - `#Submissions` — paper entries
+ * - `#Reviewers` — reviewer entries
+ * - `#Parameters` — numeric problem parameters
+ * - `#Control` — output control settings
+ *
+ * Errors (invalid IDs, duplicates) are collected and printed to stderr at the end.
+ * Parsing continues even when errors are found.
+ *
+ * @param filename Path to the .csv input file.
+ * @return A fully populated AssignmentData struct.
+ */
 AssignmentData parseCSV(string filename) {
     AssignmentData data;
     string line;

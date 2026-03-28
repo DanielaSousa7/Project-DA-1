@@ -1,7 +1,25 @@
+/**
+ * @file Connection.cpp
+ * @brief Implementation of the flow network and risk analysis.
+ */
+
 #include "Connection.h"
 #include "data_structures/EdmondsKarp.h"
 #include <map>
 using namespace std;
+
+/**
+ * @brief Determines the domain that allows a submission-reviewer pair to match.
+ *
+ * Behaviour depends on the assignment mode:
+ * - Mode 1: primary submission domain must equal primary reviewer expertise
+ * - Mode 2: (primary or secondary) submission domain must equal primary reviewer expertise
+ *
+ * @param s    The submission.
+ * @param r    The reviewer.
+ * @param data The full problem instance (used for mode and parameter flags).
+ * @return The matched domain number, or -1 if there is no valid match.
+ */
 
 int getMatchDomain(Submission s, Reviewer r, AssignmentData data) {
     int mode = data.control.generateAssignments;
@@ -23,6 +41,20 @@ int getMatchDomain(Submission s, Reviewer r, AssignmentData data) {
     }
     return -1;
 }
+
+/**
+ * @brief Runs the review assignment algorithm using Max-Flow (Edmonds-Karp).
+ *
+ * Node IDs in the graph:
+ * - 0: source
+ * - 1: sink
+ * - 1000 + submissionId: one node per submission
+ * - 2000 + reviewerId: one node per reviewer
+ *
+ * @param data The full problem instance.
+ * @param excludeReviewerId Reviewer to exclude from the network (-1 = include all).
+ * @return A ReviewAssignment containing all assigned paper-reviewer pairs.
+ */
 
 ReviewAssignment runReviewAssignment(AssignmentData data, int excludeReviewerId) {
     ReviewAssignment assignment;
@@ -87,11 +119,30 @@ ReviewAssignment runReviewAssignment(AssignmentData data, int excludeReviewerId)
     return assignment;
 }
 
+/**
+ * @brief Checks whether a full valid assignment is possible.
+ * @param data The full problem instance.
+ * @param excludeReviewerId Reviewer to exclude (-1 = include all).
+ * @return true if totalAssignments equals submissions × minReviewsPerSubmission.
+ */
+
 bool assignmentFeasible(AssignmentData data, int excludeReviewerId) {
     ReviewAssignment result = runReviewAssignment(data, excludeReviewerId);
     int required = (int)data.submissions.size() * data.parameters.minReviewsPerSubmission;
     return result.totalAssignments >= required;
 }
+
+/**
+ * @brief Risk Analysis: finds reviewers whose individual absence breaks the assignment.
+ *
+ * For each reviewer, removes them from the problem and checks whether a full
+ * assignment is still possible. If not, they are considered critical.
+ *
+ * Returns an empty list if the base assignment is already infeasible.
+ *
+ * @param data The full problem instance.
+ * @return Sorted list of critical reviewer IDs.
+ */
 
 vector<int> riskAnalysis(AssignmentData data) {
     vector<int> risky;

@@ -1,0 +1,133 @@
+\doxysection{Connection.\+cpp File Reference}
+\hypertarget{_connection_8cpp}{}\label{_connection_8cpp}\index{Connection.cpp@{Connection.cpp}}
+
+
+Implementation of the flow network and risk analysis.  
+
+
+{\ttfamily \+\#include "{}Connection.\+h"{}}\newline
+{\ttfamily \+\#include "{}data\+\_\+structures/\+\+Edmonds\+Karp.\+h"{}}\newline
+{\ttfamily \+\#include $<$map$>$}\newline
+Include dependency graph for Connection.\+cpp:\+
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \doxymbox{\hyperlink{_connection_8cpp_a96dfbe1b0d265ac578eb8182c4e86315}{get\+Match\+Domain}} (\doxymbox{\hyperlink{struct_submission}{Submission}} s, \doxymbox{\hyperlink{struct_reviewer}{Reviewer}} r, \doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data)
+\begin{DoxyCompactList}\small\item\em Determines the domain that allows a submission-\/reviewer pair to match. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_review_assignment}{Review\+Assignment}} \doxymbox{\hyperlink{_connection_8cpp_a8887ea7dde9bbff899c983944bd68a77}{run\+Review\+Assignment}} (\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data, int exclude\+Reviewer\+Id)
+\begin{DoxyCompactList}\small\item\em Runs the review assignment algorithm using Max-\/\+Flow (Edmonds-\/\+Karp). \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{_connection_8cpp_a0ad79e1513d3401ae8f7ff6aebd0adfc}{assignment\+Feasible}} (\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data, int exclude\+Reviewer\+Id)
+\begin{DoxyCompactList}\small\item\em Checks whether a full valid assignment is possible. \end{DoxyCompactList}\item 
+vector$<$ int $>$ \doxymbox{\hyperlink{_connection_8cpp_afd77d87842dd3594f0482c89b20f1921}{risk\+Analysis}} (\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data)
+\begin{DoxyCompactList}\small\item\em Risk Analysis:\+ finds reviewers whose individual absence breaks the assignment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the flow network and risk analysis. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{_connection_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_connection_8cpp_a0ad79e1513d3401ae8f7ff6aebd0adfc}\index{Connection.cpp@{Connection.cpp}!assignmentFeasible@{assignmentFeasible}}
+\index{assignmentFeasible@{assignmentFeasible}!Connection.cpp@{Connection.cpp}}
+\doxysubsubsection{\texorpdfstring{assignmentFeasible()}{assignmentFeasible()}}
+{\footnotesize\ttfamily \label{_connection_8cpp_a0ad79e1513d3401ae8f7ff6aebd0adfc} 
+bool assignment\+Feasible (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{, }\item[{int}]{exclude\+Reviewer\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether a full valid assignment is possible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The full problem instance. \\
+\hline
+{\em exclude\+Reviewer\+Id} & \doxylink{struct_reviewer}{Reviewer} to exclude (-\/1 = include all). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if total\+Assignments equals submissions × min\+Reviews\+Per\+Submission. 
+\end{DoxyReturn}
+\Hypertarget{_connection_8cpp_a96dfbe1b0d265ac578eb8182c4e86315}\index{Connection.cpp@{Connection.cpp}!getMatchDomain@{getMatchDomain}}
+\index{getMatchDomain@{getMatchDomain}!Connection.cpp@{Connection.cpp}}
+\doxysubsubsection{\texorpdfstring{getMatchDomain()}{getMatchDomain()}}
+{\footnotesize\ttfamily \label{_connection_8cpp_a96dfbe1b0d265ac578eb8182c4e86315} 
+int get\+Match\+Domain (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_submission}{Submission}}}]{s}{, }\item[{\doxymbox{\hyperlink{struct_reviewer}{Reviewer}}}]{r}{, }\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Determines the domain that allows a submission-\/reviewer pair to match. 
+
+Behaviour depends on the assignment mode:\+
+\begin{DoxyItemize}
+\item Mode 1:\+ primary submission domain must equal primary reviewer expertise
+\item Mode 2:\+ (primary or secondary) submission domain must equal primary reviewer expertise
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The submission. \\
+\hline
+{\em r} & The reviewer. \\
+\hline
+{\em data} & The full problem instance (used for mode and parameter flags). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The matched domain number, or -\/1 if there is no valid match. 
+\end{DoxyReturn}
+\Hypertarget{_connection_8cpp_afd77d87842dd3594f0482c89b20f1921}\index{Connection.cpp@{Connection.cpp}!riskAnalysis@{riskAnalysis}}
+\index{riskAnalysis@{riskAnalysis}!Connection.cpp@{Connection.cpp}}
+\doxysubsubsection{\texorpdfstring{riskAnalysis()}{riskAnalysis()}}
+{\footnotesize\ttfamily \label{_connection_8cpp_afd77d87842dd3594f0482c89b20f1921} 
+vector$<$ int $>$ risk\+Analysis (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Risk Analysis:\+ finds reviewers whose individual absence breaks the assignment. 
+
+Risk Analysis K=1:\+ identifies critical reviewers.
+
+For each reviewer, removes them from the problem and checks whether a full assignment is still possible. If not, they are considered critical.
+
+Returns an empty list if the base assignment is already infeasible.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The full problem instance. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Sorted list of critical reviewer IDs. 
+\end{DoxyReturn}
+\Hypertarget{_connection_8cpp_a8887ea7dde9bbff899c983944bd68a77}\index{Connection.cpp@{Connection.cpp}!runReviewAssignment@{runReviewAssignment}}
+\index{runReviewAssignment@{runReviewAssignment}!Connection.cpp@{Connection.cpp}}
+\doxysubsubsection{\texorpdfstring{runReviewAssignment()}{runReviewAssignment()}}
+{\footnotesize\ttfamily \label{_connection_8cpp_a8887ea7dde9bbff899c983944bd68a77} 
+\doxymbox{\hyperlink{struct_review_assignment}{Review\+Assignment}} run\+Review\+Assignment (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{, }\item[{int}]{exclude\+Reviewer\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Runs the review assignment algorithm using Max-\/\+Flow (Edmonds-\/\+Karp). 
+
+Node IDs in the graph:\+
+\begin{DoxyItemize}
+\item 0:\+ source
+\item 1:\+ sink
+\item 1000 + submission\+Id:\+ one node per submission
+\item 2000 + reviewer\+Id:\+ one node per reviewer
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The full problem instance. \\
+\hline
+{\em exclude\+Reviewer\+Id} & \doxylink{struct_reviewer}{Reviewer} to exclude from the network (-\/1 = include all). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \doxylink{struct_review_assignment}{Review\+Assignment} containing all assigned paper-\/reviewer pairs. 
+\end{DoxyReturn}

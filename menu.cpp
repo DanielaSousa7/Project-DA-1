@@ -1,5 +1,10 @@
+/**
+ * @file menu.cpp
+ * @brief Implementation of the interactive menu.
+ */
+
 #include "menu.h"
-#include "parser.h"
+#include "Parser.h"
 #include "Output.h"
 #include "Connection.h"
 #include <iostream>
@@ -7,6 +12,9 @@
 #include <string>
 using namespace std;
 
+/**
+ * @brief Displays the main menu.
+ */
 void showMainMenu() {
     cout << "=== Assignment Tool ===\n";
     cout << "1. Read new file\n";
@@ -16,6 +24,9 @@ void showMainMenu() {
     cout << "Select an option: ";
 }
 
+/**
+ * @brief Displays the data menu.
+ */
 void showDataMenu() {
     cout << "=== File Data ===\n";
     cout << "1. List Submissions\n";
@@ -26,6 +37,13 @@ void showDataMenu() {
     cout << "Select an option: ";
 }
 
+/**
+ * @brief Prints all submissions.
+ *
+ * Time complexity: O(S), where S is the number of submissions.
+ *
+ * @param data Input problem data.
+ */
 void printSubmissions(AssignmentData data) {
     cout << "--- Submissions ---\n";
     for (Submission s : data.submissions) {
@@ -38,6 +56,13 @@ void printSubmissions(AssignmentData data) {
     }
 }
 
+/**
+ * @brief Prints all reviewers.
+ *
+ * Time complexity: O(R), where R is the number of reviewers.
+ *
+ * @param data Input problem data.
+ */
 void printReviewers(AssignmentData data) {
     cout << "--- Reviewers ---\n";
     for (Reviewer r : data.reviewers) {
@@ -49,6 +74,13 @@ void printReviewers(AssignmentData data) {
     }
 }
 
+/**
+ * @brief Prints the problem parameters.
+ *
+ * Time complexity: O(1).
+ *
+ * @param data Input problem data.
+ */
 void printParameters(AssignmentData data) {
     cout << "--- Parameters ---\n";
     cout << "MinReviewsPerSubmission: " << data.parameters.minReviewsPerSubmission << "\n";
@@ -59,6 +91,13 @@ void printParameters(AssignmentData data) {
     cout << "SecondarySubmissionDomain: " << data.parameters.secondarySubmissionDomain << "\n";
 }
 
+/**
+ * @brief Prints the control settings.
+ *
+ * Time complexity: O(1).
+ *
+ * @param data Input problem data.
+ */
 void printControl(AssignmentData data) {
     cout << "--- Control ---\n";
     cout << "GenerateAssignments: " << data.control.generateAssignments << "\n";
@@ -66,6 +105,13 @@ void printControl(AssignmentData data) {
     cout << "OutputFileName: " << data.control.outputFileName << "\n";
 }
 
+/**
+ * @brief Runs the data menu.
+ *
+ * Time complexity: depends on the selected option.
+ *
+ * @param data Input problem data.
+ */
 void dataMenu(AssignmentData data) {
     int option = -1;
     while(option != 0) {
@@ -90,6 +136,14 @@ void dataMenu(AssignmentData data) {
     }
 }
 
+/**
+ * @brief Runs the main interactive menu.
+ *
+ * Time complexity: depends on the selected options. The most expensive
+ * operation is running the review assignment algorithm.
+ *
+ * @return 0 on normal exit.
+ */
 int mainMenu() {
     string filename;
     AssignmentData data;

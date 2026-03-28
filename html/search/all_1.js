@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['control_0',['Control',['../structControl.html',1,'']]]
+  ['2_20basic_20formulation_20with_20any_20risk_20analysis_201_0',['T2.2 Basic Formulation with Any Risk Analysis = 1',['../md__r_e_a_d_m_e.html#autotoc_md5',1,'']]]
 ];

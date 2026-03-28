@@ -1,0 +1,60 @@
+\doxysection{Batch.\+h File Reference}
+\hypertarget{_batch_8h}{}\label{_batch_8h}\index{Batch.h@{Batch.h}}
+
+
+Provides batch processing functionality for the project.  
+
+
+{\ttfamily \+\#include $<$string$>$}\newline
+Include dependency graph for Batch.\+h:\+
+% FIG 0
+This graph shows which files directly or indirectly include this file:\+
+% FIG 1
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{_batch_8h_a0bd62db4f7cba1ba3aab1517daf75fde}{batch\+Mode}} (string input\+File, string output\+File)
+\begin{DoxyCompactList}\small\item\em Executes batch processing mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides batch processing functionality for the project. 
+
+This header declares the batch\+Mode function, which is used to process input and output files in batch mode. 
+
+\label{doc-func-members}
+\Hypertarget{_batch_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{_batch_8h_a0bd62db4f7cba1ba3aab1517daf75fde}\index{Batch.h@{Batch.h}!batchMode@{batchMode}}
+\index{batchMode@{batchMode}!Batch.h@{Batch.h}}
+\doxysubsubsection{\texorpdfstring{batchMode()}{batchMode()}}
+{\footnotesize\ttfamily \label{_batch_8h_a0bd62db4f7cba1ba3aab1517daf75fde} 
+void batch\+Mode (\begin{DoxyParamCaption}\item[{string}]{input\+File}{, }\item[{string}]{output\+File}{}\end{DoxyParamCaption})}
+
+
+
+Executes batch processing mode. 
+
+Reads data from the specified input file, processes it in batch mode, and writes the results to the output file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+File} & Path to the input file containing batch commands or data. \\
+\hline
+{\em output\+File} & Path to the output file where results will be written.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is intended to be called from the main program when batch mode is selected.
+\end{DoxyNote}
+Executes batch processing mode.
+
+If an explicit output filename is provided as a third argument, it overrides the filename specified in the CSV control section.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+File} & Path to the input CSV file. \\
+\hline
+{\em output\+File} & Optional output filename override (empty = use CSV setting). \\
+\hline
+\end{DoxyParams}

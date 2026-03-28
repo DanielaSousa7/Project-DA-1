@@ -1,12 +1,12 @@
 CXX      = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -I. -w
+CXXFLAGS = -std=c++17 -Wall -Wextra -Wno-reorder -I.
+DS_FLAGS = -std=c++17 -I. -w
 
-SRCS = Connection.cpp main.cpp menu.cpp Output.cpp Parser.cpp Batch.cpp
-OBJS = $(SRCS:.cpp=.o)
+TARGET = proj
+SRCS   = main.cpp menu.cpp Parser.cpp Connection.cpp Output.cpp Batch.cpp
+OBJS   = $(SRCS:.cpp=.o)
 
-TARGET = myProg
-
-.PHONY: all clean
+.PHONY: all clean docs
 
 all: $(TARGET)
 
@@ -16,5 +16,8 @@ $(TARGET): $(OBJS)
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+docs:
+	doxygen Doxyfile
+
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(TARGET) $(OBJS)
