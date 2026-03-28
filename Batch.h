@@ -1,9 +1,6 @@
 /**
-* @file batch.h
- * @brief Provides batch processing functionality for the project.
- *
- * This header declares the batchMode function, which is used to process
- * input and output files in batch mode.
+ * @file batch.h
+ * @brief Batch processing function.
  */
 
 #ifndef PROJECT_DA_1_BATCH_H
@@ -13,17 +10,11 @@
 using namespace std;
 
 /**
- * @brief Executes batch processing mode.
- *
- * Reads data from the specified input file, processes it in batch mode,
- * and writes the results to the output file.
- *
- * @param inputFile  Path to the input file containing batch commands or data.
- * @param outputFile Path to the output file where results will be written.
- *
- * @note This function is intended to be called from the main program
- *       when batch mode is selected.
- */
+* @brief Runs the program in batch mode.
+*
+* @param inputFile Input file name.
+* @param outputFile Output file name.
+*/
 
 void batchMode(string inputFile, string outputFile);
 

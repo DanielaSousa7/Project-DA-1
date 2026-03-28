@@ -12,9 +12,12 @@
 using namespace std;
 
 /**
- * @brief Removes leading and trailing whitespace from a string.
- * @param s The input string.
- * @return The trimmed string.
+ * @brief Removes leading and trailing spaces from a string.
+ *
+ * Time complexity: O(n), where n is the length of the string.
+ *
+ * @param s Input string.
+ * @return Trimmed string.
  */
 string trim(string s) {
     size_t start = s.find_first_not_of(" \t\r\n");
@@ -24,9 +27,12 @@ string trim(string s) {
 }
 
 /**
- * @brief Removes surrounding double-quotes from a string if present.
- * @param s The input string, e.g. `"assign.csv"`.
- * @return The string without surrounding quotes, e.g. `assign.csv`.
+ * @brief Removes surrounding double quotes from a string.
+ *
+ * Time complexity: O(n), where n is the length of the string.
+ *
+ * @param s Input string.
+ * @return String without surrounding quotes.
  */
 string removeQuotes(string s) {
     if (s.size() >= 2 && s.front() == '"' && s.back() == '"') {
@@ -36,19 +42,15 @@ string removeQuotes(string s) {
 }
 
 /**
- * @brief Parses a conference assignment CSV file into an AssignmentData struct.
- *
- * The file must contain four sections delimited by lines starting with '#':
- * - `#Submissions` — paper entries
- * - `#Reviewers` — reviewer entries
- * - `#Parameters` — numeric problem parameters
- * - `#Control` — output control settings
+ * @brief Reads a CSV file and stores its data.
  *
  * Errors (invalid IDs, duplicates) are collected and printed to stderr at the end.
  * Parsing continues even when errors are found.
  *
- * @param filename Path to the .csv input file.
- * @return A fully populated AssignmentData struct.
+ * Time complexity: O(L log L), where L is the number of lines in the file.
+ *
+ * @param filename Input file name.
+ * @return Parsed problem data.
  */
 AssignmentData parseCSV(string filename) {
     AssignmentData data;

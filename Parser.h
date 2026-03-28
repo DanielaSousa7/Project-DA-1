@@ -1,5 +1,5 @@
 /**
-* @file Parser.h
+ * @file Parser.h
  * @brief Functions for reading and parsing the input CSV file.
  */
 
@@ -10,27 +10,26 @@
 #include <string>
 
 /**
- * @brief Removes leading and trailing whitespace from a string.
- * @param s The input string.
- * @return The trimmed string.
+ * @brief Removes leading and trailing spaces from a string.
+ *
+ * @param s Input string.
+ * @return Trimmed string.
  */
 string trim(string s);
 
 /**
- * @brief Removes surrounding double-quotes from a string if present.
- * @param s The input string.
- * @return The unquoted string.
+ * @brief Removes surrounding double quotes from a string.
+ *
+ * @param s Input string.
+ * @return String without surrounding quotes.
  */
 string removeQuotes(string s);
 
 /**
- * @brief Parses a conference assignment CSV file into an AssignmentData struct.
+ * @brief Reads a CSV file and stores its data.
  *
- * Reads the four sections of the file (#Submissions, #Reviewers, #Parameters, #Control).
- * Reports any errors (duplicate IDs, invalid values) to stderr but continues parsing.
- *
- * @param filename Path to the .csv input file.
- * @return A fully populated AssignmentData struct.
+ * @param filename Input file name.
+ * @return Parsed problem data.
  */
 AssignmentData parseCSV(string filename);
 
