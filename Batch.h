@@ -10,11 +10,11 @@
 using namespace std;
 
 /**
-* @brief Runs the program in batch mode.
-*
-* @param inputFile Input file name.
-* @param outputFile Output file name.
-*/
+ * @brief Runs the program in batch mode.
+ *
+ * @param inputFile Input file name.
+ * @param outputFile Output file name.
+ */
 
 void batchMode(string inputFile, string outputFile);
 

@@ -1,5 +1,7 @@
-// Original code by Gonçalo Leão
-// Updated by DA 2024/2025 Team
+/**
+ * @file Graph.h
+ * @brief Graph, vertex and edge data structures.
+ */
 
 #ifndef DA_TP_CLASSES_GRAPH
 #define DA_TP_CLASSES_GRAPH
@@ -16,13 +18,32 @@ class Edge;
 
 #define INF std::numeric_limits<double>::max()
 
-/************************* Vertex  **************************/
+
+/********************** Vertex  ****************************/
+
+/**
+ * @brief Represents a vertex of the graph.
+ *
+ * @tparam T Type of the information stored in the vertex.
+ */
 
 template <class T>
 class Vertex {
 public:
+    /**
+     * @brief Creates a vertex with the given information.
+     *
+     * @param in Vertex information.
+     */
     Vertex(T in);
-    bool operator<(Vertex<T> & vertex) const; // // required by MutablePriorityQueue
+
+    /**
+     * @brief Comparison operator used by MutablePriorityQueue.
+     *
+     * @param vertex Vertex to compare with.
+     * @return True if this vertex has smaller distance.
+     */
+    bool operator<(Vertex<T> & vertex) const; // required by MutablePriorityQueue
 
     T getInfo() const;
     std::vector<Edge<T> *> getAdj() const;
@@ -45,8 +66,33 @@ public:
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge<T> *path);
+
+    /**
+     * @brief Adds an outgoing edge.
+     *
+     * Time complexity: O(1).
+     *
+     * @param dest Destination vertex.
+     * @param w Edge weight.
+     * @return Pointer to the created edge.
+     */
     Edge<T> * addEdge(Vertex<T> *dest, double w);
+
+    /**
+     * @brief Removes all outgoing edges to a given destination.
+     *
+     * Time complexity: O(E), where E is the number of outgoing edges.
+     *
+     * @param in Destination vertex information.
+     * @return True if at least one edge was removed.
+     */
     bool removeEdge(T in);
+
+    /**
+     * @brief Removes all outgoing edges of the vertex.
+     *
+     * Time complexity: O(E), where E is the number of outgoing edges.
+     */
     void removeOutgoingEdges();
 
     friend class MutablePriorityQueue<Vertex>;
@@ -66,14 +112,31 @@ protected:
 
     int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS
 
+    /**
+     * @brief Deletes an edge and removes it from the destination incoming list.
+     *
+     * @param edge Edge to delete.
+     */
     void deleteEdge(Edge<T> *edge);
 };
 
 /********************** Edge  ****************************/
 
+/**
+ * @brief Represents an edge of the graph.
+ *
+ * @tparam T Type of the information stored in the vertices.
+ */
 template <class T>
 class Edge {
 public:
+    /**
+     * @brief Creates an edge.
+     *
+     * @param orig Origin vertex.
+     * @param dest Destination vertex.
+     * @param w Edge weight.
+     */
     Edge(Vertex<T> *orig, Vertex<T> *dest, double w);
 
     Vertex<T> * getDest() const;
@@ -102,31 +165,82 @@ protected:
 
 /********************** Graph  ****************************/
 
+/**
+ * @brief Represents a graph.
+ *
+ * @tparam T Type of the information stored in the vertices.
+ */
 template <class T>
 class Graph {
 public:
     ~Graph();
-    /*
-    * Auxiliary function to find a vertex with a given the content.
-    */
+    /**
+     * @brief Finds a vertex with given information.
+     *
+     * Time complexity: O(V), where V is the number of vertices.
+     *
+     * @param in Vertex information.
+     * @return Pointer to the vertex, or nullptr if not found.
+     */
     Vertex<T> *findVertex(const T &in) const;
-    /*
-     *  Adds a vertex with a given content or info (in) to a graph (this).
-     *  Returns true if successful, and false if a vertex with that content already exists.
+    /**
+     * @brief Removes a vertex and all its edges.
+     *
+     * Time complexity: O(V + E).
+     *
+     * @param in Vertex information.
+     * @return True if the vertex was removed, false otherwise.
      */
     bool addVertex(const T &in);
     bool removeVertex(const T &in);
 
-    /*
-     * Adds an edge to a graph (this), given the contents of the source and
-     * destination vertices and the edge weight (w).
-     * Returns true if successful, and false if the source or destination vertex does not exist.
+    /**
+     * @brief Adds an edge to the graph.
+     *
+     * Time complexity: O(V).
+     *
+     * @param sourc Source vertex information.
+     * @param dest Destination vertex information.
+     * @param w Edge weight.
+     * @return True if the edge was added, false otherwise.
      */
     bool addEdge(const T &sourc, const T &dest, double w);
+
+    /**
+     * @brief Removes an edge from the graph.
+     *
+     * Time complexity: O(V + E).
+     *
+     * @param source Source vertex information.
+     * @param dest Destination vertex information.
+     * @return True if the edge was removed, false otherwise.
+     */
     bool removeEdge(const T &source, const T &dest);
+
+    /**
+     * @brief Adds a bidirectional edge.
+     *
+     * Time complexity: O(V).
+     *
+     * @param sourc Source vertex information.
+     * @param dest Destination vertex information.
+     * @param w Edge weight.
+     * @return True if the edge was added, false otherwise.
+     */
     bool addBidirectionalEdge(const T &sourc, const T &dest, double w);
 
+    /**
+     * @brief Returns the number of vertices.
+     *
+     * @return Number of vertices.
+     */
     int getNumVertex() const;
+
+    /**
+     * @brief Returns the vertex set.
+     *
+     * @return Vector of vertex pointers.
+     */
     std::vector<Vertex<T> *> getVertexSet() const;
 
 protected:
@@ -135,13 +249,31 @@ protected:
     double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
 
-    /*
-     * Finds the index of the vertex with a given content.
+    /**
+     * @brief Finds the index of a vertex.
+     *
+     * Time complexity: O(V).
+     *
+     * @param in Vertex information.
+     * @return Index of the vertex, or -1 if not found.
      */
     int findVertexIdx(const T &in) const;
 };
 
+/**
+ * @brief Deletes an integer matrix.
+ *
+ * @param m Matrix pointer.
+ * @param n Number of rows.
+ */
 void deleteMatrix(int **m, int n);
+
+/**
+ * @brief Deletes a double matrix.
+ *
+ * @param m Matrix pointer.
+ * @param n Number of rows.
+ */
 void deleteMatrix(double **m, int n);
 
 
