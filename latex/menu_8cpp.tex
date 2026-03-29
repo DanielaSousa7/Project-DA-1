@@ -5,14 +5,14 @@
 Implementation of the interactive menu.  
 
 
-{\ttfamily \#include "{}menu.\+h"{}}\newline
-{\ttfamily \#include "{}Parser.\+h"{}}\newline
-{\ttfamily \#include "{}Output.\+h"{}}\newline
-{\ttfamily \#include "{}Connection.\+h"{}}\newline
-{\ttfamily \#include $<$iostream$>$}\newline
-{\ttfamily \#include $<$limits$>$}\newline
-{\ttfamily \#include $<$string$>$}\newline
-Include dependency graph for menu.\+cpp\+:
+{\ttfamily \+\#include "{}menu.\+h"{}}\newline
+{\ttfamily \+\#include "{}Parser.\+h"{}}\newline
+{\ttfamily \+\#include "{}Output.\+h"{}}\newline
+{\ttfamily \+\#include "{}Connection.\+h"{}}\newline
+{\ttfamily \+\#include $<$iostream$>$}\newline
+{\ttfamily \+\#include $<$limits$>$}\newline
+{\ttfamily \+\#include $<$string$>$}\newline
+Include dependency graph for menu.\+cpp:\+
 % FIG 0
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
@@ -23,17 +23,17 @@ void {\bfseries show\+Main\+Menu} ()
 \Hypertarget{menu_8cpp_a43761e52ff1fecc2fc480507b6653247}\label{menu_8cpp_a43761e52ff1fecc2fc480507b6653247} 
 void {\bfseries show\+Data\+Menu} ()
 \begin{DoxyCompactList}\small\item\em Displays the data menu. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{menu_8cpp_a2571b681705b8010607af088c924e50b}{print\+Submissions}} (\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} data)
+void \doxymbox{\hyperlink{menu_8cpp_a2571b681705b8010607af088c924e50b}{print\+Submissions}} (\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data)
 \begin{DoxyCompactList}\small\item\em Prints all submissions. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{menu_8cpp_a8d88a60e26d53e0ab7ddcbfccbad84c9}{print\+Reviewers}} (\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} data)
+void \doxymbox{\hyperlink{menu_8cpp_a8d88a60e26d53e0ab7ddcbfccbad84c9}{print\+Reviewers}} (\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data)
 \begin{DoxyCompactList}\small\item\em Prints all reviewers. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{menu_8cpp_a1f9892349b0a9e8a9eacbfdfd279cab2}{print\+Parameters}} (\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} data)
+void \doxymbox{\hyperlink{menu_8cpp_a1f9892349b0a9e8a9eacbfdfd279cab2}{print\+Parameters}} (\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data)
 \begin{DoxyCompactList}\small\item\em Prints the problem parameters. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{menu_8cpp_a34c8069461f34cda070f6157af8cc6ea}{print\+Control}} (\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} data)
+void \doxymbox{\hyperlink{menu_8cpp_a34c8069461f34cda070f6157af8cc6ea}{print\+Control}} (\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data)
 \begin{DoxyCompactList}\small\item\em Prints the control settings. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{menu_8cpp_ac3324e46a9b34d0b93488f340d1e66d4}{data\+Menu}} (\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} data)
+void \doxymbox{\hyperlink{menu_8cpp_ac3324e46a9b34d0b93488f340d1e66d4}{data\+Menu}} (\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data)
 \begin{DoxyCompactList}\small\item\em Runs the data menu. \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{menu_8cpp_a8396c50bf544009fb2fc4907b00cbad3}{main\+Menu}} ()
+int \doxymbox{\hyperlink{menu_8cpp_a8396c50bf544009fb2fc4907b00cbad3}{main\+Menu}} ()
 \begin{DoxyCompactList}\small\item\em Runs the main interactive menu. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -42,61 +42,63 @@ Implementation of the interactive menu.
 
 
 
+\label{doc-func-members}
+\Hypertarget{menu_8cpp_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{menu_8cpp_ac3324e46a9b34d0b93488f340d1e66d4}\label{menu_8cpp_ac3324e46a9b34d0b93488f340d1e66d4} 
-\index{menu.cpp@{menu.cpp}!dataMenu@{dataMenu}}
+\Hypertarget{menu_8cpp_ac3324e46a9b34d0b93488f340d1e66d4}\index{menu.cpp@{menu.cpp}!dataMenu@{dataMenu}}
 \index{dataMenu@{dataMenu}!menu.cpp@{menu.cpp}}
 \doxysubsubsection{\texorpdfstring{dataMenu()}{dataMenu()}}
-{\footnotesize\ttfamily void data\+Menu (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}}}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{menu_8cpp_ac3324e46a9b34d0b93488f340d1e66d4} 
+void data\+Menu (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{}\end{DoxyParamCaption})}
 
 
 
 Runs the data menu. 
 
-Time complexity\+: depends on the selected option.
+Time complexity:\+ depends on the selected option.
 
 
 \begin{DoxyParams}{Parameters}
 {\em data} & Input problem data. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{menu_8cpp_a8396c50bf544009fb2fc4907b00cbad3}\label{menu_8cpp_a8396c50bf544009fb2fc4907b00cbad3} 
-\index{menu.cpp@{menu.cpp}!mainMenu@{mainMenu}}
+\Hypertarget{menu_8cpp_a8396c50bf544009fb2fc4907b00cbad3}\index{menu.cpp@{menu.cpp}!mainMenu@{mainMenu}}
 \index{mainMenu@{mainMenu}!menu.cpp@{menu.cpp}}
 \doxysubsubsection{\texorpdfstring{mainMenu()}{mainMenu()}}
-{\footnotesize\ttfamily int main\+Menu (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{menu_8cpp_a8396c50bf544009fb2fc4907b00cbad3} 
+int main\+Menu (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
 Runs the main interactive menu. 
 
-Time complexity\+: depends on the selected options. The most expensive operation is running the review assignment algorithm.
+Time complexity:\+ depends on the selected options. The most expensive operation is running the review assignment algorithm.
 
 \begin{DoxyReturn}{Returns}
 0 on normal exit. 
 \end{DoxyReturn}
-\Hypertarget{menu_8cpp_a34c8069461f34cda070f6157af8cc6ea}\label{menu_8cpp_a34c8069461f34cda070f6157af8cc6ea} 
-\index{menu.cpp@{menu.cpp}!printControl@{printControl}}
+\Hypertarget{menu_8cpp_a34c8069461f34cda070f6157af8cc6ea}\index{menu.cpp@{menu.cpp}!printControl@{printControl}}
 \index{printControl@{printControl}!menu.cpp@{menu.cpp}}
 \doxysubsubsection{\texorpdfstring{printControl()}{printControl()}}
-{\footnotesize\ttfamily void print\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}}}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{menu_8cpp_a34c8069461f34cda070f6157af8cc6ea} 
+void print\+Control (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{}\end{DoxyParamCaption})}
 
 
 
 Prints the control settings. 
 
-Time complexity\+: O(1).
+Time complexity:\+ O(1).
 
 
 \begin{DoxyParams}{Parameters}
 {\em data} & Input problem data. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{menu_8cpp_a1f9892349b0a9e8a9eacbfdfd279cab2}\label{menu_8cpp_a1f9892349b0a9e8a9eacbfdfd279cab2} 
-\index{menu.cpp@{menu.cpp}!printParameters@{printParameters}}
+\Hypertarget{menu_8cpp_a1f9892349b0a9e8a9eacbfdfd279cab2}\index{menu.cpp@{menu.cpp}!printParameters@{printParameters}}
 \index{printParameters@{printParameters}!menu.cpp@{menu.cpp}}
 \doxysubsubsection{\texorpdfstring{printParameters()}{printParameters()}}
-{\footnotesize\ttfamily void print\+Parameters (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}}}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{menu_8cpp_a1f9892349b0a9e8a9eacbfdfd279cab2} 
+void print\+Parameters (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{}\end{DoxyParamCaption})}
 
 
 
@@ -104,41 +106,41 @@ Prints the problem parameters.
 
 Prints the problem parameters to the console.
 
-Time complexity\+: O(1).
+Time complexity:\+ O(1).
 
 
 \begin{DoxyParams}{Parameters}
 {\em data} & Input problem data. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{menu_8cpp_a8d88a60e26d53e0ab7ddcbfccbad84c9}\label{menu_8cpp_a8d88a60e26d53e0ab7ddcbfccbad84c9} 
-\index{menu.cpp@{menu.cpp}!printReviewers@{printReviewers}}
+\Hypertarget{menu_8cpp_a8d88a60e26d53e0ab7ddcbfccbad84c9}\index{menu.cpp@{menu.cpp}!printReviewers@{printReviewers}}
 \index{printReviewers@{printReviewers}!menu.cpp@{menu.cpp}}
 \doxysubsubsection{\texorpdfstring{printReviewers()}{printReviewers()}}
-{\footnotesize\ttfamily void print\+Reviewers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}}}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{menu_8cpp_a8d88a60e26d53e0ab7ddcbfccbad84c9} 
+void print\+Reviewers (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{}\end{DoxyParamCaption})}
 
 
 
 Prints all reviewers. 
 
-Time complexity\+: O(\+R), where R is the number of reviewers.
+Time complexity:\+ O(\+R), where R is the number of reviewers.
 
 
 \begin{DoxyParams}{Parameters}
 {\em data} & Input problem data. \\
 \hline
 \end{DoxyParams}
-\Hypertarget{menu_8cpp_a2571b681705b8010607af088c924e50b}\label{menu_8cpp_a2571b681705b8010607af088c924e50b} 
-\index{menu.cpp@{menu.cpp}!printSubmissions@{printSubmissions}}
+\Hypertarget{menu_8cpp_a2571b681705b8010607af088c924e50b}\index{menu.cpp@{menu.cpp}!printSubmissions@{printSubmissions}}
 \index{printSubmissions@{printSubmissions}!menu.cpp@{menu.cpp}}
 \doxysubsubsection{\texorpdfstring{printSubmissions()}{printSubmissions()}}
-{\footnotesize\ttfamily void print\+Submissions (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}}}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{menu_8cpp_a2571b681705b8010607af088c924e50b} 
+void print\+Submissions (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}}}]{data}{}\end{DoxyParamCaption})}
 
 
 
 Prints all submissions. 
 
-Time complexity\+: O(\+S), where S is the number of submissions.
+Time complexity:\+ O(\+S), where S is the number of submissions.
 
 
 \begin{DoxyParams}{Parameters}

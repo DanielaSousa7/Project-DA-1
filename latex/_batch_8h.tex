@@ -2,7 +2,7 @@
 \hypertarget{_batch_8h}{}\label{_batch_8h}\index{Batch.h@{Batch.h}}
 
 
-Provides batch processing functionality for the project.  
+Batch processing function.  
 
 
 {\ttfamily \+\#include $<$string$>$}\newline
@@ -14,13 +14,13 @@ This graph shows which files directly or indirectly include this file:\+
 \begin{DoxyCompactItemize}
 \item 
 void \doxymbox{\hyperlink{_batch_8h_a0bd62db4f7cba1ba3aab1517daf75fde}{batch\+Mode}} (string input\+File, string output\+File)
-\begin{DoxyCompactList}\small\item\em Executes batch processing mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Runs the program in batch mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Provides batch processing functionality for the project. 
+Batch processing function. 
 
-This header declares the batch\+Mode function, which is used to process input and output files in batch mode. 
+
 
 \label{doc-func-members}
 \Hypertarget{_batch_8h_doc-func-members}
@@ -33,28 +33,21 @@ void batch\+Mode (\begin{DoxyParamCaption}\item[{string}]{input\+File}{, }\item[
 
 
 
-Executes batch processing mode. 
-
-Reads data from the specified input file, processes it in batch mode, and writes the results to the output file.
+Runs the program in batch mode. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em input\+File} & Path to the input file containing batch commands or data. \\
+{\em input\+File} & Input file name. \\
 \hline
-{\em output\+File} & Path to the output file where results will be written.\\
+{\em output\+File} & Output file name.\\
 \hline
 \end{DoxyParams}
-\begin{DoxyNote}{Note}
-This function is intended to be called from the main program when batch mode is selected.
-\end{DoxyNote}
-Executes batch processing mode.
-
-If an explicit output filename is provided as a third argument, it overrides the filename specified in the CSV control section.
+Time complexity:\+ depends mainly on parse\+CSV, run\+Review\+Assignment and print\+Assignment.
 
 
 \begin{DoxyParams}{Parameters}
-{\em input\+File} & Path to the input CSV file. \\
+{\em input\+File} & Input file name. \\
 \hline
-{\em output\+File} & Optional output filename override (empty = use CSV setting). \\
+{\em output\+File} & Output file name. \\
 \hline
 \end{DoxyParams}

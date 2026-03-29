@@ -16,7 +16,7 @@ This graph shows which files directly or indirectly include this file:\+
 \begin{DoxyCompactItemize}
 \item 
 void \doxymbox{\hyperlink{_output_8h_a39530cf7d6e95cc2e133607b1500e642}{print\+Assignment}} (\doxymbox{\hyperlink{struct_review_assignment}{Review\+Assignment}} assignment, \doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data, string filename)
-\begin{DoxyCompactList}\small\item\em Writes the review assignment result to a CSV output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Writes the assignment result to a CSV file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -35,27 +35,20 @@ void print\+Assignment (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{stru
 
 
 
-Writes the review assignment result to a CSV output file. 
-
-The output file contains:\+
-\begin{DoxyItemize}
-\item {\ttfamily \#Submission\+Id,Reviewer\+Id,Match} — one line per assignment, sorted by paper ID
-\item {\ttfamily \#Reviewer\+Id,Submission\+Id,Match} — same assignments, sorted by reviewer ID
-\item {\ttfamily \#Total:\+ N} — total number of assignments
-\item {\ttfamily \#Submission\+Id,Domain,Missing\+Reviews} — papers that did not get enough reviews (if any)
-\item {\ttfamily \#Risk Analysis:\+ 1} followed by critical reviewer IDs (if Risk\+Analysis = 1)
-\end{DoxyItemize}
+Writes the assignment result to a CSV file. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em assignment} & The result of running the assignment algorithm. \\
+{\em assignment} & Final review assignment. \\
 \hline
-{\em data} & The full problem instance (used for missing review checks). \\
+{\em data} & Input problem data. \\
 \hline
-{\em filename} & Path to the output CSV file.\\
+{\em filename} & Name of the output file.\\
 \hline
 \end{DoxyParams}
-Sorts submissions by paper ID then reviewer ID, and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.
+Sorts submissions by paper ID then reviewer ID and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.
+
+Time complexity:\+ O(A log A + R \texorpdfstring{$\ast$}{*} A + K), where A is the number of assignments, R is the number of submissions and K is the cost of the risk analysis.
 
 
 \begin{DoxyParams}{Parameters}

@@ -98,7 +98,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a39530cf7d6e95cc2e133607b1500e642" id="r_a39530cf7d6e95cc2e133607b1500e642"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a39530cf7d6e95cc2e133607b1500e642">printAssignment</a> (<a class="el" href="struct_review_assignment.html">ReviewAssignment</a> assignment, <a class="el" href="struct_assignment_data.html">AssignmentData</a> data, string filename)</td></tr>
-<tr class="memdesc:a39530cf7d6e95cc2e133607b1500e642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the review assignment result to a CSV output file.  <br /></td></tr>
+<tr class="memdesc:a39530cf7d6e95cc2e133607b1500e642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the assignment result to a CSV file.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Function for writing the assignment result to a CSV file. </p>
@@ -127,23 +127,17 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Writes the review assignment result to a CSV output file. </p>
-<p>The output file contains:</p><ul>
-<li><span class="tt">#SubmissionId,ReviewerId,Match</span> — one line per assignment, sorted by paper ID</li>
-<li><span class="tt">#ReviewerId,SubmissionId,Match</span> — same assignments, sorted by reviewer ID</li>
-<li><span class="tt">#Total: N</span> — total number of assignments</li>
-<li><span class="tt">#SubmissionId,Domain,MissingReviews</span> — papers that did not get enough reviews (if any)</li>
-<li><span class="tt">#Risk Analysis: 1</span> followed by critical reviewer IDs (if RiskAnalysis = 1)</li>
-</ul>
+<p>Writes the assignment result to a CSV file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">assignment</td><td>The result of running the assignment algorithm. </td></tr>
-    <tr><td class="paramname">data</td><td>The full problem instance (used for missing review checks). </td></tr>
-    <tr><td class="paramname">filename</td><td>Path to the output CSV file.</td></tr>
+    <tr><td class="paramname">assignment</td><td>Final review assignment. </td></tr>
+    <tr><td class="paramname">data</td><td>Input problem data. </td></tr>
+    <tr><td class="paramname">filename</td><td>Name of the output file.</td></tr>
   </table>
   </dd>
 </dl>
-<p>Sorts submissions by paper ID then reviewer ID, and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.</p>
+<p>Sorts submissions by paper ID then reviewer ID and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.</p>
+<p>Time complexity: O(A log A + R * A + K), where A is the number of assignments, R is the number of submissions and K is the cost of the risk analysis.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">assignment</td><td>The result of running the assignment algorithm. </td></tr>

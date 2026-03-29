@@ -77,7 +77,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the assignment output writer.  
+<p>Implementation of the function that writes the assignment result to a CSV file.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_output_8h_source.html">Output.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_connection_8h_source.html">Connection.h</a>&quot;</code><br />
@@ -92,10 +92,10 @@ Include dependency graph for Output.cpp:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a39530cf7d6e95cc2e133607b1500e642" id="r_a39530cf7d6e95cc2e133607b1500e642"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a39530cf7d6e95cc2e133607b1500e642">printAssignment</a> (<a class="el" href="struct_review_assignment.html">ReviewAssignment</a> assignment, <a class="el" href="struct_assignment_data.html">AssignmentData</a> data, string filename)</td></tr>
-<tr class="memdesc:a39530cf7d6e95cc2e133607b1500e642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the review assignment result to a CSV output file.  <br /></td></tr>
+<tr class="memdesc:a39530cf7d6e95cc2e133607b1500e642"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the assignment result to a CSV file.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the assignment output writer. </p>
+<div class="textblock"><p>Implementation of the function that writes the assignment result to a CSV file. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a39530cf7d6e95cc2e133607b1500e642" name="a39530cf7d6e95cc2e133607b1500e642"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a39530cf7d6e95cc2e133607b1500e642">&#9670;&#160;</a></span>printAssignment()</h2>
@@ -121,8 +121,9 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Writes the review assignment result to a CSV output file. </p>
-<p>Sorts submissions by paper ID then reviewer ID, and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.</p>
+<p>Writes the assignment result to a CSV file. </p>
+<p>Sorts submissions by paper ID then reviewer ID and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.</p>
+<p>Time complexity: O(A log A + R * A + K), where A is the number of assignments, R is the number of submissions and K is the cost of the risk analysis.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">assignment</td><td>The result of running the assignment algorithm. </td></tr>

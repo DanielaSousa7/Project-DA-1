@@ -94,7 +94,7 @@ Include dependency graph for Batch.cpp:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a0bd62db4f7cba1ba3aab1517daf75fde" id="r_a0bd62db4f7cba1ba3aab1517daf75fde"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0bd62db4f7cba1ba3aab1517daf75fde">batchMode</a> (string inputFile, string outputFile)</td></tr>
-<tr class="memdesc:a0bd62db4f7cba1ba3aab1517daf75fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the tool in batch mode, reading from a CSV file and writing output.  <br /></td></tr>
+<tr class="memdesc:a0bd62db4f7cba1ba3aab1517daf75fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the program in batch mode.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of the batch mode. </p>
@@ -118,13 +118,12 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Runs the tool in batch mode, reading from a CSV file and writing output. </p>
-<p>Executes batch processing mode.</p>
-<p>If an explicit output filename is provided as a third argument, it overrides the filename specified in the CSV control section.</p>
+<p>Runs the program in batch mode. </p>
+<p>Time complexity: depends mainly on parseCSV, runReviewAssignment and printAssignment.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inputFile</td><td>Path to the input CSV file. </td></tr>
-    <tr><td class="paramname">outputFile</td><td>Optional output filename override (empty = use CSV setting). </td></tr>
+    <tr><td class="paramname">inputFile</td><td>Input file name. </td></tr>
+    <tr><td class="paramname">outputFile</td><td>Output file name. </td></tr>
   </table>
   </dd>
 </dl>

@@ -2,7 +2,7 @@
 \hypertarget{_output_8cpp}{}\label{_output_8cpp}\index{Output.cpp@{Output.cpp}}
 
 
-Implementation of the assignment output writer.  
+Implementation of the function that writes the assignment result to a CSV file.  
 
 
 {\ttfamily \+\#include "{}Output.\+h"{}}\newline
@@ -15,11 +15,11 @@ Include dependency graph for Output.\+cpp:\+
 \begin{DoxyCompactItemize}
 \item 
 void \doxymbox{\hyperlink{_output_8cpp_a39530cf7d6e95cc2e133607b1500e642}{print\+Assignment}} (\doxymbox{\hyperlink{struct_review_assignment}{Review\+Assignment}} assignment, \doxymbox{\hyperlink{struct_assignment_data}{Assignment\+Data}} data, string filename)
-\begin{DoxyCompactList}\small\item\em Writes the review assignment result to a CSV output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Writes the assignment result to a CSV file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Implementation of the assignment output writer. 
+Implementation of the function that writes the assignment result to a CSV file. 
 
 
 
@@ -34,9 +34,11 @@ void print\+Assignment (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{stru
 
 
 
-Writes the review assignment result to a CSV output file. 
+Writes the assignment result to a CSV file. 
 
-Sorts submissions by paper ID then reviewer ID, and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.
+Sorts submissions by paper ID then reviewer ID and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.
+
+Time complexity:\+ O(A log A + R \texorpdfstring{$\ast$}{*} A + K), where A is the number of assignments, R is the number of submissions and K is the cost of the risk analysis.
 
 
 \begin{DoxyParams}{Parameters}

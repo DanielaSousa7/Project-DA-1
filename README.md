@@ -37,7 +37,7 @@ If the maximum flow found is equal to that required value, the assignment is con
 
 The function `riskAnalysis` first checks whether the original instance is feasible when all reviewers are available. If it is already infeasible, then the analysis is not meaningful and an empty list is returned. Otherwise, it removes each reviewer one at a time by calling `assignmentFeasible(data, r.id)`,
 where r.id is the identifier of the reviewer being excluded. If removing that reviewer makes the assignment infeasible, then that reviewer
-is considered critical and its identifier is added to the result. At the end, the list of critical reviewers is sorted and returned.
+is considered critical and their identifier is added to the result. At the end, the list of critical reviewers is sorted and returned.
 
 Regarding complexity, one execution of the assignment algorithm has the complexity of Edmonds-Karp, which is O(V * E^2), where V is the number of
 vertices and E is the number of edges in the flow network. In this code, the number of vertices is 2 + number of submissions + number of reviewers,
@@ -85,7 +85,7 @@ is already infeasible, then the analysis is not meaningful and no critical set i
 If the instance is feasible, for each subset of K reviewers, the flow network is rebuilt without those reviewers and the max-flow assignment algorithm is executed again. If the total number of assignments found is smaller than the required
 number of assignments, that subset of reviewers is considered critical, since their simultaneous absence prevents a valid assignment.
 
-This approach reuses the same idea of the Risk Analysis for K = 1. The only difference is that instead of excluding a single reviewer, it excludes a set of reviewers before running Edmonds-Karp.
+This approach reuses the same idea as the Risk Analysis for K = 1. The only difference is that instead of excluding a single reviewer, it excludes a set of reviewers before running Edmonds-Karp.
 
 The time complexity of this approach is dominated by the number of combinations of k reviewers that must be tested. Since all combinations of k reviewers
 are considered, the total number of cases is C(R, K), which represents the number of ways to choose K reviewers from a total of R reviewers. For each subset of k reviewers, the Edmonds-Karp algorithm is executed, with complexity O(V * E^2). Therefore, the total

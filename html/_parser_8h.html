@@ -97,11 +97,11 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:af54deaac3f50b79226535f61f5822e56" id="r_af54deaac3f50b79226535f61f5822e56"><td class="memItemLeft">string&#160;</td><td class="memItemRight"><a class="el" href="#af54deaac3f50b79226535f61f5822e56">trim</a> (string s)</td></tr>
-<tr class="memdesc:af54deaac3f50b79226535f61f5822e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes leading and trailing whitespace from a string.  <br /></td></tr>
+<tr class="memdesc:af54deaac3f50b79226535f61f5822e56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes leading and trailing spaces from a string.  <br /></td></tr>
 <tr class="memitem:af678a74de1d6fb50933244136811127f" id="r_af678a74de1d6fb50933244136811127f"><td class="memItemLeft">string&#160;</td><td class="memItemRight"><a class="el" href="#af678a74de1d6fb50933244136811127f">removeQuotes</a> (string s)</td></tr>
-<tr class="memdesc:af678a74de1d6fb50933244136811127f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes surrounding double-quotes from a string if present.  <br /></td></tr>
+<tr class="memdesc:af678a74de1d6fb50933244136811127f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes surrounding double quotes from a string.  <br /></td></tr>
 <tr class="memitem:a724be4895e53323b971968a2436e0b80" id="r_a724be4895e53323b971968a2436e0b80"><td class="memItemLeft"><a class="el" href="struct_assignment_data.html">AssignmentData</a>&#160;</td><td class="memItemRight"><a class="el" href="#a724be4895e53323b971968a2436e0b80">parseCSV</a> (string filename)</td></tr>
-<tr class="memdesc:a724be4895e53323b971968a2436e0b80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses a conference assignment CSV file into an <a class="el" href="struct_assignment_data.html" title="Container for all data parsed from a .csv input file.">AssignmentData</a> struct.  <br /></td></tr>
+<tr class="memdesc:a724be4895e53323b971968a2436e0b80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a CSV file and stores its data.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Functions for reading and parsing the input CSV file. </p>
@@ -121,29 +121,23 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Parses a conference assignment CSV file into an <a class="el" href="struct_assignment_data.html" title="Container for all data parsed from a .csv input file.">AssignmentData</a> struct. </p>
-<p>Reads the four sections of the file (#Submissions, #Reviewers, <a class="el" href="struct_parameters.html" title="Problem parameters read from the Parameters section of the CSV.">Parameters</a>, <a class="el" href="struct_control.html" title="Control settings read from the Control section of the CSV.">Control</a>). Reports any errors (duplicate IDs, invalid values) to stderr but continues parsing.</p>
+<p>Reads a CSV file and stores its data. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>Path to the .csv input file. </td></tr>
+    <tr><td class="paramname">filename</td><td>Input file name. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A fully populated <a class="el" href="struct_assignment_data.html" title="Container for all data parsed from a .csv input file.">AssignmentData</a> struct.</dd></dl>
-<p>The file must contain four sections delimited by lines starting with '#':</p><ul>
-<li><span class="tt">#Submissions</span> — paper entries</li>
-<li><span class="tt">#Reviewers</span> — reviewer entries</li>
-<li><span class="tt">#<a class="el" href="struct_parameters.html" title="Problem parameters read from the Parameters section of the CSV.">Parameters</a></span> — numeric problem parameters</li>
-<li><span class="tt">#<a class="el" href="struct_control.html" title="Control settings read from the Control section of the CSV.">Control</a></span> — output control settings</li>
-</ul>
+<dl class="section return"><dt>Returns</dt><dd>Parsed problem data.</dd></dl>
 <p>Errors (invalid IDs, duplicates) are collected and printed to stderr at the end. Parsing continues even when errors are found.</p>
+<p>Time complexity: O(L log L), where L is the number of lines in the file.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>Path to the .csv input file. </td></tr>
+    <tr><td class="paramname">filename</td><td>Input file name. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A fully populated <a class="el" href="struct_assignment_data.html" title="Container for all data parsed from a .csv input file.">AssignmentData</a> struct. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Parsed problem data. </dd></dl>
 
 </div>
 </div>
@@ -162,21 +156,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Removes surrounding double-quotes from a string if present. </p>
+<p>Removes surrounding double quotes from a string. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>The input string. </td></tr>
+    <tr><td class="paramname">s</td><td>Input string. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The unquoted string.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>String without surrounding quotes.</dd></dl>
+<p>Time complexity: O(n), where n is the length of the string.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>The input string, e.g. <span class="tt">"assign.csv"</span>. </td></tr>
+    <tr><td class="paramname">s</td><td>Input string. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The string without surrounding quotes, e.g. <span class="tt">assign.csv</span>. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>String without surrounding quotes. </dd></dl>
 
 </div>
 </div>
@@ -195,14 +190,22 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Removes leading and trailing whitespace from a string. </p>
+<p>Removes leading and trailing spaces from a string. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s</td><td>The input string. </td></tr>
+    <tr><td class="paramname">s</td><td>Input string. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The trimmed string. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Trimmed string.</dd></dl>
+<p>Time complexity: O(n), where n is the length of the string.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s</td><td>Input string. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Trimmed string. </dd></dl>
 
 </div>
 </div>

@@ -8,7 +8,7 @@ digraph "Output.h"
   Node1 -> Node2 [id="edge4_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node2 [id="Node000002",label="Batch.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_batch_8cpp.html",tooltip="Implementation of the batch mode."];
   Node1 -> Node3 [id="edge5_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="Output.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_output_8cpp.html",tooltip="Implementation of the assignment output writer."];
+  Node3 [id="Node000003",label="Output.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_output_8cpp.html",tooltip="Implementation of the function that writes the assignment result to a CSV file."];
   Node1 -> Node4 [id="edge6_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node4 [id="Node000004",label="menu.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$menu_8cpp.html",tooltip="Implementation of the interactive menu."];
 }

@@ -106,7 +106,7 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Flow network construction and risk analysis functions. </p>
-<p>Builds a Max-Flow network from a problem instance and runs Edmonds-Karp to determine review assignments. Also provides risk analysis. </p>
+<p>Builds a Max-Flow network from a problem instance and runs Edmonds-Karp to determine review assignments. Provides risk analysis. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a5b52f2944066945f5d4e03badc2f299e" name="a5b52f2944066945f5d4e03badc2f299e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5b52f2944066945f5d4e03badc2f299e">&#9670;&#160;</a></span>assignmentFeasible()</h2>
@@ -128,7 +128,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Checks whether a full valid assignment is possible. </p>
-<p>A full assignment means every paper receives at least MinReviewsPerSubmission reviews.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The full problem instance. </td></tr>
@@ -137,14 +136,16 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true if all papers can receive the minimum number of reviews.</dd></dl>
+<p>Checks whether a full valid assignment is possible.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The full problem instance. </td></tr>
-    <tr><td class="paramname">excludeReviewerId</td><td><a class="el" href="struct_reviewer.html" title="Represents a reviewer in the conference.">Reviewer</a> to exclude (-1 = include all). </td></tr>
+    <tr><td class="paramname">excludeReviewerId</td><td><a class="el" href="struct_reviewer.html" title="Represents a reviewer.">Reviewer</a> to exclude (-1 = include all). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if totalAssignments equals submissions × minReviewsPerSubmission. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if totalAssignments is equal to submissions × minReviewsPerSubmission.</dd></dl>
+<p>Complexity: O(V * E^2). This function inherits the complexity of the Edmonds-Karp algorithm, since that <a class="el" href="#afd6dfec961cbe4d276a3cf70c034e08c" title="Runs the review assignment algorithm using Max-Flow (Edmonds-Karp).">runReviewAssignment()</a> is called. </p>
 
 </div>
 </div>
@@ -164,9 +165,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Risk Analysis K=1: identifies critical reviewers. </p>
-<p>A reviewer is "critical" if their individual absence makes a full assignment impossible. This function tests each reviewer one by one.</p>
-<p>Only runs if the base assignment (with all reviewers) is feasible.</p>
-<p>Time complexity: O(R * V * E²) where R = number of reviewers.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The full problem instance. </td></tr>
@@ -175,15 +173,14 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Sorted list of reviewer IDs whose absence breaks the assignment.</dd></dl>
 <p>Risk Analysis K=1: identifies critical reviewers.</p>
-<p>For each reviewer, removes them from the problem and checks whether a full assignment is still possible. If not, they are considered critical.</p>
-<p>Returns an empty list if the base assignment is already infeasible.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The full problem instance. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Sorted list of critical reviewer IDs. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Sorted list of critical reviewer IDs.</dd></dl>
+<p>Complexity: O(R * V * E^2) R = number of reviewers, V = number of vertices, E = number of edges. For each reviewer, we run a full max-flow computation. The final sort is O(R log R). </p>
 
 </div>
 </div>
@@ -207,13 +204,6 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Runs the review assignment algorithm using Max-Flow (Edmonds-Karp). </p>
-<p>Builds a flow network with the following structure:</p><ul>
-<li>Source → each submission (capacity = MinReviewsPerSubmission)</li>
-<li><a class="el" href="struct_submission.html" title="Represents a paper submitted to the conference.">Submission</a> → reviewer (capacity = 1, only if domains match)</li>
-<li><a class="el" href="struct_reviewer.html" title="Represents a reviewer in the conference.">Reviewer</a> → Sink (capacity = MaxReviewsPerReviewer)</li>
-</ul>
-<p>Then runs Edmonds-Karp to find the maximum flow, which corresponds to the maximum number of valid review assignments.</p>
-<p>Time complexity: O(V * E²)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The full problem instance. </td></tr>
@@ -221,7 +211,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_review_assignment.html" title="Holds the full result of running the assignment algorithm.">ReviewAssignment</a> containing all assigned paper-reviewer pairs.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_review_assignment.html" title="Stores the final result of the review assignment process.">ReviewAssignment</a> containing all assigned paper-reviewer pairs.</dd></dl>
 <p>Node IDs in the graph:</p><ul>
 <li>0: source</li>
 <li>1: sink</li>
@@ -231,11 +221,12 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>The full problem instance. </td></tr>
-    <tr><td class="paramname">excludeReviewerId</td><td><a class="el" href="struct_reviewer.html" title="Represents a reviewer in the conference.">Reviewer</a> to exclude from the network (-1 = include all). </td></tr>
+    <tr><td class="paramname">excludeReviewerId</td><td><a class="el" href="struct_reviewer.html" title="Represents a reviewer.">Reviewer</a> to exclude from the network (-1 = include all). </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_review_assignment.html" title="Holds the full result of running the assignment algorithm.">ReviewAssignment</a> containing all assigned paper-reviewer pairs. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_review_assignment.html" title="Stores the final result of the review assignment process.">ReviewAssignment</a> containing all assigned paper-reviewer pairs.</dd></dl>
+<p>Complexity: O(V * E^2) This is the complexity of Edmonds-Karp algorithm. V = number of vertices (2 + |submissions| + |reviewers|) E = number of edges (source-&gt;submission + reviewer-&gt;sink + submission-&gt;reviewer edges). </p>
 
 </div>
 </div>

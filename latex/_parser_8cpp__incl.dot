@@ -8,7 +8,7 @@ digraph "Parser.cpp"
   Node1 -> Node2 [id="edge11_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
   Node2 [id="Node000002",label="Parser.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_parser_8h.html",tooltip="Functions for reading and parsing the input CSV file."];
   Node2 -> Node3 [id="edge12_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
-  Node3 [id="Node000003",label="Data.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_data_8h.html",tooltip="Core data structures used throughout the application."];
+  Node3 [id="Node000003",label="Data.h",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_data_8h.html",tooltip="Data structures used in the review assignment problem."];
   Node3 -> Node4 [id="edge13_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
   Node4 [id="Node000004",label="string",height=0.2,width=0.4,color="grey60", fillcolor="#E0E0E0", style="filled",tooltip=" "];
   Node3 -> Node5 [id="edge14_Node000003_Node000005",color="steelblue1",style="solid",tooltip=" "];

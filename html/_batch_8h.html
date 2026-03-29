@@ -77,7 +77,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Provides batch processing functionality for the project.  
+<p>Batch processing function.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -96,11 +96,10 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a0bd62db4f7cba1ba3aab1517daf75fde" id="r_a0bd62db4f7cba1ba3aab1517daf75fde"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0bd62db4f7cba1ba3aab1517daf75fde">batchMode</a> (string inputFile, string outputFile)</td></tr>
-<tr class="memdesc:a0bd62db4f7cba1ba3aab1517daf75fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes batch processing mode.  <br /></td></tr>
+<tr class="memdesc:a0bd62db4f7cba1ba3aab1517daf75fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Runs the program in batch mode.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Provides batch processing functionality for the project. </p>
-<p>This header declares the batchMode function, which is used to process input and output files in batch mode. </p>
+<div class="textblock"><p>Batch processing function. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a0bd62db4f7cba1ba3aab1517daf75fde" name="a0bd62db4f7cba1ba3aab1517daf75fde"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0bd62db4f7cba1ba3aab1517daf75fde">&#9670;&#160;</a></span>batchMode()</h2>
@@ -121,22 +120,19 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes batch processing mode. </p>
-<p>Reads data from the specified input file, processes it in batch mode, and writes the results to the output file.</p>
+<p>Runs the program in batch mode. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inputFile</td><td>Path to the input file containing batch commands or data. </td></tr>
-    <tr><td class="paramname">outputFile</td><td>Path to the output file where results will be written.</td></tr>
+    <tr><td class="paramname">inputFile</td><td>Input file name. </td></tr>
+    <tr><td class="paramname">outputFile</td><td>Output file name.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>This function is intended to be called from the main program when batch mode is selected.</dd></dl>
-<p>Executes batch processing mode.</p>
-<p>If an explicit output filename is provided as a third argument, it overrides the filename specified in the CSV control section.</p>
+<p>Time complexity: depends mainly on parseCSV, runReviewAssignment and printAssignment.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">inputFile</td><td>Path to the input CSV file. </td></tr>
-    <tr><td class="paramname">outputFile</td><td>Optional output filename override (empty = use CSV setting). </td></tr>
+    <tr><td class="paramname">inputFile</td><td>Input file name. </td></tr>
+    <tr><td class="paramname">outputFile</td><td>Output file name. </td></tr>
   </table>
   </dd>
 </dl>

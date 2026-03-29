@@ -26,7 +26,7 @@ vector$<$ int $>$ \doxymbox{\hyperlink{_connection_8h_afd77d87842dd3594f0482c89b
 \doxysubsection{Detailed Description}
 Flow network construction and risk analysis functions. 
 
-Builds a Max-\/\+Flow network from a problem instance and runs Edmonds-\/\+Karp to determine review assignments. Also provides risk analysis. 
+Builds a Max-\/\+Flow network from a problem instance and runs Edmonds-\/\+Karp to determine review assignments. Provides risk analysis. 
 
 \label{doc-func-members}
 \Hypertarget{_connection_8h_doc-func-members}
@@ -41,8 +41,6 @@ bool assignment\+Feasible (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{s
 
 Checks whether a full valid assignment is possible. 
 
-A full assignment means every paper receives at least Min\+Reviews\+Per\+Submission reviews.
-
 
 \begin{DoxyParams}{Parameters}
 {\em data} & The full problem instance. \\
@@ -53,6 +51,8 @@ A full assignment means every paper receives at least Min\+Reviews\+Per\+Submiss
 \begin{DoxyReturn}{Returns}
 true if all papers can receive the minimum number of reviews.
 \end{DoxyReturn}
+Checks whether a full valid assignment is possible.
+
 
 \begin{DoxyParams}{Parameters}
 {\em data} & The full problem instance. \\
@@ -61,9 +61,9 @@ true if all papers can receive the minimum number of reviews.
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if total\+Assignments equals submissions × min\+Reviews\+Per\+Submission. 
+true if total\+Assignments is equal to submissions × min\+Reviews\+Per\+Submission.
 \end{DoxyReturn}
-\Hypertarget{_connection_8h_afd77d87842dd3594f0482c89b20f1921}\index{Connection.h@{Connection.h}!riskAnalysis@{riskAnalysis}}
+Complexity:\+ O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2). This function inherits the complexity of the Edmonds-\/\+Karp algorithm, since that \doxylink{_connection_8h_afd6dfec961cbe4d276a3cf70c034e08c}{run\+Review\+Assignment()} is called. \Hypertarget{_connection_8h_afd77d87842dd3594f0482c89b20f1921}\index{Connection.h@{Connection.h}!riskAnalysis@{riskAnalysis}}
 \index{riskAnalysis@{riskAnalysis}!Connection.h@{Connection.h}}
 \doxysubsubsection{\texorpdfstring{riskAnalysis()}{riskAnalysis()}}
 {\footnotesize\ttfamily \label{_connection_8h_afd77d87842dd3594f0482c89b20f1921} 
@@ -72,12 +72,6 @@ vector$<$ int $>$ risk\+Analysis (\begin{DoxyParamCaption}\item[{\doxymbox{\hype
 
 
 Risk Analysis K=1:\+ identifies critical reviewers. 
-
-A reviewer is "{}critical"{} if their individual absence makes a full assignment impossible. This function tests each reviewer one by one.
-
-Only runs if the base assignment (with all reviewers) is feasible.
-
-Time complexity:\+ O(R \texorpdfstring{$\ast$}{*} V \texorpdfstring{$\ast$}{*} E²) where R = number of reviewers.
 
 
 \begin{DoxyParams}{Parameters}
@@ -89,19 +83,15 @@ Sorted list of reviewer IDs whose absence breaks the assignment.
 \end{DoxyReturn}
 Risk Analysis K=1:\+ identifies critical reviewers.
 
-For each reviewer, removes them from the problem and checks whether a full assignment is still possible. If not, they are considered critical.
-
-Returns an empty list if the base assignment is already infeasible.
-
 
 \begin{DoxyParams}{Parameters}
 {\em data} & The full problem instance. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Sorted list of critical reviewer IDs. 
+Sorted list of critical reviewer IDs.
 \end{DoxyReturn}
-\Hypertarget{_connection_8h_afd6dfec961cbe4d276a3cf70c034e08c}\index{Connection.h@{Connection.h}!runReviewAssignment@{runReviewAssignment}}
+Complexity:\+ O(\+R \texorpdfstring{$\ast$}{*} V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2) R = number of reviewers, V = number of vertices, E = number of edges. For each reviewer, we run a full max-\/flow computation. The final sort is O(\+R log R). \Hypertarget{_connection_8h_afd6dfec961cbe4d276a3cf70c034e08c}\index{Connection.h@{Connection.h}!runReviewAssignment@{runReviewAssignment}}
 \index{runReviewAssignment@{runReviewAssignment}!Connection.h@{Connection.h}}
 \doxysubsubsection{\texorpdfstring{runReviewAssignment()}{runReviewAssignment()}}
 {\footnotesize\ttfamily \label{_connection_8h_afd6dfec961cbe4d276a3cf70c034e08c} 
@@ -110,17 +100,6 @@ Sorted list of critical reviewer IDs.
 
 
 Runs the review assignment algorithm using Max-\/\+Flow (Edmonds-\/\+Karp). 
-
-Builds a flow network with the following structure:\+
-\begin{DoxyItemize}
-\item Source → each submission (capacity = Min\+Reviews\+Per\+Submission)
-\item \doxylink{struct_submission}{Submission} → reviewer (capacity = 1, only if domains match)
-\item \doxylink{struct_reviewer}{Reviewer} → Sink (capacity = Max\+Reviews\+Per\+Reviewer)
-\end{DoxyItemize}
-
-Then runs Edmonds-\/\+Karp to find the maximum flow, which corresponds to the maximum number of valid review assignments.
-
-Time complexity:\+ O(V \texorpdfstring{$\ast$}{*} E²)
 
 
 \begin{DoxyParams}{Parameters}
@@ -148,5 +127,6 @@ Node IDs in the graph:\+
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-A \doxylink{struct_review_assignment}{Review\+Assignment} containing all assigned paper-\/reviewer pairs. 
+A \doxylink{struct_review_assignment}{Review\+Assignment} containing all assigned paper-\/reviewer pairs.
 \end{DoxyReturn}
+Complexity:\+ O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2) This is the complexity of Edmonds-\/\+Karp algorithm. V = number of vertices (2 + \texorpdfstring{$\vert$}{|}submissions\texorpdfstring{$\vert$}{|} + \texorpdfstring{$\vert$}{|}reviewers\texorpdfstring{$\vert$}{|}) E = number of edges (source-\/\texorpdfstring{$>$}{>}submission + reviewer-\/\texorpdfstring{$>$}{>}sink + submission-\/\texorpdfstring{$>$}{>}reviewer edges). 

@@ -17,7 +17,7 @@ Include dependency graph for Batch.\+cpp:\+
 \begin{DoxyCompactItemize}
 \item 
 void \doxymbox{\hyperlink{_batch_8cpp_a0bd62db4f7cba1ba3aab1517daf75fde}{batch\+Mode}} (string input\+File, string output\+File)
-\begin{DoxyCompactList}\small\item\em Runs the tool in batch mode, reading from a CSV file and writing output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Runs the program in batch mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -36,16 +36,14 @@ void batch\+Mode (\begin{DoxyParamCaption}\item[{string}]{input\+File}{, }\item[
 
 
 
-Runs the tool in batch mode, reading from a CSV file and writing output. 
+Runs the program in batch mode. 
 
-Executes batch processing mode.
-
-If an explicit output filename is provided as a third argument, it overrides the filename specified in the CSV control section.
+Time complexity:\+ depends mainly on parse\+CSV, run\+Review\+Assignment and print\+Assignment.
 
 
 \begin{DoxyParams}{Parameters}
-{\em input\+File} & Path to the input CSV file. \\
+{\em input\+File} & Input file name. \\
 \hline
-{\em output\+File} & Optional output filename override (empty = use CSV setting). \\
+{\em output\+File} & Output file name. \\
 \hline
 \end{DoxyParams}

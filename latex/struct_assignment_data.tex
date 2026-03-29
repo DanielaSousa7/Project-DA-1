@@ -2,7 +2,7 @@
 \hypertarget{struct_assignment_data}{}\label{struct_assignment_data}\index{AssignmentData@{AssignmentData}}
 
 
-Container for all data parsed from a .csv input file.  
+Stores all parsed input data.  
 
 
 
@@ -18,20 +18,23 @@ Collaboration diagram for Assignment\+Data:\+
 \item 
 \Hypertarget{struct_assignment_data_a2d2b3628ea3f8e9a061c318d6335ebf8}\label{struct_assignment_data_a2d2b3628ea3f8e9a061c318d6335ebf8} 
 vector$<$ \doxymbox{\hyperlink{struct_submission}{Submission}} $>$ {\bfseries submissions}
-\begin{DoxyCompactList}\small\item\em List of all paper submissions. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em List of submissions. \end{DoxyCompactList}\item 
 \Hypertarget{struct_assignment_data_a1c280a09f7428d53453348eefbd63008}\label{struct_assignment_data_a1c280a09f7428d53453348eefbd63008} 
 vector$<$ \doxymbox{\hyperlink{struct_reviewer}{Reviewer}} $>$ {\bfseries reviewers}
-\begin{DoxyCompactList}\small\item\em List of all reviewers. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em List of reviewers. \end{DoxyCompactList}\item 
 \Hypertarget{struct_assignment_data_a3607aea45b0ae82928c635d52bff2ff7}\label{struct_assignment_data_a3607aea45b0ae82928c635d52bff2ff7} 
 \doxymbox{\hyperlink{struct_parameters}{Parameters}} {\bfseries parameters}
 \begin{DoxyCompactList}\small\item\em Problem parameters. \end{DoxyCompactList}\item 
 \Hypertarget{struct_assignment_data_a688ded16abf28048abd28a158df96268}\label{struct_assignment_data_a688ded16abf28048abd28a158df96268} 
 \doxymbox{\hyperlink{struct_control}{Control}} {\bfseries control}
-\begin{DoxyCompactList}\small\item\em \doxylink{struct_control}{Control} settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \doxylink{struct_control}{Control} settings. \end{DoxyCompactList}\item 
+\Hypertarget{struct_assignment_data_a670668174975b40963f6314089e8f74d}\label{struct_assignment_data_a670668174975b40963f6314089e8f74d} 
+bool {\bfseries has\+Errors} = false
+\begin{DoxyCompactList}\small\item\em Indicates whether input errors were found. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Container for all data parsed from a .csv input file. 
+Stores all parsed input data. 
 
 The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
 \item 

@@ -10,7 +10,7 @@ digraph "Connection.h"
   Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node3 [id="Node000003",label="Connection.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_connection_8cpp.html",tooltip="Implementation of the flow network and risk analysis."];
   Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
-  Node4 [id="Node000004",label="Output.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_output_8cpp.html",tooltip="Implementation of the assignment output writer."];
+  Node4 [id="Node000004",label="Output.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$_output_8cpp.html",tooltip="Implementation of the function that writes the assignment result to a CSV file."];
   Node1 -> Node5 [id="edge4_Node000001_Node000005",dir="back",color="steelblue1",style="solid",tooltip=" "];
   Node5 [id="Node000005",label="main.cpp",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$main_8cpp.html",tooltip="Entry point for the Scientific Conference Assignment Tool."];
   Node1 -> Node6 [id="edge5_Node000001_Node000006",dir="back",color="steelblue1",style="solid",tooltip=" "];
