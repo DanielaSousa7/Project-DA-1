@@ -104,7 +104,9 @@ ReviewAssignment runReviewAssignment(AssignmentData data, int excludeReviewerId)
         for (Edge<int>* e : v->getAdj()) {
             int u = e->getOrig()->getInfo();
             int w = e->getDest()->getInfo();
-            if (u >= submissionOffset && u < reviewerOffset && w >= reviewerOffset   && e->getFlow() > 0) {
+            if (u < submissionOffset || u >= reviewerOffset || w < reviewerOffset) continue;
+
+            if (e->getFlow() > 0) {
                 int subId = u - submissionOffset;
                 int revId = w - reviewerOffset;
                 int dom = -1;
