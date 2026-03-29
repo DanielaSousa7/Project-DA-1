@@ -12,7 +12,7 @@ using namespace std;
 /**
  * @brief Writes the assignment result to a CSV file
  *
- * Sorts submissions by paper ID then reviewer ID, and reviewers by reviewer ID
+ * Sorts submissions by paper ID then reviewer ID and reviewers by reviewer ID
  * then paper ID. Also reports any papers that did not receive enough reviews,
  * and runs the risk analysis if requested in the control settings.
  *
