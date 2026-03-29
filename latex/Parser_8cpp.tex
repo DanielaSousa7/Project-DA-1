@@ -1,0 +1,94 @@
+\doxysection{Parser.\+cpp File Reference}
+\hypertarget{Parser_8cpp}{}\label{Parser_8cpp}\index{Parser.cpp@{Parser.cpp}}
+
+
+Implementation of the CSV parser.  
+
+
+{\ttfamily \#include "{}Parser.\+h"{}}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for Parser.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{Parser_8cpp_af54deaac3f50b79226535f61f5822e56}{trim}} (string s)
+\begin{DoxyCompactList}\small\item\em Removes leading and trailing spaces from a string. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{Parser_8cpp_af678a74de1d6fb50933244136811127f}{remove\+Quotes}} (string s)
+\begin{DoxyCompactList}\small\item\em Removes surrounding double quotes from a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} \mbox{\hyperlink{Parser_8cpp_a724be4895e53323b971968a2436e0b80}{parse\+CSV}} (string filename)
+\begin{DoxyCompactList}\small\item\em Reads a CSV file and stores its data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the CSV parser. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{Parser_8cpp_a724be4895e53323b971968a2436e0b80}\label{Parser_8cpp_a724be4895e53323b971968a2436e0b80} 
+\index{Parser.cpp@{Parser.cpp}!parseCSV@{parseCSV}}
+\index{parseCSV@{parseCSV}!Parser.cpp@{Parser.cpp}}
+\doxysubsubsection{\texorpdfstring{parseCSV()}{parseCSV()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} parse\+CSV (\begin{DoxyParamCaption}\item[{string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Reads a CSV file and stores its data. 
+
+Errors (invalid IDs, duplicates) are collected and printed to stderr at the end. Parsing continues even when errors are found.
+
+Time complexity\+: O(\+L log L), where L is the number of lines in the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Input file name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Parsed problem data. 
+\end{DoxyReturn}
+\Hypertarget{Parser_8cpp_af678a74de1d6fb50933244136811127f}\label{Parser_8cpp_af678a74de1d6fb50933244136811127f} 
+\index{Parser.cpp@{Parser.cpp}!removeQuotes@{removeQuotes}}
+\index{removeQuotes@{removeQuotes}!Parser.cpp@{Parser.cpp}}
+\doxysubsubsection{\texorpdfstring{removeQuotes()}{removeQuotes()}}
+{\footnotesize\ttfamily string remove\+Quotes (\begin{DoxyParamCaption}\item[{string}]{s }\end{DoxyParamCaption})}
+
+
+
+Removes surrounding double quotes from a string. 
+
+Time complexity\+: O(n), where n is the length of the string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Input string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String without surrounding quotes. 
+\end{DoxyReturn}
+\Hypertarget{Parser_8cpp_af54deaac3f50b79226535f61f5822e56}\label{Parser_8cpp_af54deaac3f50b79226535f61f5822e56} 
+\index{Parser.cpp@{Parser.cpp}!trim@{trim}}
+\index{trim@{trim}!Parser.cpp@{Parser.cpp}}
+\doxysubsubsection{\texorpdfstring{trim()}{trim()}}
+{\footnotesize\ttfamily string trim (\begin{DoxyParamCaption}\item[{string}]{s }\end{DoxyParamCaption})}
+
+
+
+Removes leading and trailing spaces from a string. 
+
+Time complexity\+: O(n), where n is the length of the string.
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & Input string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Trimmed string. 
+\end{DoxyReturn}

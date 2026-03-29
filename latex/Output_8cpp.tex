@@ -1,0 +1,49 @@
+\doxysection{Output.\+cpp File Reference}
+\hypertarget{Output_8cpp}{}\label{Output_8cpp}\index{Output.cpp@{Output.cpp}}
+
+
+Implementation of the function that writes the assignment result to a CSV file.  
+
+
+{\ttfamily \#include "{}Output.\+h"{}}\newline
+{\ttfamily \#include "{}Connection.\+h"{}}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+Include dependency graph for Output.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{Output_8cpp_a39530cf7d6e95cc2e133607b1500e642}{print\+Assignment}} (\mbox{\hyperlink{structReviewAssignment}{Review\+Assignment}} assignment, \mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} data, string filename)
+\begin{DoxyCompactList}\small\item\em Writes the assignment result to a CSV file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the function that writes the assignment result to a CSV file. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{Output_8cpp_a39530cf7d6e95cc2e133607b1500e642}\label{Output_8cpp_a39530cf7d6e95cc2e133607b1500e642} 
+\index{Output.cpp@{Output.cpp}!printAssignment@{printAssignment}}
+\index{printAssignment@{printAssignment}!Output.cpp@{Output.cpp}}
+\doxysubsubsection{\texorpdfstring{printAssignment()}{printAssignment()}}
+{\footnotesize\ttfamily void print\+Assignment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structReviewAssignment}{Review\+Assignment}}}]{assignment,  }\item[{\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}}}]{data,  }\item[{string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Writes the assignment result to a CSV file. 
+
+Sorts submissions by paper ID then reviewer ID and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.
+
+Time complexity\+: O(A log A + R \texorpdfstring{$\ast$}{*} A + K), where A is the number of assignments, R is the number of submissions and K is the cost of the risk analysis.
+
+
+\begin{DoxyParams}{Parameters}
+{\em assignment} & The result of running the assignment algorithm. \\
+\hline
+{\em data} & The full problem instance. \\
+\hline
+{\em filename} & Path to the output CSV file. \\
+\hline
+\end{DoxyParams}

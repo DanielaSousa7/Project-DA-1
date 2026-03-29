@@ -1,0 +1,59 @@
+\doxysection{Output.\+h File Reference}
+\hypertarget{Output_8h}{}\label{Output_8h}\index{Output.h@{Output.h}}
+
+
+Function for writing the assignment result to a CSV file.  
+
+
+{\ttfamily \#include "{}Data.\+h"{}}\newline
+{\ttfamily \#include "{}Review\+Assignment.\+h"{}}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for Output.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{Output_8h_a39530cf7d6e95cc2e133607b1500e642}{print\+Assignment}} (\mbox{\hyperlink{structReviewAssignment}{Review\+Assignment}} assignment, \mbox{\hyperlink{structAssignmentData}{Assignment\+Data}} data, string filename)
+\begin{DoxyCompactList}\small\item\em Writes the assignment result to a CSV file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Function for writing the assignment result to a CSV file. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{Output_8h_a39530cf7d6e95cc2e133607b1500e642}\label{Output_8h_a39530cf7d6e95cc2e133607b1500e642} 
+\index{Output.h@{Output.h}!printAssignment@{printAssignment}}
+\index{printAssignment@{printAssignment}!Output.h@{Output.h}}
+\doxysubsubsection{\texorpdfstring{printAssignment()}{printAssignment()}}
+{\footnotesize\ttfamily void print\+Assignment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structReviewAssignment}{Review\+Assignment}}}]{assignment,  }\item[{\mbox{\hyperlink{structAssignmentData}{Assignment\+Data}}}]{data,  }\item[{string}]{filename }\end{DoxyParamCaption})}
+
+
+
+Writes the assignment result to a CSV file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em assignment} & Final review assignment. \\
+\hline
+{\em data} & Input problem data. \\
+\hline
+{\em filename} & Name of the output file.\\
+\hline
+\end{DoxyParams}
+Sorts submissions by paper ID then reviewer ID and reviewers by reviewer ID then paper ID. Also reports any papers that did not receive enough reviews, and runs the risk analysis if requested in the control settings.
+
+Time complexity\+: O(A log A + R \texorpdfstring{$\ast$}{*} A + K), where A is the number of assignments, R is the number of submissions and K is the cost of the risk analysis.
+
+
+\begin{DoxyParams}{Parameters}
+{\em assignment} & The result of running the assignment algorithm. \\
+\hline
+{\em data} & The full problem instance. \\
+\hline
+{\em filename} & Path to the output CSV file. \\
+\hline
+\end{DoxyParams}

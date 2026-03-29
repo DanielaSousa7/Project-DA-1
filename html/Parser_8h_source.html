@@ -77,16 +77,25 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">Parser.h</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef PROJECT_DA_1_PARSER_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define PROJECT_DA_1_PARSER_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;Data.h&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><a class="code hl_struct" href="structAssignmentData.html">AssignmentData</a> parseCSV(<span class="keywordtype">string</span> filename);</div>
+<a href="Parser_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#ifndef PROJECT_DA_1_PARSER_H</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#define PROJECT_DA_1_PARSER_H</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#endif </span><span class="comment">//PROJECT_DA_1_PARSER_H</span></div>
-<div class="ttc" id="astructAssignmentData_html"><div class="ttname"><a href="structAssignmentData.html">AssignmentData</a></div><div class="ttdef"><b>Definition</b> Data.h:40</div></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="Data_8h.html">Data.h</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keywordtype">string</span> <a class="code hl_function" href="Parser_8h.html#af54deaac3f50b79226535f61f5822e56">trim</a>(<span class="keywordtype">string</span> s);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keywordtype">string</span> <a class="code hl_function" href="Parser_8h.html#af678a74de1d6fb50933244136811127f">removeQuotes</a>(<span class="keywordtype">string</span> s);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><a class="code hl_struct" href="structAssignmentData.html">AssignmentData</a> <a class="code hl_function" href="Parser_8h.html#a724be4895e53323b971968a2436e0b80">parseCSV</a>(<span class="keywordtype">string</span> filename);</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aData_8h_html"><div class="ttname"><a href="Data_8h.html">Data.h</a></div><div class="ttdoc">Data structures used in the review assignment problem.</div></div>
+<div class="ttc" id="aParser_8h_html_a724be4895e53323b971968a2436e0b80"><div class="ttname"><a href="Parser_8h.html#a724be4895e53323b971968a2436e0b80">parseCSV</a></div><div class="ttdeci">AssignmentData parseCSV(string filename)</div><div class="ttdoc">Reads a CSV file and stores its data.</div><div class="ttdef"><b>Definition</b> Parser.cpp:55</div></div>
+<div class="ttc" id="aParser_8h_html_af54deaac3f50b79226535f61f5822e56"><div class="ttname"><a href="Parser_8h.html#af54deaac3f50b79226535f61f5822e56">trim</a></div><div class="ttdeci">string trim(string s)</div><div class="ttdoc">Removes leading and trailing spaces from a string.</div><div class="ttdef"><b>Definition</b> Parser.cpp:22</div></div>
+<div class="ttc" id="aParser_8h_html_af678a74de1d6fb50933244136811127f"><div class="ttname"><a href="Parser_8h.html#af678a74de1d6fb50933244136811127f">removeQuotes</a></div><div class="ttdeci">string removeQuotes(string s)</div><div class="ttdoc">Removes surrounding double quotes from a string.</div><div class="ttdef"><b>Definition</b> Parser.cpp:37</div></div>
+<div class="ttc" id="astructAssignmentData_html"><div class="ttname"><a href="structAssignmentData.html">AssignmentData</a></div><div class="ttdoc">Stores all parsed input data.</div><div class="ttdef"><b>Definition</b> Data.h:60</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

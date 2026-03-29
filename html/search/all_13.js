@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['t2_202_20basic_20formulation_20with_20any_20risk_20analysis_201_0',['T2.2 Basic Formulation with Any Risk Analysis = 1',['../md__r_e_a_d_m_e.html#autotoc_md5',1,'']]],
-  ['t2_203_20basic_20formulation_20with_20risk_20analysis_20k_1',['T2.3 Basic Formulation with Risk Analysis = K',['../md__r_e_a_d_m_e.html#autotoc_md6',1,'']]],
-  ['t2_204_20general_20formulation_20without_20risk_20analysis_2',['T2.4 General Formulation without Risk Analysis',['../md__r_e_a_d_m_e.html#autotoc_md7',1,'']]],
-  ['the_20program_3',['Compilation and Execution of the Program',['../md__r_e_a_d_m_e.html#autotoc_md1',1,'']]],
-  ['title_4',['title',['../struct_submission.html#ac26241e9b65c1ac2303a721ac41fed23',1,'Submission']]],
-  ['totalassignments_5',['totalAssignments',['../struct_review_assignment.html#ab6cbe4a88b7be8e3c35e805a3e1ef43e',1,'ReviewAssignment']]],
-  ['trim_6',['trim',['../_parser_8cpp.html#af54deaac3f50b79226535f61f5822e56',1,'trim(string s):&#160;Parser.cpp'],['../_parser_8h.html#af54deaac3f50b79226535f61f5822e56',1,'trim(string s):&#160;Parser.cpp']]]
+  ['secondarydomain_0',['secondaryDomain',['../structSubmission.html#a9bafaead1609a44c738d2e6d9e511e9e',1,'Submission']]],
+  ['secondaryexpertise_1',['secondaryExpertise',['../structReviewer.html#a19fc5d836237badc57737b4b8bbdcd10',1,'Reviewer']]],
+  ['secondaryreviewerexpertise_2',['secondaryReviewerExpertise',['../structParameters.html#a66edfe04b880cf7060f40eae3a1aa695',1,'Parameters']]],
+  ['secondarysubmissiondomain_3',['secondarySubmissionDomain',['../structParameters.html#ab0a361652545514ac10813459c929f1f',1,'Parameters']]],
+  ['showdatamenu_4',['showdatamenu',['../menu_8cpp.html#a43761e52ff1fecc2fc480507b6653247',1,'showDataMenu():&#160;menu.cpp'],['../menu_8h.html#a43761e52ff1fecc2fc480507b6653247',1,'showDataMenu():&#160;menu.cpp']]],
+  ['showmainmenu_5',['showmainmenu',['../menu_8cpp.html#a547646815560a705ed2ab461dbf46d04',1,'showMainMenu():&#160;menu.cpp'],['../menu_8h.html#a547646815560a705ed2ab461dbf46d04',1,'showMainMenu():&#160;menu.cpp']]],
+  ['submission_6',['Submission',['../structSubmission.html',1,'']]],
+  ['submissionassignments_7',['submissionAssignments',['../structReviewAssignment.html#a4f3c8cda25e7cb21335c3989efc20798',1,'ReviewAssignment']]],
+  ['submissionid_8',['submissionId',['../structReviewAssignmentItem.html#a89d5c7d84bfba991028de41027f3919e',1,'ReviewAssignmentItem']]],
+  ['submissions_9',['submissions',['../structAssignmentData.html#a2d2b3628ea3f8e9a061c318d6335ebf8',1,'AssignmentData']]]
 ];

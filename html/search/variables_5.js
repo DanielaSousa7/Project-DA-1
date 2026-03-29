@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['matchdomain_0',['matchDomain',['../struct_review_assignment_item.html#a8174286ef1adbcbc6bf8f14ca59f6908',1,'ReviewAssignmentItem']]],
-  ['maxreviewsperreviewer_1',['maxReviewsPerReviewer',['../struct_parameters.html#ae78183abd0f7689d650ab60b0194dd43',1,'Parameters']]],
-  ['minreviewspersubmission_2',['minReviewsPerSubmission',['../struct_parameters.html#a7a88a93ea0e7bb9aa1f2b44acff3776c',1,'Parameters']]]
+  ['id_0',['id',['../structSubmission.html#a7b6e2405d79134e923f1d74beba845a0',1,'Submission::id'],['../structReviewer.html#aeacccab23a0ec1c59ab0283f95f01fda',1,'Reviewer::id']]]
 ];

@@ -1,0 +1,47 @@
+\doxysection{Batch.\+cpp File Reference}
+\hypertarget{Batch_8cpp}{}\label{Batch_8cpp}\index{Batch.cpp@{Batch.cpp}}
+
+
+Implementation of the batch mode.  
+
+
+{\ttfamily \#include "{}Parser.\+h"{}}\newline
+{\ttfamily \#include "{}Output.\+h"{}}\newline
+{\ttfamily \#include "{}Connection.\+h"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include "{}Batch.\+h"{}}\newline
+Include dependency graph for Batch.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{Batch_8cpp_a0bd62db4f7cba1ba3aab1517daf75fde}{batch\+Mode}} (string input\+File, string output\+File)
+\begin{DoxyCompactList}\small\item\em Runs the program in batch mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implementation of the batch mode. 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{Batch_8cpp_a0bd62db4f7cba1ba3aab1517daf75fde}\label{Batch_8cpp_a0bd62db4f7cba1ba3aab1517daf75fde} 
+\index{Batch.cpp@{Batch.cpp}!batchMode@{batchMode}}
+\index{batchMode@{batchMode}!Batch.cpp@{Batch.cpp}}
+\doxysubsubsection{\texorpdfstring{batchMode()}{batchMode()}}
+{\footnotesize\ttfamily void batch\+Mode (\begin{DoxyParamCaption}\item[{string}]{input\+File,  }\item[{string}]{output\+File }\end{DoxyParamCaption})}
+
+
+
+Runs the program in batch mode. 
+
+Time complexity\+: depends mainly on parse\+CSV, run\+Review\+Assignment and print\+Assignment.
+
+
+\begin{DoxyParams}{Parameters}
+{\em input\+File} & Input file name. \\
+\hline
+{\em output\+File} & Output file name. \\
+\hline
+\end{DoxyParams}

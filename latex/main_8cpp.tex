@@ -5,56 +5,49 @@
 Entry point for the Scientific Conference Assignment Tool.  
 
 
-{\ttfamily \+\#include "{}menu.\+h"{}}\newline
-{\ttfamily \+\#include "{}Batch.\+h"{}}\newline
-{\ttfamily \+\#include "{}Connection.\+h"{}}\newline
-{\ttfamily \+\#include $<$iostream$>$}\newline
-{\ttfamily \+\#include $<$string$>$}\newline
-Include dependency graph for main.\+cpp:\+
+{\ttfamily \#include "{}menu.\+h"{}}\newline
+{\ttfamily \#include "{}Batch.\+h"{}}\newline
+{\ttfamily \#include "{}Connection.\+h"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for main.\+cpp\+:
 % FIG 0
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-int \doxymbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\+[$\,$]\+)
-\begin{DoxyCompactList}\small\item\em Program entry point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Runs the program. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
 Entry point for the Scientific Conference Assignment Tool. 
 
-Supports two modes of operation:\+
+Supports two modes of operation\+:
 \begin{DoxyItemize}
-\item Interactive:\+ launches a menu-\/driven interface
-\item Batch:\+ {\ttfamily ./\+proj -\/b input.\+csv \+[output.\+csv]\+} runs non-\/interactively 
+\item Interactive\+: launches a menu-\/driven interface
+\item Batch\+: {\ttfamily ./my\+Prog -\/b input.\+csv output.\+csv} runs non-\/interactively 
 \end{DoxyItemize}
 
-\label{doc-func-members}
-\Hypertarget{main_8cpp_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{main.cpp@{main.cpp}!main@{main}}
+\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+\index{main.cpp@{main.cpp}!main@{main}}
 \index{main@{main}!main.cpp@{main.cpp}}
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
-{\footnotesize\ttfamily \label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
-int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\+[$\,$]\+}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
 
 
 
-Program entry point. 
+Runs the program. 
 
-Usage:\+
-\begin{DoxyItemize}
-\item {\ttfamily ./\+proj} — interactive menu
-\item {\ttfamily ./\+proj -\/b input.\+csv} — batch mode, output to file specified in CSV
-\item {\ttfamily ./\+proj -\/b input.\+csv out.\+csv} — batch mode, output to out.\+csv
-\end{DoxyItemize}
+Time complexity\+: depends on the selected mode.
 
 
 \begin{DoxyParams}{Parameters}
 {\em argc} & Number of command-\/line arguments. \\
 \hline
-{\em argv} & Array of command-\/line argument strings. \\
+{\em argv} & Command-\/line arguments. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-Main menu. 
+0 on normal execution. 
 \end{DoxyReturn}

@@ -1,0 +1,135 @@
+\chapter{Programming Project I}
+\hypertarget{md_README}{}\label{md_README}\index{Programming Project I@{Programming Project I}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+ This project aims to develop a tool to help with the assignment of reviewers to paper submissions. Each paper belongs to a specific topic and each reviewer has expertise in a certain area. The assignment must respect these areas of expertise, while also ensuring that each submission is reviewed by a minimum number of reviewers and that each reviewer does not exceed their review limit.
+
+To solve this problem, the assignment is modeled as a network flow problem, allowing valid assignments to be found. The project also considers risk analysis by studying how the absence of reviewers may affect the review process.
+
+We use the Edmonds-\/\+Karp maximum flow algorithm and the only changes made to {\ttfamily graph.\+h} and {\ttfamily Edmonds\+Karp.\+h} were the addition of Doxygen comments.\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{Compilation and Execution of the Program}{Compilation and Execution of the Program}}\label{md_README_autotoc_md1}
+\hypertarget{md_README_autotoc_md2}{}\doxysubsection{\texorpdfstring{Compile using Makefile}{Compile using Makefile}}\label{md_README_autotoc_md2}
+
+\begin{DoxyItemize}
+\item make clean \#optional
+\item make 
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md3}{}\doxysubsection{\texorpdfstring{Run in Interactive Mode}{Run in Interactive Mode}}\label{md_README_autotoc_md3}
+
+\begin{DoxyItemize}
+\item ./my\+Prog
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md4}{}\doxysubsection{\texorpdfstring{Run in Batch Mode}{Run in Batch Mode}}\label{md_README_autotoc_md4}
+
+\begin{DoxyItemize}
+\item ./my\+Prog -\/b input.\+csv output.\+csv
+\end{DoxyItemize}
+
+where {\ttfamily input.\+csv} is the input file to be read and {\ttfamily output.\+csv} is the file where the results will be written.\hypertarget{md_README_autotoc_md5}{}\doxysection{\texorpdfstring{T2.\+2 Basic Formulation with Any Risk Analysis = 1}{T2.2 Basic Formulation with Any Risk Analysis = 1}}\label{md_README_autotoc_md5}
+For the risk analysis variant, the goal is to determine whether the absence of a single reviewer makes a complete review assignment impossible, meaning that some submissions do not receive the required number of reviews. This is implemented through the functions {\ttfamily assignment\+Feasible} and {\ttfamily risk\+Analysis} in {\ttfamily \doxylink{Connection_8cpp}{Connection.\+cpp}}.
+
+The function {\ttfamily assignment\+Feasible} runs the assignment algorithm while excluding one reviewer from the flow network. It then compares the total number of assignments found with the total number of assignments required, which is equal to the number of submissions multiplied by min\+Reviews\+Per\+Submission. If the maximum flow found is equal to that required value, the assignment is considered feasible.
+
+The function {\ttfamily risk\+Analysis} first checks whether the original instance is feasible when all reviewers are available. If it is already infeasible, then the analysis is not meaningful and an empty list is returned. Otherwise, it removes each reviewer one at a time by calling {\ttfamily assignment\+Feasible(data, r.\+id)}, where r.\+id is the identifier of the reviewer being excluded. If removing that reviewer makes the assignment infeasible, then that reviewer is considered critical and its identifier is added to the result. At the end, the list of critical reviewers is sorted and returned.
+
+Regarding complexity, one execution of the assignment algorithm has the complexity of Edmonds-\/\+Karp, which is O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2), where V is the number of vertices and E is the number of edges in the flow network. In this code, the number of vertices is 2 + number of submissions + number of reviewers, since the graph contains the source, sink, one node per submission and one node per reviewer. The number of edges includes one edge from the source to each submission, one edge from each reviewer to the sink and in the worst case one edge from each submission to each reviewer, so it is proportional to S + R + S\texorpdfstring{$\ast$}{*}R, where S is the number of submissions and R is the number of reviewers. The time complexity of the risk analysis is O(R · V · E²), since Edmonds-\/\+Karp is executed once for each reviewer through calls to the function {\ttfamily assignment\+Feasible}.
+
+A nontrivial example where the absence of a single reviewer makes the assignment impossible is the following. Suppose min\+Reviews\+Per\+Submission = 2 and max\+Reviews\+Per\+Reviewer = 2.
+
+Consider three submissions\+:
+\begin{DoxyItemize}
+\item submission 1 has primary domain 1 and secondary domain 2;
+\item submission 2 has primary domain 1 and secondary domain 3;
+\item submission 3 has primary domain 2 and secondary domain 3.
+\end{DoxyItemize}
+
+Consider four reviewers\+:
+\begin{DoxyItemize}
+\item reviewer 10 has primary expertise 1;
+\item reviewer 11 has primary expertise 2;
+\item reviewer 12 has primary expertise 3;
+\item reviewer 13 has primary expertise 1.
+\end{DoxyItemize}
+
+If the code is running in mode 2, where a submission can match either its primary or secondary domain against the reviewer’s primary expertise, then\+:
+\begin{DoxyItemize}
+\item submission 1 can be assigned to reviewers 10, 11 and 13;
+\item submission 2 can be assigned to reviewers 10, 12 and 13;
+\item submission 3 can be assigned to reviewers 11 and 12.
+\end{DoxyItemize}
+
+With all reviewers available, a full assignment is possible. For example\+:
+\begin{DoxyItemize}
+\item submission 1 is assigned to reviewers 11 and 13;
+\item submission 2 is assigned to reviewers 10 and 12;
+\item submission 3 is assigned to reviewers 11 and 12.
+\end{DoxyItemize}
+
+Each submission receives exactly 2 reviews and no reviewer exceeds the maximum of 2 assigned reviews.
+
+However, if reviewer 12 is removed, submission 3 can only be assigned to reviewer 11, since reviewer 12 was its only reviewer with expertise in domain 3. Therefore, submission 3 can no longer receive the required 2 reviews. Therefore, the total number of assignments becomes smaller than the required value and the instance becomes infeasible. This means reviewer 12 is critical according to the implemented risk analysis.\hypertarget{md_README_autotoc_md6}{}\doxysection{\texorpdfstring{T2.\+3 Basic Formulation with Risk Analysis = K}{T2.3 Basic Formulation with Risk Analysis = K}}\label{md_README_autotoc_md6}
+For the risk analysis variant with K \texorpdfstring{$>$}{>} 1, the goal is to determine whether the simultaneous absence of any set of K reviewers makes a complete review assignment impossible, meaning that some submissions do not receive the required number of reviews.
+
+A natural extension of the approach used for K = 1 is to test every combination of K reviewers. First, the original instance is checked to verify whether it is feasible when all reviewers are available. If it is already infeasible, then the analysis is not meaningful and no critical set is reported.
+
+If the instance is feasible, for each subset of K reviewers, the flow network is rebuilt without those reviewers and the max-\/flow assignment algorithm is executed again. If the total number of assignments found is smaller than the required number of assignments, that subset of reviewers is considered critical, since their simultaneous absence prevents a valid assignment.
+
+This approach reuses the same idea of the Risk Analysis for K = 1. The only difference is that instead of excluding a single reviewer, it excludes a set of reviewers before running Edmonds-\/\+Karp.
+
+The time complexity of this approach is dominated by the number of combinations of k reviewers that must be tested. Since all combinations of k reviewers are considered, the total number of cases is C(\+R, K), which represents the number of ways to choose K reviewers from a total of R reviewers. For each subset of k reviewers, the Edmonds-\/\+Karp algorithm is executed, with complexity O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2). Therefore, the total time complexity is O(\+C(\+R, K) \texorpdfstring{$\ast$}{*} V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2).
+
+A nontrivial example for the case K = 2 is the following. Suppose min\+Reviews\+Per\+Submission = 2 and max\+Reviews\+Per\+Reviewer = 2.
+
+Consider three submissions\+:
+
+
+\begin{DoxyItemize}
+\item submission 1 has primary domain 1 and secondary domain 2;
+\item submission 2 has primary domain 1 and secondary domain 3;
+\item submission 3 has primary domain 2 and secondary domain 3.
+\end{DoxyItemize}
+
+Consider five reviewers\+:
+
+
+\begin{DoxyItemize}
+\item reviewer 10 has primary expertise 1;
+\item reviewer 11 has primary expertise 2;
+\item reviewer 12 has primary expertise 3;
+\item reviewer 13 has primary expertise 1;
+\item reviewer 14 has primary expertise 2.
+\end{DoxyItemize}
+
+If the system is running in mode 2, where a submission may match either its primary or secondary domain against the reviewer’s primary expertise, then\+:
+
+
+\begin{DoxyItemize}
+\item submission 1 can be assigned to reviewers 10, 11, 13 and 14;
+\item submission 2 can be assigned to reviewers 10, 12 and 13;
+\item submission 3 can be assigned to reviewers 11, 12 and 14.
+\end{DoxyItemize}
+
+With all reviewers available, a full assignment is possible, since each submission can receive 2 reviews and no reviewer exceeds the maximum of 2 assignments.
+
+However, if reviewers 12 and 13 are both removed, submission 2 can only be assigned to reviewer 10, which is not enough to satisfy its minimum requirement of 2 reviews. Therefore, the assignment becomes infeasible. This shows that the subset \{12, 13\} is a critical set of reviewers for K = 2.
+
+Corresponding output\+: Critical reviewer sets for K = 2\+:
+\begin{DoxyItemize}
+\item \{12, 13\}
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md7}{}\doxysection{\texorpdfstring{T2.\+4 General Formulation without Risk Analysis}{T2.4 General Formulation without Risk Analysis}}\label{md_README_autotoc_md7}
+For the general formulation, the problem becomes more complex since both submissions and reviewers may have primary and secondary domains. As a result, different submission-\/reviewer matches may have different levels of quality and not all valid assignments are equally desirable.
+
+Instead of modifying the underlying Max-\/\+Flow algorithm, we extend the existing approach by introducing different levels of matching quality. The flow network structure remains the same\+: a source node connects to submission nodes, which connect to reviewer nodes and finally to the sink. The capacities also remain unchanged, ensuring that each submission receives the required number of reviews and each reviewer does not exceed their maximum limit.
+
+The key idea is to prioritize higher-\/quality matches. For example, a match between the primary domain of a submission and the primary expertise of a reviewer is considered better than matches involving secondary domains. To incorporate this, matches are divided into levels of priority.
+
+The assignment is then computed in multiple phases. In the first phase, the flow network is constructed using only the highest-\/quality matches and the Max-\/\+Flow algorithm is executed. If a complete assignment is not found, additional edges corresponding to lower-\/quality matches are progressively added to the network and the algorithm is executed again. This process continues until either a complete assignment is found or all possible match types have been considered.
+
+This approach ensures that higher-\/quality matches are always preferred, since lower-\/quality matches are only used when necessary.
+
+Regarding complexity, if L represents the number of matching levels, the Max-\/\+Flow algorithm is executed at most L times. Since each execution has complexity O(\+V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2), the overall complexity is O(\+L \texorpdfstring{$\ast$}{*} V \texorpdfstring{$\ast$}{*} E\texorpdfstring{$^\wedge$}{\string^}2).\hypertarget{md_README_autotoc_md8}{}\doxysection{\texorpdfstring{Contributions}{Contributions}}\label{md_README_autotoc_md8}
+This project was developed by\+:
+\begin{DoxyItemize}
+\item Daniela Sousa up202406448
+\item João Costa up202403747
+\item Rodrigo Correia up202405057
+\end{DoxyItemize}
+
+Class 12 -\/ Group 5 

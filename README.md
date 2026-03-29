@@ -10,7 +10,7 @@ To solve this problem, the assignment is modeled as a network flow problem, allo
 to be found. The project also considers risk analysis by studying how the
 absence of reviewers may affect the review process.
 
-We use the Edmonds-Karp maximum flow algorithm and the only changes did is this algorihtm and in graph.h was add doxygen comments.
+We use the Edmonds-Karp maximum flow algorithm and the only changes made to `graph.h` and `EdmondsKarp.h` were the addition of Doxygen comments.
 
 
 ## Compilation and Execution of the Program 
@@ -43,7 +43,7 @@ Regarding complexity, one execution of the assignment algorithm has the complexi
 vertices and E is the number of edges in the flow network. In this code, the number of vertices is 2 + number of submissions + number of reviewers,
 since the graph contains the source, sink, one node per submission and one node per reviewer. The number of edges includes one edge from the source
 to each submission, one edge from each reviewer to the sink and in the worst case one edge from each submission to each reviewer, so it is proportional
-to S + R + S*R, where S is the number of submissions and R is the number of reviewers. Therefore, a single run of the assignment algorithm has complexity O(V * E^2).
+to S + R + S*R, where S is the number of submissions and R is the number of reviewers. 
 The time complexity of the risk analysis is O(R · V · E²), since Edmonds-Karp is executed once for each reviewer through calls to the function `assignmentFeasible`.
 
 A nontrivial example where the absence of a single reviewer makes the assignment impossible is the following. Suppose minReviewsPerSubmission = 2 and maxReviewsPerReviewer = 2.
@@ -72,7 +72,7 @@ With all reviewers available, a full assignment is possible. For example:
 Each submission receives exactly 2 reviews and no reviewer exceeds the maximum of 2 assigned reviews.
 
 However, if reviewer 12 is removed, submission 3 can only be assigned to reviewer 11, since reviewer 12 was its only reviewer with expertise in domain 3. Therefore, submission 3 can no longer receive
-the required 2 reviews. Therefore, the total number of assignments becomes smaller than the required value, and the instance becomes infeasible. This means reviewer 12 is critical according to the implemented risk analysis.
+the required 2 reviews. Therefore, the total number of assignments becomes smaller than the required value and the instance becomes infeasible. This means reviewer 12 is critical according to the implemented risk analysis.
 
 ## T2.3 Basic Formulation with Risk Analysis = K
 
@@ -95,23 +95,23 @@ A nontrivial example for the case K = 2 is the following. Suppose minReviewsPerS
 
 Consider three submissions:
 
-submission 1 has primary domain 1 and secondary domain 2;
-submission 2 has primary domain 1 and secondary domain 3;
-submission 3 has primary domain 2 and secondary domain 3.
+- submission 1 has primary domain 1 and secondary domain 2;
+- submission 2 has primary domain 1 and secondary domain 3;
+- submission 3 has primary domain 2 and secondary domain 3.
 
 Consider five reviewers:
 
-reviewer 10 has primary expertise 1;
-reviewer 11 has primary expertise 2;
-reviewer 12 has primary expertise 3;
-reviewer 13 has primary expertise 1;
-reviewer 14 has primary expertise 2.
+- reviewer 10 has primary expertise 1;
+- reviewer 11 has primary expertise 2;
+- reviewer 12 has primary expertise 3;
+- reviewer 13 has primary expertise 1;
+- reviewer 14 has primary expertise 2.
 
 If the system is running in mode 2, where a submission may match either its primary or secondary domain against the reviewer’s primary expertise, then:
 
-submission 1 can be assigned to reviewers 10, 11, 13 and 14;
-submission 2 can be assigned to reviewers 10, 12 and 13;
-submission 3 can be assigned to reviewers 11, 12 and 14.
+- submission 1 can be assigned to reviewers 10, 11, 13 and 14;
+- submission 2 can be assigned to reviewers 10, 12 and 13;
+- submission 3 can be assigned to reviewers 11, 12 and 14.
 
 With all reviewers available, a full assignment is possible, since each submission can receive 2 reviews and no reviewer exceeds the maximum of 2 assignments.
 
@@ -120,7 +120,7 @@ the assignment becomes infeasible. This shows that the subset {12, 13} is a crit
 
 Corresponding output:
 Critical reviewer sets for K = 2:
-{12, 13}
+- {12, 13}
 
 
 ## T2.4 General Formulation without Risk Analysis

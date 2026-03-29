@@ -1,14 +1,18 @@
 var searchData=
 [
-  ['secondarydomain_0',['secondaryDomain',['../struct_submission.html#a9bafaead1609a44c738d2e6d9e511e9e',1,'Submission']]],
-  ['secondaryexpertise_1',['secondaryExpertise',['../struct_reviewer.html#a19fc5d836237badc57737b4b8bbdcd10',1,'Reviewer']]],
-  ['secondaryreviewerexpertise_2',['secondaryReviewerExpertise',['../struct_parameters.html#a66edfe04b880cf7060f40eae3a1aa695',1,'Parameters']]],
-  ['secondarysubmissiondomain_3',['secondarySubmissionDomain',['../struct_parameters.html#ab0a361652545514ac10813459c929f1f',1,'Parameters']]],
-  ['showassignmentmenu_4',['showAssignmentMenu',['../menu_8h.html#a14ec15290aaab592a4716494772205cc',1,'menu.h']]],
-  ['showdatamenu_5',['showDataMenu',['../menu_8cpp.html#a43761e52ff1fecc2fc480507b6653247',1,'showDataMenu():&#160;menu.cpp'],['../menu_8h.html#a43761e52ff1fecc2fc480507b6653247',1,'showDataMenu():&#160;menu.cpp']]],
-  ['showmainmenu_6',['showMainMenu',['../menu_8cpp.html#a547646815560a705ed2ab461dbf46d04',1,'showMainMenu():&#160;menu.cpp'],['../menu_8h.html#a547646815560a705ed2ab461dbf46d04',1,'showMainMenu():&#160;menu.cpp']]],
-  ['submission_7',['Submission',['../struct_submission.html',1,'']]],
-  ['submissionassignments_8',['submissionAssignments',['../struct_review_assignment.html#a4f3c8cda25e7cb21335c3989efc20798',1,'ReviewAssignment']]],
-  ['submissionid_9',['submissionId',['../struct_review_assignment_item.html#a89d5c7d84bfba991028de41027f3919e',1,'ReviewAssignmentItem']]],
-  ['submissions_10',['submissions',['../struct_assignment_data.html#a2d2b3628ea3f8e9a061c318d6335ebf8',1,'AssignmentData']]]
+  ['removequotes_0',['removequotes',['../Parser_8h.html#af678a74de1d6fb50933244136811127f',1,'removeQuotes(string s):&#160;Parser.cpp'],['../Parser_8cpp.html#af678a74de1d6fb50933244136811127f',1,'removeQuotes(string s):&#160;Parser.cpp']]],
+  ['reviewassignment_1',['ReviewAssignment',['../structReviewAssignment.html',1,'']]],
+  ['reviewassignment_2eh_2',['ReviewAssignment.h',['../ReviewAssignment_8h.html',1,'']]],
+  ['reviewassignmentitem_3',['ReviewAssignmentItem',['../structReviewAssignmentItem.html',1,'']]],
+  ['reviewer_4',['Reviewer',['../structReviewer.html',1,'']]],
+  ['reviewerassignments_5',['reviewerAssignments',['../structReviewAssignment.html#af6116120fb75922a4966a0cd002da761',1,'ReviewAssignment']]],
+  ['reviewerid_6',['reviewerId',['../structReviewAssignmentItem.html#ada123ae26883917f6393e7ca2c236318',1,'ReviewAssignmentItem']]],
+  ['reviewers_7',['reviewers',['../structAssignmentData.html#a1c280a09f7428d53453348eefbd63008',1,'AssignmentData']]],
+  ['risk_20analysis_8',['T2.4 General Formulation without Risk Analysis',['../md_README.html#autotoc_md7',1,'']]],
+  ['risk_20analysis_201_9',['T2.2 Basic Formulation with Any Risk Analysis = 1',['../md_README.html#autotoc_md5',1,'']]],
+  ['risk_20analysis_20k_10',['T2.3 Basic Formulation with Risk Analysis = K',['../md_README.html#autotoc_md6',1,'']]],
+  ['riskanalysis_11',['riskanalysis',['../structControl.html#a51dcb4a3f5c2793db8229a3cb0e15ce9',1,'Control::riskAnalysis'],['../Connection_8cpp.html#afd77d87842dd3594f0482c89b20f1921',1,'riskAnalysis(AssignmentData data):&#160;Connection.cpp'],['../Connection_8h.html#afd77d87842dd3594f0482c89b20f1921',1,'riskAnalysis(AssignmentData data):&#160;Connection.cpp']]],
+  ['run_20in_20batch_20mode_12',['Run in Batch Mode',['../md_README.html#autotoc_md4',1,'']]],
+  ['run_20in_20interactive_20mode_13',['Run in Interactive Mode',['../md_README.html#autotoc_md3',1,'']]],
+  ['runreviewassignment_14',['runreviewassignment',['../Connection_8cpp.html#a8887ea7dde9bbff899c983944bd68a77',1,'runReviewAssignment(AssignmentData data, int excludeReviewerId):&#160;Connection.cpp'],['../Connection_8h.html#afd6dfec961cbe4d276a3cf70c034e08c',1,'runReviewAssignment(AssignmentData data, int excludeReviewerId=-1):&#160;Connection.cpp']]]
 ];
