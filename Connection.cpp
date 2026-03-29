@@ -130,7 +130,7 @@ ReviewAssignment runReviewAssignment(AssignmentData data, int excludeReviewerId)
  * @brief Checks whether a full valid assignment is possible when reviewer is removed.
  * @param data The full problem instance.
  * @param excludeReviewerId Reviewer to exclude (-1 = include all).
- * @return true if totalAssignments is bigger or equal to submissions × minReviewsPerSubmission.
+ * @return true if totalAssignments is greater or equal to submissions × minReviewsPerSubmission.
  *
  * Complexity: O(V * E^2). This function inherits the complexity of the Edmonds-Karp algorithm, since that runReviewAssignment() is called.
  */
