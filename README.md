@@ -141,6 +141,12 @@ This approach ensures that higher-quality matches are always preferred, since lo
 
 Regarding complexity, if L represents the number of matching levels, the Max-Flow algorithm is executed at most L times. Since each execution has complexity O(V * E^2), the overall complexity is O(L * V * E^2).
 
+
+## Documentation
+
+The HTML documentation generated with Doxygen can be found in the html directory, in the index.html
+
+
 ## Contributions 
 
 This project was developed by:
