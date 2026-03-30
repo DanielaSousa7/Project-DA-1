@@ -137,7 +137,7 @@ ReviewAssignment runReviewAssignment(AssignmentData data, int excludeReviewerId)
 
 bool assignmentFeasible(AssignmentData data, int excludeReviewerId) {
     ReviewAssignment result = runReviewAssignment(data, excludeReviewerId);
-    int required = (int)data.submissions.size() * data.parameters.minReviewsPerSubmission;
+    int required = data.submissions.size() * data.parameters.minReviewsPerSubmission;
     return result.totalAssignments == required;
 }
 
