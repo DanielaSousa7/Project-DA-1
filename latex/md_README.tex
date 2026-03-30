@@ -22,7 +22,7 @@ We use the Edmonds-\/\+Karp maximum flow algorithm and the only changes made to 
 \item ./my\+Prog -\/b input.\+csv output.\+csv
 \end{DoxyItemize}
 
-where {\ttfamily input.\+csv} is the input file to be read and {\ttfamily output.\+csv} is the file where the results will be written.\hypertarget{md_README_autotoc_md5}{}\doxysection{\texorpdfstring{T2.\+2 Basic Formulation with Any Risk Analysis = 1}{T2.2 Basic Formulation with Any Risk Analysis = 1}}\label{md_README_autotoc_md5}
+where {\ttfamily input.\+csv} is the input file to be read and {\ttfamily output.\+csv} is the file where the results will be written. If they are located in folders, the full path must be provided.\hypertarget{md_README_autotoc_md5}{}\doxysection{\texorpdfstring{T2.\+2 Basic Formulation with Any Risk Analysis = 1}{T2.2 Basic Formulation with Any Risk Analysis = 1}}\label{md_README_autotoc_md5}
 For the risk analysis variant, the goal is to determine whether the absence of a single reviewer makes a complete review assignment impossible, meaning that some submissions do not receive the required number of reviews. This is implemented through the functions {\ttfamily assignment\+Feasible} and {\ttfamily risk\+Analysis} in {\ttfamily \doxylink{Connection_8cpp}{Connection.\+cpp}}.
 
 The function {\ttfamily assignment\+Feasible} runs the assignment algorithm while excluding one reviewer from the flow network. It then compares the total number of assignments found with the total number of assignments required, which is equal to the number of submissions multiplied by min\+Reviews\+Per\+Submission. If the maximum flow found is equal to that required value, the assignment is considered feasible.

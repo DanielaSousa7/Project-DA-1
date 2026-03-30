@@ -24,7 +24,7 @@ We use the Edmonds-Karp maximum flow algorithm and the only changes made to `gra
 ### Run in Batch Mode
 - ./myProg -b input.csv output.csv 
 
-where `input.csv` is the input file to be read and `output.csv` is the file where the results will be written.
+where `input.csv` is the input file to be read and `output.csv` is the file where the results will be written. If they are located in folders, the full path must be provided.
 
 ## T2.2 Basic Formulation with Any Risk Analysis = 1
 
